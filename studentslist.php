@@ -49,7 +49,7 @@
 
 <?php
 	include_once("students.php");
-	$student = new student();
+	$student = new students();
 	$result = $student->getStudents();
 	if($result==false){
 		echo "Error getting users.";
