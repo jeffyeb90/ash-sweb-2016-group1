@@ -1,6 +1,6 @@
 <?php
 define("DB_HOST","localhost");
-define("DB_USERNAME","ashesics_beb7381");
-define("DB_PASSWORD","rha07v3mb0ez");
-define("DB_NAME","ashesics_efua_bainson");
+define("DB_USERNAME","root");
+define("DB_PASSWORD","");
+define("DB_NAME","ashesi_clinic");
 ?>

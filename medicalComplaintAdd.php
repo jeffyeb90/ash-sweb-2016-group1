@@ -44,7 +44,16 @@
 						</div>
 						<div>
 						Diagnosis: <select name="diagnosis">
-							<option>Malaria</option>
+							<?php
+				      	$disease=new diseases();
+				      	$result=$disease->getAllDiseases();
+				      	$row=$result->fetch_assoc();
+
+				        		while($row==true){
+				          		echo "<option value={$row['DISEASEID']}>{$row['NAME']}</option>";
+											$row=$result->fetch_assoc();
+				        	}
+				      ?>
 						</select>
 						</div>
 						<div>
