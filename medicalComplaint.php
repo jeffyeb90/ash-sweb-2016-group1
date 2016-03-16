@@ -5,7 +5,7 @@
  *medicalComplaint  class
  */
  class medicalComplaint extends databasehelper{
-   function __construct() {
+   function medicalComplaint() {
 
     }
     /**
@@ -22,14 +22,14 @@
   	*/
     function addComplaint($studentID, $date, $temperature, $symptoms, $diagnosis, $cause, $prescription, $nurseID){
       $strQuery="insert into medicalcomplaint set
-  						STUDENTID='$studentid',
+  						STUDENTID='$studentID',
   						DATE='$date',
   						TEMPERATURE='$temperature',
   						SYMPTOMS='$symptoms',
               DIAGNOSIS='$diagnosis',
   						CAUSE='$cause',
               PRESCRIPTION='$prescription',
-  						NURSEID='$nurseid'";
+  						NURSEID='$nurseID'";
   		return $this->query($strQuery);
   	}
 

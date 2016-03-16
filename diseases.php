@@ -1,10 +1,10 @@
 <?php
 include_once("databasehelper.php");
 /**
-*medicalComplaint  class
+*disease  class
 */
-class disease extends databasehelper{
-  function __construct() {
+class diseases extends databasehelper{
+  function diseases() {
 
    }
 
