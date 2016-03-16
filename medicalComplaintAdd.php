@@ -37,7 +37,7 @@
 							Date of Attendance: <input type="date" name="date">
 						</div>
 						<div>
-							Temperature: <input type="number" name="temp" min="20" max="50" value="37">degree celcius
+							Temperature: <input type="number" name="temp" min="20" max="50" value="37">°C
 						</div>
 						<div>
 
