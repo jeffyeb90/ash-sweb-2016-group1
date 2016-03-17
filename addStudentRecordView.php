@@ -24,7 +24,9 @@
 						<span class="menuitem" >page menu 1</span>
 						<input type="text" id="txtSearch" />
 						<span class="menuitem">search</span>
+    <div><span ><br>Enter Student ID to add record</br></span></div>
 					</div>
+
           <?php
                 //initialize
 
@@ -33,11 +35,10 @@
                 $height="";
                 $bloodtype="";
                   include_once("students.php");
+
                 //1) what is the purpose of this if block
-                if(!isset($_REQUEST['studentID'])){
-                  exit();
-                }
-                else{
+                if(isset($_REQUEST['studentID'])){
+
                   $studentID=$_REQUEST['studentID'];
                   $weight=$_REQUEST['weight'];
                   $height = $_REQUEST['height'];
@@ -47,7 +48,7 @@
                   $r=$obj->addStudentRecord($studentID,$weight,$height,$bloodtype);
 
                   if($r==false){
-                    echo "error while adding student information";
+                    echo "Error adding student information";
                   }else{
                     echo" Student with ID $studentID added";
                   }
@@ -60,10 +61,16 @@
                     <div id="divContent">
                       Content space
                       <form action="" method="GET">
-                  <div>StudentID: <input type="text" name="studentID" value="<?php echo $studentID  ?>"/></div>
-                  <div>Height: <input type="text" name="weight" value="<?php echo $weight  ?>"/>
-                  <div>Weight: <input type="text" name="height" value="<?php echo $height  ?>"/>
-                  <div>Bloodtype: <input type="bloodtype" name="bloodtype"  value="<?php echo $bloodtype  ?>"/></div>
+                  <div>StudentID: <input type="text" name="studentID" value=""/></div>
+                  <div>Height: <input type="text" name="weight" value=""/>
+                  <div>Weight: <input type="text" name="height" value=""/>
+                  <div>Bloodtype: <select name="bloodtype">
+                    <option value =A>A</option>
+                    <option value =B>B</option>
+                    <option value =AB>AB</option>
+                    <option value =O>O</option>
+
+          </select>
                   <input type="submit" value="Add">
                       </form>
                     </div>
