@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Users List</title>
+		<title>Medical Complaints List</title>
 		<link rel="stylesheet" href="css/style.css">
 		<script>
 			<!--add validation js script here
@@ -26,7 +26,7 @@
 						<span class="menuitem">search</span>		
 					</div>
 					<?php
-					$strStatusMessage="Display Users";
+					$strStatusMessage="Display Medical Complaints";
 
 					if(isset($_REQUEST['message'])){
 						$strStatusMessage=$_REQUEST['message'];
@@ -60,13 +60,13 @@
 	}
 
 	echo "<table border=1>
-		<tr><td>COMPLAINT ID</td><td>STUDENT ID</td><td>DATE</td><td>TEMPERATURE</td><td>SYMPTOMS</td><td>DIAGNOSIS</td><td>CAUSE<td><td>PRESCRIPTION</td><td>NURSE</td><tr>";
+		<tr><td>COMPLAINT ID</td><td>STUDENT ID</td><td>DATE</td><td>TEMPERATURE</td><td>SYMPTOMS</td><td>DIAGNOSIS</td><td>CAUSE<td>PRESCRIPTION</td><td>NURSE</td><tr>";
 		$counter=1;
 		$bgcolor ="";
 		$style="";
 	while($row=$complaint->fetch()){
 
-		//$usergroup=
+		
 		if($counter%2==0){
 			$bgcolor="Coral";
 			$style='color:black';
@@ -79,15 +79,15 @@
 		
 		
 		echo "<tr bgcolor='$bgcolor' style='$style'>
-		<td>{$row['XOMPLAINTID']}</td>
+		<td>{$row['COMPLAINTID']}</td>
 		<td>{$row['STUDENTID']}</td>
 		<td>{$row['DATE']}</td>
 		<td>{$row['TEMPERATURE']}</td>
 		<td>{$row['SYMPTOMS']}</td>
-		<td>{$row['DIAGNOSIS']}</td>
+		<td>{$row['NAME']}</td>
 		<td>{$row['CAUSE']}</td>
 		<td>{$row['PRESCRIPTION']}</td>
-		<td>{$row['NURSEID']}</td>
+		<td>{$row['FIRSTNAME']} {$row['LASTNAME']}</td>
 		
 		
 		</tr>";
