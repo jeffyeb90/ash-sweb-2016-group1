@@ -50,14 +50,19 @@
 <?php
 	include_once("students.php");
 	$student = new students();
-	$result = $student->getStudents();
+	if(isset($_REQUEST['txtSearch'])){
+		$result = $student->searchStudents($_REQUEST['txtSearch']);
+	}
+	else{
+		$result = $student->getStudents();
+	}
 	if($result==false){
 		echo "Error getting users.";
 		exit();
 	}
 
 	echo "<table border=1>
-		<tr><td>ID</td><td>USER NAME</td><td>FULL NAME</td><td>GENDER</td><td>PHONE NUMBER</td><td>EMERGNCY CONTACT</td><td>CONTROLS</td></tr>";
+		<tr><td>ID</td><td>USER NAME</td><td>FULL NAME</td><td>GENDER</td><td>PHONE NUMBER</td><td>HEIGHT</td><td>WEIGHT</td><td>BLOOD TYPE</td><td>EMERGENCY CONTACT</td><td>CONTROLS</td></tr>";
 	$counter = 1;
 	$bgcolor="";
 	$style="";
@@ -78,11 +83,17 @@
 		<td>{$row['USERNAME']}</td>
 		<td>{$row['FIRSTNAME']} {$row["LASTNAME"]}</td>
 		<td>{$row['GENDER']}</td>
-		<td>{$row['PHONE NUMBER']}</td>
-		<td>{$row['EMERGENCY CONTACT']}</td>
+		<td>{$row['PHONENUMBER']}</td>
+		<td>{$row['HEIGHT']}</td>
+		<td>{$row['WEIGHT']}</td>
+		<td>{$row['BLOODTYPE']}</td>
+
+		<td>{$row['CONTACTFIRSTNAME']} {$row['CONTACTLASTNAME']}</td>
+		
 		</tr>";
+		
 		$counter++;
 	}
 
-	echo "</table";
+	echo "</table>";
 ?>
