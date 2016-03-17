@@ -25,6 +25,36 @@
 						<input type="text" id="txtSearch" />
 						<span class="menuitem">search</span>
 					</div>
+          <?php
+                //initialize
+
+                $studentID="";
+                $weight="";
+                $height="";
+                $bloodtype="";
+                  include_once("students.php");
+                //1) what is the purpose of this if block
+                if(!isset($_REQUEST['studentID'])){
+                  exit();
+                }
+                else{
+                  $studentID=$_REQUEST['studentID'];
+                  $weight=$_REQUEST['weight'];
+                  $height = $_REQUEST['height'];
+                  $bloodtype=$_REQUEST['bloodtype'];
+
+                  $obj=new students();
+                  $r=$obj->addStudentRecord($studentID,$weight,$height,$bloodtype);
+                  //1) what is the purpose of this if block
+                  if($r==false){
+                    echo "error while adding student information";
+                  }else{
+                    echo" Student with ID $studentID added";
+                  }
+
+                }
+          ?>
+
           <div id="divStatus" class="status">
                     </div>
                     <div id="divContent">
@@ -40,32 +70,3 @@
                   </table>
                 </body>
               </html>
-          <?php
-          			//initialize
-
-          			$studentID="";
-          			$weight="";
-          			$height="";
-          			$bloodtype="";
-          				include_once("students.php");
-          			//1) what is the purpose of this if block
-          			if(!isset($_REQUEST['studentID'])){
-                  exit();
-                }
-                else{
-          				$studentID=$_REQUEST['studentID'];
-          				$weight=$_REQUEST['weight'];
-          				$height = $_REQUEST['height'];
-          				$bloodtype=$_REQUEST['bloodtype'];
-
-          				$obj=new students();
-          				$r=$obj->addStudentRecord($studentID,$weight,$height,$bloodtype);
-          				//1) what is the purpose of this if block
-          				if($r==false){
-          					echo "error while adding student information";
-          				}else{
-          					echo" Student with ID $studentID added";
-          				}
-
-          			}
-          ?>
