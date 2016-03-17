@@ -15,11 +15,12 @@
 		*@return boolean returns true if successful or false
 		*/
 		function addStudentRecord($studentID,$weight,$height,$bloodtype){
+
 			$strQuery="insert into studentHasRecord set
 							STUDENTID='$studentID',
 							HEIGHT='$height',
 							WEIGHT='$weight',
-							BLOODTYPE=''$bloodtype'";
+							BLOODTYPE='$bloodtype'";
 			return $this->query($strQuery);
 		}
 
