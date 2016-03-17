@@ -31,7 +31,7 @@
           			$studentID="";
           			$weight="";
           			$height="";
-          			$bloodtype=="";
+          			$bloodtype="";
           				include_once("students.php");
           			//1) what is the purpose of this if block
           			if(isset($_REQUEST['studentID'])){
@@ -39,7 +39,7 @@
           				$weight=$_REQUEST['weight'];
           				$height = $_REQUEST['height'];
           				$bloodtype=$_REQUEST['bloodtype'];
-          			]
+
 
 
           				$obj=new students();
