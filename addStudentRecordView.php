@@ -45,7 +45,7 @@
 
                   $obj=new students();
                   $r=$obj->addStudentRecord($studentID,$weight,$height,$bloodtype);
-                  //1) what is the purpose of this if block
+
                   if($r==false){
                     echo "error while adding student information";
                   }else{
