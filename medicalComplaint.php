@@ -13,12 +13,13 @@
         *@return boolean true if successful, else false
         */
         function getAllMedicalComplaints($filter=false){
-            $strQuery="select COMPLAINTID, students.STUDENTID, students.FIRSTNAME, students.LASTNAME, DATE,TEMPERATURE,SYMPTOMS,DIAGNOSIS,CAUSE,PRESCRIPTION,NURSEID from students left join medicalComplaint on students.STUDENTID=medicalComplaint.STUDENTID";
+            $strQuery="select COMPLAINTID, students.STUDENTID, students.FIRSTNAME, students.LASTNAME, EMAIL, PHONENUMBER, DATE,TEMPERATURE,SYMPTOMS,DIAGNOSIS,CAUSE,PRESCRIPTION,NURSEID from students left join medicalComplaint on students.STUDENTID=medicalComplaint.STUDENTID";
             
             if($filter!=false){
                 $strQuery=$strQuery . " where $filter";
             }
             $strQuery=$strQuery . " ORDER BY DATE DESC";
+            //var_dump($strQuery);
             return $this->query($strQuery);
         }
 
