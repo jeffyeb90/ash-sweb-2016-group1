@@ -37,7 +37,7 @@
 							Date of Attendance: <input type="date" name="date">
 						</div>
 						<div>
-							Temperature: <input type="number" name="temp" min="20" max="50" value="37">°C
+							Temperature: <input type="number" name="temp" step="0.01" min="20" max="50" value="37">°C
 						</div>
 						<div>
 
@@ -45,6 +45,7 @@
 						</div>
 						Diagnosis: <select name="diagnosis">
 							<?php
+
 							include_once("diseases.php");
 				      	$disease=new diseases();
 				      	$result=$disease->getAllDiseases();

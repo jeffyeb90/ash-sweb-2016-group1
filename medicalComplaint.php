@@ -1,15 +1,17 @@
 <?php
-
+/**
+*@author Efua Bainson
+*@method string addComplaint(integer $studentID, date $date, decimal $temperature, string $symptoms, string $diagnosis, string $cause, string $prescription, integer $nurseID)
+*/
  include_once("databasehelper.php");
  /**
  *medicalComplaint  class
  */
  class medicalComplaint extends databasehelper{
-   function medicalComplaint() {
+   function medicalComplaint () {
 
     }
     /**
-  	*Adds a new medical complaint
   	*@param string studentID identification number of the student
   	*@param string date date
   	*@param string temperature temperature
@@ -21,21 +23,21 @@
   	*@return boolean returns true if successful or false
   	*/
     function addComplaint($studentID, $date, $temperature, $symptoms, $diagnosis, $cause, $prescription, $nurseID){
+      /**
+      *@var string $strQuery Contains sql statement
+      */
       $strQuery="insert into medicalcomplaint set
-  						STUDENTID='$studentID',
+  						STUDENTID=$studentID,
   						DATE='$date',
-  						TEMPERATURE='$temperature',
+  						TEMPERATURE=$temperature,
   						SYMPTOMS='$symptoms',
               DIAGNOSIS='$diagnosis',
   						CAUSE='$cause',
               PRESCRIPTION='$prescription',
-  						NURSEID='$nurseID'";
+  						NURSEID=$nurseID";
   		return $this->query($strQuery);
   	}
-
-
-
-
-
  }
- ?>
+
+
+?>
