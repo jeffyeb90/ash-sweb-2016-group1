@@ -26,20 +26,23 @@
 					</div>
 					<div id="divStatus" class="status">status message
 					</div>
-					
+					<img src="" alt="">
 					<div class="divContent">
 <!--					    Content Space-->
 					    
 					    <?php
-                        
+                        //Request the sid and if it isn't available say so
                         if(!isset($_REQUEST['sid'])){
                             echo "No user to show";
                             return;
                         }
                         
+                        
+                        //Function to check if a given number is even
                         function isEven($num) {
                             return $num % 2 == 0;
                         }
+                        
                         
                         include_once("medicalComplaint.php");
                         $obj = new medicalComplaint();
@@ -55,6 +58,7 @@
                         else{
                             //$row = $obj->fetch();
                             //var_dump($result);
+                            echo "<img class='profile-image' src='images/{$row['IMAGE']}' alt=''>";
                             echo "<p>Name: {$row['FIRSTNAME']} {$row['LASTNAME']}</p>";
                             echo "<p>Student ID: {$row['STUDENTID']}</p>";
                             echo "<p>Email: {$row['EMAIL']}</p>";
