@@ -47,13 +47,14 @@
                         $student_id = $_REQUEST['sid'];
                         $filter = "students.STUDENTID = $student_id";
                         $result = $obj->getAllMedicalComplaints($filter);
+                        $row = $obj->fetch();
                         
-                        if($result == false){
+                        if($row <= 0){
                             echo "User doesn't exist";
                         }
                         else{
-                            $row = $obj->fetch();
-                            //var_dump($row);
+                            //$row = $obj->fetch();
+                            //var_dump($result);
                             echo "<p>Name: {$row['FIRSTNAME']} {$row['LASTNAME']}</p>";
                             echo "<p>Student ID: {$row['STUDENTID']}</p>";
                             echo "<p>Email: {$row['EMAIL']}</p>";
