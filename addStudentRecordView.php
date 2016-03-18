@@ -24,36 +24,36 @@
 						<span class="menuitem" >page menu 1</span>
 						<input type="text" id="txtSearch" />
 						<span class="menuitem">search</span>
-    <div><span ><br>Enter Student ID to add record</br></span></div>
 					</div>
 
           <?php
                 //initialize
+  include_once("students.php");
+  /**
+  *@author Jeffrey Takyi-Yeboah
 
-                $studentID="";
-                $weight="";
-                $height="";
-                $bloodtype="";
-                  include_once("students.php");
+  */
+    //1) what is the purpose of this if block
+    if(!isset($_REQUEST['studentID'])){
+    echo "Please Enter Student ID";
+    }
+    else if(isset($_REQUEST['studentID'])){
+    $studentID=$_REQUEST['studentID'];
+    $weight=$_REQUEST['weight'];
+    $height = $_REQUEST['height'];
+    $bloodtype=$_REQUEST['bloodtype'];
 
-                //1) what is the purpose of this if block
-                if(isset($_REQUEST['studentID'])){
+     $obj=new students();
+     $r=$obj->addStudentRecord($studentID,$weight,$height,$bloodtype);
 
-                  $studentID=$_REQUEST['studentID'];
-                  $weight=$_REQUEST['weight'];
-                  $height = $_REQUEST['height'];
-                  $bloodtype=$_REQUEST['bloodtype'];
+       if($r==false){
+       echo "Error adding student information";
+      }else{
+       echo" Student with ID $studentID added";
+        }
+          }
 
-                  $obj=new students();
-                  $r=$obj->addStudentRecord($studentID,$weight,$height,$bloodtype);
 
-                  if($r==false){
-                    echo "Error adding student information";
-                  }else{
-                    echo" Student with ID $studentID added";
-                  }
-
-                }
           ?>
 
           <div id="divStatus" class="status">
@@ -71,6 +71,8 @@
                     <option value =O>O</option>
 
           </select>
+            </div>
+            <div>
                   <input type="submit" value="Add">
                       </form>
                     </div>
