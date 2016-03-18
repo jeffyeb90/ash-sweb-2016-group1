@@ -7,7 +7,7 @@ class testDatabasehelper extends PHPUnit_Framework_TestCase
     {
 
         $databasehelper=new databasehelper();
-        $this->assertEquals(true, $->connect());
+        $this->assertEquals(true, $databasehelper->connect());
 		return $databasehelper;
     }
 	/**
