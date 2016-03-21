@@ -62,8 +62,8 @@
                       Content space
                       <form action="" method="GET">
                   <div>StudentID: <input type="text" name="studentID" value=""/></div>
-                  <div>Height: <input type="text" name="weight" value=""/>
-                  <div>Weight: <input type="text" name="height" value=""/>
+                  <div>Height (cm): <input type="text" name="weight" value=""/>
+                  <div>Weight (kg): <input type="text" name="height" value=""/>
                   <div>Bloodtype: <select name="bloodtype">
                     <option value =A>A</option>
                     <option value =B>B</option>
