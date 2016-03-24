@@ -16,6 +16,7 @@ body{
     width: 100%;
 }
 
+<<<<<<< HEAD
 .clickspot{
 	text-decoration:underline;
 	color:blue;
@@ -30,6 +31,22 @@ body{
 }
 
 .menuitem {
+=======
+.clickspot{
+	text-decoration:underline;
+	color:blue;
+	cursor:pointer
+}
+.status{
+	background-color:Yellow
+}
+.error{
+	color:Red;
+	background-color:Yellow
+}
+
+.menuitem {
+>>>>>>> 88846dcb9025eec3f2e6f6f1682270d44fe1ffed
 	text-decoration:none;
 	background-color:#f37520;
     color:#fff;
@@ -42,6 +59,7 @@ body{
     padding: 10px
 
 
+<<<<<<< HEAD
 }
 .menuitem:hover{
 	text-decoration:underline;
@@ -139,6 +157,105 @@ body{
     display:none;
     width: auto;
 }
+=======
+}
+.menuitem:hover{
+	text-decoration:underline;
+	cursor:hand;
+	font-weight:bold;
+	background-color:Silver
+}
+
+#pageheader
+{
+    height: 1in;
+    background-color: #FFCC66;
+    font-size: large;
+    text-align: center;
+}
+
+#mainnav{
+	width:2in;
+	vertical-align:top
+}
+
+
+#content {
+	width:11.85in;
+    margin-left: 500px;
+	vertical-align:top;
+	
+}
+
+.reportTable 
+{
+    border:1px;
+    border-collapse:collapse;
+}
+
+.reportTable .header
+{
+    background-color: #CC6600;
+    text-transform: uppercase;
+    color: White;
+}
+
+.reportTable .row1
+{
+    background-color: #FFE0B3;
+}
+
+.reportTable .row2
+{
+    background-color:White;
+}
+
+.reportTable tr:hover
+{
+    background-color:Yellow
+}
+
+.tableForm .label
+{
+    background-color: #CC6600;
+    text-transform:capitalize;
+    color: White;
+    text-align:right;
+}
+
+.tableForm .field
+{
+    background-color: #FFAE35;
+}
+.popupMenu
+{
+    background-color: #DC7518;
+    position: absolute;
+    display:none;
+    width: auto;
+}
+
+.popupMenu div
+{
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+.popupMenu div:hover
+{
+    color: #FFFFFF;
+    text-decoration: underline;
+    background-color: #CC6600;
+}
+
+.popupForm
+{
+    background-color: #DC7518;
+    position: absolute;
+    display:none;
+    width: auto;
+}
+>>>>>>> 88846dcb9025eec3f2e6f6f1682270d44fe1ffed
 
 table.container {
    width: 100%;
