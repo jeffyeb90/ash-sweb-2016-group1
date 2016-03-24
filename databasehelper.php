@@ -55,6 +55,7 @@ class databasehelper{
   	*Fetch from the current data set and return
   	*@param string $strQuery sql string to execute
     *@return array one record
+
   	*/
   function fetch(){
 

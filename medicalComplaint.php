@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 /**
 
 *@author Efua Bainson and Andrew Abbeyquaye
@@ -39,7 +40,7 @@
   						NURSEID=$nurseID";
   		return $this->query($strQuery);
   	}
- 
+
 
         /**
         *gets medical complaints based on the filter
