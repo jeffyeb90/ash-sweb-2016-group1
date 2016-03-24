@@ -7,7 +7,7 @@
 	* @method boolean addStudentRecord() should insert a student and return a boolean result
 	* @method students() is a constructor of the student class
 	*/
-	*/
+	
 	class students extends databasehelper{
 		
 		function students(){
