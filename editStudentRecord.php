@@ -40,6 +40,7 @@
 
 	}
 	$row =$obj->fetch();
+	print_r($row);
 	
 ?>
 					<div id="divStatus" class="status">
@@ -55,34 +56,41 @@
 					
 						
 						</div>
-						<div>Blood Type: 
+						<div>Blood Type:
+						<?php echo $row['BLOODTYPE']; ?> 
 							<select name="bloodtype">
 								 <?php
-									
+									echo "hello";
 									$groupA="";
 									$groupB="";
 									$groupAB="";
 									$groupO="";
-									if($row['BLOODTYPE'=='A']){
+
+									if($row['BLOODTYPE']=='A'){
 										$groupA="selected";
+										
 									}
-									else if($row['BLOODTYPE'=='B']){
+									else if($row['BLOODTYPE']=='B'){
 										$groupB="selected";
+										
 									}
-									else if($row['BLOODTYPE'=='AB']){
+									else if($row['BLOODTYPE']=='AB'){
 										$groupAB="selected";
+										
 									}
 									else{
 										
 										$groupO="selected";
+										
 									}
+
 										
 									
 								?>	 
-                   				 <option <?php echo $groupA ?>value =A>A</option>
-                   				 <option <?php echo $groupB ?>value =B>B</option>
-                   				 <option <?php echo $groupAB ?>value =AB>AB</option>
-                    			<option <?php echo $groupO ?>value =O>O</option>
+                   				 <option <?php echo $groupA ?> value =A>A</option>
+                   				 <option <?php echo $groupB ?> value =B>B</option>
+                   				 <option <?php echo $groupAB ?> value =AB>AB</option>
+                    			<option <?php echo $groupO ?> value =O>O</option>
 									
 
           

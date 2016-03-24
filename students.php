@@ -13,7 +13,7 @@
 		}
 
 		function getStudentByID($studentID){
-			$strQuery="Select STUDENTID, HEIGHT, WEIGHT, BLOODTYPE from studentID where STUDENTID = $studentID";
+			$strQuery="Select STUDENTID, HEIGHT, WEIGHT, BLOODTYPE from studenthasrecord where STUDENTID=$studentID";
 			return $this->query($strQuery);
 		}
 
