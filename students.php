@@ -12,5 +12,10 @@
 			return $this->query($strQuery);
 		}
 
+		function getStudentByID($studentID){
+			$strQuery="Select STUDENTID, HEIGHT, WEIGHT, BLOODTYPE from studentID where STUDENTID = $studentID";
+			return $this->query($strQuery);
+		}
+
 	}
 	?>
