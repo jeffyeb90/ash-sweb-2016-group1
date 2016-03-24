@@ -1,8 +1,7 @@
 <?php
-<<<<<<< HEAD
 /**
 
-*@author Efua Bainson and Andrew Abbeyquaye
+*@author Efua Bainson, Makafui Fie and Andrew Abbeyquaye
 *@method string addComplaint(integer $studentID, date $date, decimal $temperature, string $symptoms, string $diagnosis, string $cause, string $prescription, integer $nurseID)
 *@method bool getAllMedicalComplaints($filter)
 */
@@ -57,6 +56,39 @@
             //var_dump($strQuery);
             return $this->query($strQuery);
         }
+		/**
+		*get complaint records based on the filter
+		*@param string condition to filter. If false, filter will not be applied
+		*@return boolean true if successful, false if unsuccessful
+		**/
+
+		function getComplaints($filter=false){
+			 $strQuery="select COMPLAINTID, STUDENTID, DATE, TEMPERATURE, SYMPTOMS, diseases.NAME, CAUSE, PRESCRIPTION, nurses.FIRSTNAME, nurses.LASTNAME from medicalcomplaint left join diseases on medicalcomplaint.DIAGNOSIS=diseases.DISEASEID left join nurses on  medicalcomplaint.NURSEID=nurses.NURSEID";
+
+
+
+			if($filter!=false){
+				$strQuery=$strQuery . " where $filter";
+
+			}
+			return $this->query($strQuery);
+		}
+		/**
+		*search for medical complaints using student ID as a filter
+		*@param string student ID to filter by. If false, calls getComplaints function to display all complaints
+		*@return boolean true if successful, false if unsuccessful
+		**/
+		function searchComplaintsByStudentID($text=false){
+			$filter=false;
+			if($text!=false){
+				$filter=" STUDENTID like '$text'";
+			}
+
+			return $this->getComplaints($filter);
+		}
+
+
+
 
 	}
 ?>
