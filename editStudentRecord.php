@@ -28,12 +28,12 @@
 						<span class="menuitem" >page menu 3</span>		
 					</div>
 <?php
-	$strStatusMessage ="Edit User";
-	include_once("users.php");
-	 $obj=new users();
-	$usercode = $_REQUEST["usercode"];
+	$strStatusMessage ="Edit Student Record";
+	include_once("students.php");
+	 $obj=new students();
+	$studentID = $_REQUEST["studentID"];
 	
-	$result =$obj->getUserByCode($usercode);
+	$result =$obj->getStudentByID($studentID);
 	if(!$result){
 		echo "Error getting data.";
 		exit();
@@ -48,85 +48,45 @@
 					<div id="divContent">
 						Content space
 						<form action="update.php" method="GET">
-						<input type="hidden" name="usercode" value="<?php echo $row['USERCODE'] ?>">
-						<div>Username: <input type="text" name="username" value="<?php echo $row['USERNAME'] ?>";/></div>
-						<div>First Name: <input type="text" name="firstname" value="<?php echo $row['FIRSTNAME'] ?>"/>
-						<div>Last Name: <input type="text" name="lastname" value="<?php echo $row['LASTNAME'] ?>"/>
-					
-						<div>
+						<input type="hidden" name="studentID" value="<?php echo $row['STUDENTID'] ?>">
+						<div>Weight: <input type="text" name="weight" value="<?php echo $row['WEIGHT'] ?>";/></div>
+						<div>Height: <input type="text" name="height" value="<?php echo $row['HEIGHT'] ?>"/>
 						
-							Permission :
-							<?php
-							$viewSelect="";
-							$addSelect="";
-							$deleteSelect="";
-							$updateSelect="";
-							$perlist=explode(",", $row['PERMISSION']);
-
-							if(in_array("VIEW", $perlist)){
-								$viewSelect="checked";
-							}
-							if(in_array("ADD", $perlist)){
-								$addSelect="checked";
-							}
-							if(in_array("DELETE", $perlist)){
-								$deleteSelect="checked";
-							}
-							if(in_array("UPDATE", $perlist)){
-								$updateSelect="checked";
-							}
-							?>	
-							<input <?php echo  $viewSelect ?> type="checkbox" value="VIEW" name="permission[]"  /> View
-							<input <?php echo  $addSelect ?> type="checkbox" value="ADD" name="permission[]" /> Add
-							<input <?php echo  $updateSelect ?> type="checkbox" value="DELETE" name="permission[]"  /> Delete
-							<input <?php echo  $deleteSelect ?> type="checkbox" value="UPDATE" name="permission[]" /> Update
-
+					
+						
 						</div>
-						<div>
-							<?php
-								$enabled="";
-								$disabled="";
-								$newUser="";
-								if($row['STATUS']=="ENABLED"){
-									$enabled="checked";
-								}
-								else if($row['STATUS']=="NEWUSER"){
-									$newUser="checked";
-								}
-								else{
-									$disabled="checked";
-								}
-							?>
-							Account Status: <input <?php echo $enabled ?> type="radio" name="status" value="1"/>Enabled
-							<input <?php echo $disabled ?> type="radio" name="status" value="0"/>Disabled
-							
-						</div>
-						<div>User Group: 
-							<select name="usergroup">
-								<?php
+						<div>Blood Type: 
+							<select name="bloodtype">
+								 <?php
 									
-									include_once("usergroups.php");
-									$usergroup= new usergroups();
-									$result=$usergroup->getAllUserGroups();
-
-									
-									if($result==false){
-										
-										echo "result is false";
-									}else{
-										
-										while($groupRow=$usergroup->fetch()){
-											$selected="";
-											if($groupRow["id"]==$row["USERGROUP"]){
-												$selected="selected";
-											}
-
-											echo "<option $selected value='{$groupRow['id']}'>{$groupRow['name']}</option>";
-										}
+									$groupA="";
+									$groupB="";
+									$groupAB="";
+									$groupO="";
+									if($row['BLOODTYPE'=='A']){
+										$groupA="selected";
 									}
+									else if($row['BLOODTYPE'=='B']){
+										$groupB="selected";
+									}
+									else if($row['BLOODTYPE'=='AB']){
+										$groupAB="selected";
+									}
+									else{
+										
+										$groupO="selected";
+									}
+										
 									
+								?>	 
+                   				 <option <?php echo $groupA ?>value =A>A</option>
+                   				 <option <?php echo $groupB ?>value =B>B</option>
+                   				 <option <?php echo $groupAB ?>value =AB>AB</option>
+                    			<option <?php echo $groupO ?>value =O>O</option>
 									
-								?>				
+
+          
+											
 							</select>
 						</div>
 						<input type="submit" name= "save" value="Update">
