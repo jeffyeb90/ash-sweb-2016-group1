@@ -17,7 +17,7 @@
         
         /**
         *gets medical complaints based on the filter
-        *@param string mixed condition to filter. If  false, then filter will not be applied
+        *@param string mixed condition to filter. If false, then filter will not be applied
         *@return boolean true if successful, else false
         */
         function getAllMedicalComplaints($filter=false){
@@ -28,6 +28,17 @@
             }
             $strQuery=$strQuery . " ORDER BY DATE DESC";
             //var_dump($strQuery);
+            return $this->query($strQuery);
+        }
+        
+        
+        /**
+        *gets a medical complaint based on the complaintID
+        *@param string complaint id 
+        *@return boolean true if successful, else false
+        */
+        function getMedicalComplaint($complaintID){
+            $strQuery = "SELECT * FROM medicalComplaint WHERE COMPLAINTID=$complaintID";
             return $this->query($strQuery);
         }
 
