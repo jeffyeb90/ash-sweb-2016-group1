@@ -40,7 +40,7 @@
 
 	}
 	$row =$obj->fetch();
-	print_r($row);
+	
 	
 ?>
 					<div id="divStatus" class="status">
@@ -48,7 +48,7 @@
 					</div>
 					<div id="divContent">
 						Content space
-						<form action="update.php" method="GET">
+						<form action="updateComplaint.php" method="GET">
 						<input type="hidden" name="complaintID" value="<?php echo $row['COMPLAINTID'] ?>">
 						<div>Student ID: <input type="text" name="studentID" value="<?php echo $row['STUDENTID'] ?>";/></div>
 						<div>Date: <input type="text" name="date" value="<?php echo $row['DATE'] ?>"/>
