@@ -57,7 +57,6 @@
 						
 						</div>
 						<div>Blood Type:
-						<?php echo $row['BLOODTYPE']; ?> 
 							<select name="bloodtype">
 								 <?php
 									echo "hello";
