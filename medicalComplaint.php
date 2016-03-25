@@ -11,5 +11,10 @@
 				return $this->query($strQuery);
 		}
 
+		function getComplaintByID($complaintID){
+			$strQuery="select COMPLAINTID, STUDENTID, DATE, TEMPERATURE, SYMPTOMS, DIAGNOSIS, CAUSE, PRESCRIPTION, NURSEID from medicalcomplaint where COMPLAINTID=$complaintID";
+			return $this->query($strQuery);
+		}
+
 	}
 ?>
