@@ -87,6 +87,12 @@
 			return $this->getComplaints($filter);
 		}
 
+    function diseaseFrequency(){
+      $strQuery="select diseases.NAME, count(DIAGNOSIS) FROM medicalComplaint inner join diseases on diseases.DISEASEID=medicalComplaint.DIAGNOSIS GROUP BY DIAGNOSIS";
+
+      return $this->query($strQuery);
+  }
+
 
 
 

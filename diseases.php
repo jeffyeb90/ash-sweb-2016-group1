@@ -52,6 +52,8 @@ class diseases extends databasehelper{
 		return $this->query($strQuery);
 	}
 
+  
+
 }
 
 ?>
