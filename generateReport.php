@@ -5,13 +5,6 @@
 		<title>Generate Report</title>
 		<link rel="stylesheet" href="css/style.css">
 
-    <style>
-		body {
-			margin: 0px;
-			padding: 0px;
-		}
-    span {background-color:blue;width:100%; height:20%;}
-    </style>
 	</head>
 	<body>
 
