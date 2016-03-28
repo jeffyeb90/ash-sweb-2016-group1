@@ -34,11 +34,37 @@
   *@author Jeffrey Takyi-Yeboah
 
   */
+    if(isset($_REQUEST['email'])&&(isset($_REQUEST['password']))){
+       $obj=new students();
+      $email = $_REQUEST['email'];
+    $password = $_REQUEST['password'];
+       $row=$obj->login($email,$password);
+
+       if($row==false){
+                echo "Error finding nurse";
+}
+      else{
+        $result=$obj->fetch();
+				if(($result['EMAIL']==$email) &&($result['PASSWORD'])==$password){
+    echo "Nurse Logged In";
+
+				}
+				else{
+					echo"User not found";
+				}
+
+
+	//echo'<script> window.location.href="studentslist.php";</script>';
+
+       }
+		 }
 
 
 
 
-          ?>
+
+
+  ?>
 
           <div id="divStatus" class="status">
                     </div>

@@ -56,12 +56,11 @@
 		*@param string email email of nurse
 		*@return boolean returns true if successful or false
 		*/
-		function login($nurseID,$email,$password){
+		function login($email,$password){
 			/**
 			*@var string $strQuery should contain insert query
 			*/
-			$strQuery="select * nurses where
-						(EMAIL='$email'and PASSWORD=MD5('$password')) and NURSEID= '$nurseID'";
+			$strQuery="SELECT * FROM `nurses` WHERE `PASSWORD` LIKE '$password' AND `EMAIL` LIKE '$email'";
 			return $this->query($strQuery);
 		}
 
