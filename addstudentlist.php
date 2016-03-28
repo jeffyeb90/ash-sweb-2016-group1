@@ -26,7 +26,7 @@
 						<span class="menuitem">search</span>
 					</div>
 					<?php
-					$strStatusMessage="Display Users";
+					$strStatusMessage="Display Students";
 					if(isset($_REQUEST['message'])){
 						$strStatusMessage=$_REQUEST['message'];
 					}
@@ -55,7 +55,7 @@
 		$result = $student->getStudents();
 	}
 	if($result==false){
-		echo "Error getting users.";
+		echo "Error getting students.";
 		exit();
 	}
 	echo "<table border=1>
@@ -78,7 +78,7 @@
 		<td>{$row['FIRSTNAME']} {$row["LASTNAME"]}</td>
 		<td>{$row['GENDER']}</td>
 		<td>{$row['PHONENUMBER']}</td>
-		<td><a href='addStudent.php?add={$row['STUDENTID']}'>Add Record</a></td>
+		<td><a href='addStudent.php?studentID={$row['STUDENTID']}'>Add Record</a></td>
 
 		</tr>";
 
