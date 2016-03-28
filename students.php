@@ -1,5 +1,5 @@
 
-<?php 
+<?php
 	include_once("databasehelper.php");
 	/**
 	*Students class
@@ -7,11 +7,11 @@
 	* @method boolean addStudentRecord() should insert a student and return a boolean result
 	* @method students() is a constructor of the student class
 	*/
-	
+
 	class students extends databasehelper{
-		
+
 		function students(){
-			
+
 		}
 		/**
 		*gets students records based on a filter
@@ -21,7 +21,7 @@
 		function getStudents($filter=false){
 			$strQuery= "select students.STUDENTID, USERNAME, students.FIRSTNAME, students.LASTNAME, GENDER, students.EMAIL, students.PHONENUMBER, HEIGHT, WEIGHT, BLOODTYPE, emergencycontact.FIRSTNAME as CONTACTFIRSTNAME, emergencycontact.LASTNAME as CONTACTLASTNAME from students left join studenthasrecord on students.STUDENTID= studenthasrecord.STUDENTID left join emergencycontact on students.EMERGENCYCONTACTID= emergencycontact.CONTACTID";
 
-			
+
 
 			if($filter!=false){
 				$strQuery=$strQuery . " where $filter";
@@ -42,11 +42,11 @@
 			return $this->getStudents($filter);
 		}
 
-	
 
 
-	
-	
+
+
+
 		/**
 		*Adds a new user
 		*@param int studentID
@@ -68,6 +68,17 @@
 		}
 
 
-	}
-	?>
+		function updateStudentRecord($studentID, $weight, $height, $bloodtype){
 
+			$strQuery="Update studenthasrecord set HEIGHT='$height', WEIGHT='$weight', BLOODTYPE='$bloodtype' where STUDENTID=$studentID";
+			return $this->query($strQuery);
+		}
+
+		function getStudentByID($studentID){
+			$strQuery="Select STUDENTID, HEIGHT, WEIGHT, BLOODTYPE from studenthasrecord where STUDENTID=$studentID";
+			return $this->query($strQuery);
+		}
+
+	}
+
+	?>
