@@ -34,24 +34,32 @@
 
   */
     //1) what is the purpose of this if block
-    if(!isset($_REQUEST['studentID'])){
-    echo "Please Enter Student ID";
+    if(!isset($_REQUEST['studentID'])&&(!isset($_REQUEST['add']))){
+    echo "<h4 style='text-align: left'>Please Enter Student ID</h4>";
     }
-    else if(isset($_REQUEST['studentID'])){
-    $studentID=$_REQUEST['studentID'];
-    $weight=$_REQUEST['weight'];
-    $height = $_REQUEST['height'];
-    $bloodtype=$_REQUEST['bloodtype'];
 
-     $obj=new students();
-     $r=$obj->addStudentRecord($studentID,$weight,$height,$bloodtype);
 
-       if($r==false){
-       echo "Error adding student information";
-      }else{
-       echo" Student with ID $studentID added";
-        }
-          }
+		else if(isset($_REQUEST['submit'])){
+
+			    $studentID=$_REQUEST['studentID'];
+			    $weight=$_REQUEST['weight'];
+			    $height = $_REQUEST['height'];
+			    $bloodtype=$_REQUEST['bloodtype'];
+		      $add = $_REQUEST['add'];
+
+					 $obj=new students();
+			     $r=$obj->addStudentRecord($studentID,$weight,$height,$bloodtype);
+
+			       if($r==false){
+							 echo "<h4 style='text-align: left'>Failed to add Student</h4>";
+						 }
+							else{
+			       echo" Student with ID $studentID added";
+						 //header("Location :studentslist.php");
+						 	//echo'<script> window.location.href="studentslist.php";</script>';
+			        }
+
+			          }
 
 
           ?>
@@ -61,7 +69,9 @@
                     <div id="divContent">
                       Content space
                       <form action="" method="GET">
-                  <div>StudentID: <input type="text" name="studentID" value=""/></div>
+
+                  <div>StudentID: <input type="text" name="studentID" value="<?php if(!isset($_REQUEST['add'])){}
+									else{echo $_REQUEST['add'];}?>"></div>
                   <div>Height (cm): <input type="text" name="weight" value=""/>
                   <div>Weight (kg): <input type="text" name="height" value=""/>
                   <div>Bloodtype: <select name="bloodtype">

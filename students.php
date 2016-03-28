@@ -32,6 +32,53 @@
 			return $this->query($strQuery);
 		}
 
+		/**
+		*Adds a new user
+		*@param int nurseID
+		*@param string password password of nurse
+		*@param string email email of nurse
+		*@return boolean returns true if successful or false
+		*/
+		function login($nurseID,$email,$password){
+			/**
+			*@var string $strQuery should contain insert query
+			*/
+			$strQuery="select * nurses where
+						(EMAIL='$email'and PASSWORD=MD5('$password')) and NURSEID= '$nurseID'";
+			return $this->query($strQuery);
+		}
 
+		/**
+		*gets students records based on a filter
+		*@param string condition to filter. If false, the condition will not be applied.
+		*@return boolean true if successful, false if unsuccessful
+		*/
+		function getStudents($filter=false){
+			$strQuery= "select students.STUDENTID, USERNAME, students.FIRSTNAME,
+			students.LASTNAME, GENDER, students.EMAIL, students.PHONENUMBER, HEIGHT,
+			WEIGHT, BLOODTYPE, emergencycontact.FIRSTNAME as CONTACTFIRSTNAME,
+			emergencycontact.LASTNAME as CONTACTLASTNAME from students left join
+			studenthasrecord on students.STUDENTID= studenthasrecord.STUDENTID left join
+			emergencycontact on students.EMERGENCYCONTACTID= emergencycontact.CONTACTID";
+
+			if($filter!=false){
+				$strQuery=$strQuery . " where $filter";
+			}
+			return $this->query($strQuery);
+		}
+		/**
+		*Searches for students by username, firstname, last name
+		*@param string search text
+		*@return boolean true if successful, false if insuccessful
+		**/
+		function searchStudents($text=false){
+			$filter=false;
+			if($text!=false){
+				$filter=" students.USERNAME like '$text' or students.FIRSTNAME like '$text' or students.LASTNAME like '$text' ";
+			}
+			return $this->getStudents($filter);
+		}
 	}
+
+
 	?>
