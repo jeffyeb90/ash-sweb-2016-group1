@@ -88,6 +88,9 @@
 		<td>{$row['CAUSE']}</td>
 		<td>{$row['PRESCRIPTION']}</td>
 		<td>{$row['FIRSTNAME']} {$row['LASTNAME']}</td>
+		<td><a href='editComplaints.php?complaintID={$row['COMPLAINTID']}'>Update</a>
+		<a href='viewComplaintDetails.php?cid={$row['COMPLAINTID']}'>View Details</a>
+		</td>
 		
 		
 		</tr>";

@@ -40,7 +40,7 @@
 
 	}
 	$row =$obj->fetch();
-	print_r($row);
+	
 
 ?>
 					<div id="divStatus" class="status">

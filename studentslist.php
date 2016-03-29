@@ -89,7 +89,9 @@
 
 
 		<td>{$row['CONTACTFIRSTNAME']} {$row['CONTACTLASTNAME']}</td>
-
+		<td><a href='editStudentRecord.php?studentID={$row['STUDENTID']}'>Update</a>
+		<a href='viewStudentComplaints.php?sid={$row['STUDENTID']}'>View Details</a>
+		</td>
 		</tr>";
 
 		$counter++;
