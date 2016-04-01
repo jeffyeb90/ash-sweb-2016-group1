@@ -45,19 +45,23 @@
 }
       else{
         $result=$obj->fetch();
+				if(($email!=NULL) && ($password!=NULL)){
 				if(($result['EMAIL']==$email) &&($result['PASSWORD'])==$password){
     echo "Nurse Logged In";
-
+	echo'<script> window.location.href="addstudentlist.php";</script>';
 				}
+
 				else{
 					echo"User not found";
 				}
 
 
-	//echo'<script> window.location.href="studentslist.php";</script>';
+
 
        }
 		 }
+	 }
+
 
 
 
