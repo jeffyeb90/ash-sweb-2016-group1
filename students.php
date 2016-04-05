@@ -19,7 +19,11 @@
 		*@return boolean true if successful, false if unsuccessful
 		*/
 		function getStudents($filter=false){
-			$strQuery= "select students.STUDENTID, USERNAME, students.FIRSTNAME, students.LASTNAME, GENDER, students.EMAIL, students.PHONENUMBER, HEIGHT, WEIGHT, BLOODTYPE, emergencycontact.FIRSTNAME as CONTACTFIRSTNAME, emergencycontact.LASTNAME as CONTACTLASTNAME from students left join studenthasrecord on students.STUDENTID= studenthasrecord.STUDENTID left join emergencycontact on students.EMERGENCYCONTACTID= emergencycontact.CONTACTID";
+			$strQuery= "select students.STUDENTID, USERNAME, students.FIRSTNAME, students.LASTNAME,
+			GENDER, students.EMAIL, students.PHONENUMBER, HEIGHT, WEIGHT, BLOODTYPE,
+			emergencycontact.FIRSTNAME as CONTACTFIRSTNAME, emergencycontact.LASTNAME as CONTACTLASTNAME
+			from students left join studenthasrecord on students.STUDENTID= studenthasrecord.STUDENTID left join emergencycontact on
+			students.EMERGENCYCONTACTID= emergencycontact.CONTACTID";
 
 
 
