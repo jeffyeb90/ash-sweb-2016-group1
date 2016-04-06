@@ -5,7 +5,7 @@
 
 
 			  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-			
+
         <!-- Loading Flat UI -->
         <link href="css/style.css" rel="stylesheet">
 
@@ -117,10 +117,8 @@ if(isset($_REQUEST['studentID'])){
 
           ?>
 
-          <div id="divStatus" class="status">
-                    </div>
-                    <div id="divContent">
-
+          <div class= "position" class="status">
+                
                       <form action="addStudent.php" method="GET">
 
                   <div>StudentID: <input type="text" name="studentID" value="<?php if(!isset($_REQUEST['add'])){}

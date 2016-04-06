@@ -14,22 +14,26 @@
     <body>
         <div class="navigation">
             <img src="images/logo.jpg" alt="" class="logo">
-						<ul id="dropdown1" class="dropdown-content">
-							<li><a href="medicalComplaintAdd.php">Add </a></li>
-							<li class="divider"></li>
-							<li><a href="medicalComplaintList.php">View </a></li>
-							<li class="divider"></li>
-							<li><a href="editComplaints.php">Edit </a></li>
-						</ul>
-						<ul id="dropdown2" class="dropdown-content">
-							<li><a href="studentslist.php">View </a></li>
-							<li class="divider"></li>
-							<li><a href="editStudentRecord.php">Edit </a></li>
-						</ul>
+
+
             <ul class="menu">
                 <li><a href="studentslist.php">HOME</a></li>
-								<li><a class="dropdown-button" href="#!" data-activates="dropdown1">COMPLAINTS</a></li>
-								<li><a class="dropdown-button" href="#!" data-activates="dropdown2">STUDENT RECORDS</a></li>
+								<li><a class="dropdown-button"  data-activates="dropdown1">COMPLAINTS</a>
+                <ul id="dropdown1" class="dropdown-content">
+    							<li><a href="medicalComplaintAdd.php">Add </a></li>
+
+    							<li><a href="medicalComplaintList.php">View </a></li>
+
+    							<li><a href="editComplaints.php">Edit </a></li>
+    						</ul>
+                </li>
+								<li><a class="dropdown-button2"  data-activates="dropdown2">STUDENT RECORDS</a>
+                <ul id="dropdown2" class="dropdown-content">
+    							<li><a href="studentslist.php">View </a></li>
+    							<li class="divider"></li>
+    							<li><a href="editStudentRecord.php">Edit </a></li>
+    						</ul>
+                </li>
 								<li><a href="generateReport.php">GET REPORT</a></li>
                 <li><a href="medicalComplaintAdd.php" class="btn">NEW COMPLAINT</a></li>
                 <li><img src="images/profie.jpg" alt="" class="profile-pic"></li>
@@ -80,15 +84,14 @@
 
 			}
 ?>
-					<div id="divStatus" class="status">
-						<?php echo  $strStatusMessage ?>
-					</div>
-					<div id="divContent">
-						Content space
+					<div class= "position" class="status">
+						<?php echo  "<h1>$strStatusMessage<h1>" ?>
+
+
 						<form action="" method="GET">
 			<div> Disease: <input type="text" name="name" value="<?php echo $name;  ?>"/></div>
 
-			<input type="submit" value="Add">
+			<br><input class="DiseaseAdd" value="ADD">
 		</form>
 					</div>
 				</td>

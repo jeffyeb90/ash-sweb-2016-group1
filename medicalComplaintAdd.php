@@ -67,22 +67,22 @@
 					<div id="divContent">
 
 					<form action="" method="GET">
-						<div  class="input-field col s12">
+						<div  class="position">
 						<div>
-							Student ID: <input type="text" name="studentID" value="<?php if(!isset($_REQUEST['sid'])){}
+							Student ID:
+              <br> <input type="text" name="studentID" value="<?php if(!isset($_REQUEST['sid'])){}
 							else{echo $_REQUEST['sid'];}?>">
 						</div>
 						<div>
-							Date of Attendance: <input type="date" name="date">
+							<br>Date of Attendance: <br><input type="date" name="date">
 						</div>
 						<div>
-							Temperature: <input type="number" name="temp" step="0.01" min="20" max="50" value="37">°C
+							Temperature: <br><input type="number" name="temp" step="0.01" min="20" max="50" value="37">°C
 						</div>
 						<div>
-
-							Symptoms: <input type="text" name="symptoms">
+							Symptoms: <br><input type="text" name="symptoms">
 						</div>
-						Diagnosis: <select class="browser-default" name="diagnosis">
+						Diagnosis: <br><select class="browser-default" name="diagnosis">
 							<?php
 
 							include_once("diseases.php");
@@ -98,17 +98,17 @@
 						</select>
 
 						<div>
-							Cause: <input type="text" name="cause">
+							Cause: <br><input type="text" name="cause">
 						</div>
 						<div>
-							prescription: <input type="text" name="prescription">
+							Prescription: <br><input type="text" name="prescription">
 						</div>
 						<div>
-							Nurse ID: <input type="text" name="nurseID">
+							Nurse ID: <br><input type="text" name="nurseID">
 						</div>
-						<div>
-							<input type="submit" value="Add">
-						</div>
+
+						<br>	<input type="submit" value="ADD">
+
 					</form>
 
 					</div>

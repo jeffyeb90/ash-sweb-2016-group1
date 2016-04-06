@@ -7,7 +7,7 @@
 			  <link rel="stylesheet" href="style.css"/>
 
 			  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-			
+
         <!-- Loading Flat UI -->
         <link href="css/style.css" rel="stylesheet">
 
@@ -81,19 +81,17 @@
 
 
 ?>
-					<div id="divStatus" class="status">
+					<div id="position" class="status">
 						<?php echo  $strStatusMessage ?>
 					</div>
-					<div id="divContent">
-						Content space
+					<div class="position">
+
 						<form action="update.php" method="GET">
 						<input type="hidden" name="studentID" value="<?php echo $row['STUDENTID'] ?>">
 						<div>Weight: <input type="text" name="weight" value="<?php echo $row['WEIGHT'] ?>";/></div>
 						<div>Height: <input type="text" name="height" value="<?php echo $row['HEIGHT'] ?>"/>
 
 
-
-						</div>
 						<div>Blood Type:
 							<select name="bloodtype">
 								 <?php
@@ -134,7 +132,7 @@
 
 							</select>
 						</div>
-						<input type="submit" name= "save" value="Update">
+						<br><input type="submit" name= "save" value="Update">
 		</form>
 					</div>
 				</td>
