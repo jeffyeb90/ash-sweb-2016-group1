@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -83,15 +84,15 @@
 		exit();
 	}
 
-	echo "<table border=1>
-		<tr><td>ID</td><td>USER NAME</td><td>FULL NAME</td><td>GENDER</td><td>PHONE NUMBER</td><td>HEIGHT</td><td>WEIGHT</td><td>BLOOD TYPE</td><td>EMERGENCY CONTACT</td><td>CONTROLS</td></tr>";
+	echo "<div style='overflow-x:auto;'><table class='center'>
+		<tr><th>ID</th><th>USER NAME</th><th>FULL NAME</th><th>GENDER</th><th>PHONE NUMBER</th><th>HEIGHT</th><th>WEIGHT</th><th>BLOOD TYPE</th><th>EMERGENCY CONTACT</th><th>CONTROLS</th></tr>";
 	$counter = 1;
 	$bgcolor="";
 	$style="";
 
 	while ($row=$student->fetch()){
 		if($counter%2==0){
-			$bgcolor="#CC3333";
+			$bgcolor="white";
 			$style="color:black";
 		}
 
@@ -112,21 +113,22 @@
 
 
 		<td>{$row['CONTACTFIRSTNAME']} {$row['CONTACTLASTNAME']}</td>
-		<td><a href='editStudentRecord.php?studentID={$row['STUDENTID']}'>Update</a>
-		<a href='viewStudentComplaints.php?sid={$row['STUDENTID']}'>View</a>
-		<a href='medicalComplaintAdd.php?sid={$row['STUDENTID']}'>Add Medical Complaint</a>
+		<td><a href='editStudentRecord.php?studentID={$row['STUDENTID']}' class='button'>Update</a><br>
+		<a href='viewStudentComplaints.php?sid={$row['STUDENTID']}' class='button'>View</a><br>
+		<a href='medicalComplaintAdd.php?sid={$row['STUDENTID']}' class='button'>Add Medical Complaint</a><br>
 		</td>
 		</tr>";
 
 		$counter++;
 	}
 
-	echo "</table>
+	echo "</table></div>
 	";
 ?>
 </div>
-</section>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
+</section>
+
 </body>
 </html>

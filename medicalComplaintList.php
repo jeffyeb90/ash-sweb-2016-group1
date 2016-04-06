@@ -39,17 +39,7 @@
             </ul>
         </div>
 
-					<?php
-					$strStatusMessage="Display Users";
-
-					if(isset($_REQUEST['message'])){
-						$strStatusMessage=$_REQUEST['message'];
-					}
-
-	?>
-					<div id="divStatus" class="status">
-						<?php echo  $strStatusMessage ?>
-					</div>
+					
 
 		<div class="row">
 			  <div class="col s3 offset-s9"><span class="flow-text">
@@ -62,7 +52,7 @@
       </form>
 			</span></div>
 		</div>
-		<section class="medical-history">
+		
 					<?php
 					$strStatusMessage="Display Medical Complaints";
 
@@ -73,18 +63,12 @@
 
 
 	?>
+
 					<div id="divStatus" class="status">
 						<?php echo  $strStatusMessage ?>
 					</div>
-					<div id="divContent">
-						Content space
-					<form action="" method="GET">
-						<input type="text" name="txtSearch">
-						<input type="submit" value="search" >
-
-					</form>
-					</div>
-
+					
+<section class="medical-history">
 <?php
 	include_once("medicalComplaint.php");
 
@@ -97,8 +81,8 @@
 		exit();
 	}
 
-	echo "<table border=1>
-		<tr><td>COMPLAINT ID</td><td>STUDENT ID</td><td>DATE</td><td>TEMPERATURE</td><td>SYMPTOMS</td><td>DIAGNOSIS</td><td>CAUSE<td>PRESCRIPTION</td><td>NURSE</td><tr>";
+	echo "<div style='overflow-x:auto;'><table class='center'>
+		<tr><th>COMPLAINT ID</th><th>STUDENT ID</th><th>DATE</th><th>TEMPERATURE</th><th>SYMPTOMS</th><th>DIAGNOSIS</th><th>CAUSE<th>PRESCRIPTION</th><th>NURSE</th><tr>";
 		$counter=1;
 		$bgcolor ="";
 		$style="";
@@ -106,12 +90,12 @@
 
 
 		if($counter%2==0){
-			$bgcolor="Coral";
-			$style='color:black';
+			$bgcolor="white";
+			$style="color:black";
 		}
 		else{
-			$bgcolor = "PapayaWhip";
-			$style='color:black';
+			$bgcolor = "#EDEFF4";
+			$style="color:black";
 		}
 
 
