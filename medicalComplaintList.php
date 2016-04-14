@@ -1,14 +1,20 @@
+<?php
+session_start();
+if(!isset($_SESSION['USER'])){
+
+	header("location:login.php");
+	exit();
+}
+
+?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <title>Ashesi | Student Medical Details</title>
-
-
 			  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-				
+
         <!-- Loading Flat UI -->
         <link href="css/style.css" rel="stylesheet">
-
         <!-- 	Web Browser thumbnail image -->
         <link rel="shortcut icon" href="#">
     </head>
@@ -17,52 +23,43 @@
     <body>
         <div class="navigation">
             <img src="images/logo.jpg" alt="" class="logo">
-						<ul id="dropdown1" class="dropdown-content">
-							<li><a href="medicalComplaintAdd.php">Add </a></li>
-							<li class="divider"></li>
-							<li><a href="medicalComplaintList.php">View </a></li>
-							<li class="divider"></li>
-							<li><a href="editComplaints.php">Edit </a></li>
-						</ul>
-						<ul id="dropdown2" class="dropdown-content">
-							<li><a href="studentslist.php">View </a></li>
-							<li class="divider"></li>
-							<li><a href="editStudentRecord.php">Edit </a></li>
-						</ul>
+
+
             <ul class="menu">
                 <li><a href="studentslist.php">HOME</a></li>
-								<li><a class="dropdown-button" href="#!" data-activates="dropdown1">COMPLAINTS</a></li>
-								<li><a class="dropdown-button" href="#!" data-activates="dropdown2">STUDENT RECORDS</a></li>
+
+
+
+								<li class="dropdown" id="complaints"><a  class="dropdown-button">COMPLAINTS</a>
+                <ul class="dropdown-content">
+    							<li><a href="medicalComplaintAdd.php">Add </a></li>
+
+    							<li><a href="medicalComplaintList.php">View </a></li>
+
+
+    						</ul>
+
+                </li>
+			        <li class="dropdown" id="records"><a class="dropdown-button2" >STUDENT RECORDS</a>
+                  <ul class="dropdown-content2">
+                      <li><a href="studentslist.php">View </a></li>
+
+                  </ul>
+
+                </li>
 								<li><a href="generateReport.php">GET REPORT</a></li>
                 <li><a href="medicalComplaintAdd.php" class="btn">NEW COMPLAINT</a></li>
-                <li><img src="images/profie.jpg" alt="" class="profile-pic"></li>
+                <li><a href='logout.php' class='btn'>Logout</a><li>
+                <li><img src="images/profie.jpg" alt="" class="profile-pic"><br>
+                  <?php
+
+
+                $id=$_SESSION['USER'];
+                echo $id['FIRSTNAME']." " .$id['LASTNAME'];
+                ?></li>
             </ul>
         </div>
 
-					<?php
-					$strStatusMessage="Display Users";
-
-					if(isset($_REQUEST['message'])){
-						$strStatusMessage=$_REQUEST['message'];
-					}
-
-	?>
-					<div id="divStatus" class="status">
-						<?php echo  $strStatusMessage ?>
-					</div>
-
-		<div class="row">
-			  <div class="col s3 offset-s9"><span class="flow-text">
-      <form action="" method="GET">
-        <div class="input-field">
-          <input id="search" type="search" name="txtSearch">
-          <label for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
-        </div>
-      </form>
-			</span></div>
-		</div>
-		<section class="medical-history">
 					<?php
 					$strStatusMessage="Display Medical Complaints";
 
@@ -70,53 +67,63 @@
 						$strStatusMessage=$_REQUEST['message'];
 					}
 
-
-
 	?>
 					<div id="divStatus" class="status">
 						<?php echo  $strStatusMessage ?>
 					</div>
-					<div id="divContent">
-						Content space
-					<form action="" method="GET">
-						<input type="text" name="txtSearch">
-						<input type="submit" value="search" >
 
-					</form>
-					</div>
+          <div class="row">
+
+            <form action="" method="GET">
+              <div class="input-field">
+                <input id="search" type="text" name="txtSearch">
+                <input type="submit" value="search" class="button"></input>
+
+              </div>
+            </form>
+      			</span></div>
+      		</div>
+		<section class="medical-history">
+
+
+
 
 <?php
 	include_once("medicalComplaint.php");
 
 	$complaint = new medicalComplaint();
+  if(isset($_REQUEST['txtSearch'])){
+    $result=$complaint->searchComplaints($_REQUEST['txtSearch']);
+  }else{
+    $result=$complaint->getComplaints();
+  }
 
-	$result=$complaint->getComplaints();
 
 	if($result==false){
 		echo "Error getting Medical Complaints.";
 		exit();
 	}
 
-	echo "<table border=1>
-		<tr><td>COMPLAINT ID</td><td>STUDENT ID</td><td>DATE</td><td>TEMPERATURE</td><td>SYMPTOMS</td><td>DIAGNOSIS</td><td>CAUSE<td>PRESCRIPTION</td><td>NURSE</td><tr>";
-		$counter=1;
-		$bgcolor ="";
-		$style="";
+	echo "<table class='center'>
+		<tr><th>COMPLAINT ID</th><th>STUDENT ID</th><th>DATE</th><th>TEMPERATURE</th><th>SYMPTOMS</th><th>DIAGNOSIS</th><th>CAUSE<th>PRESCRIPTION</th><th>NURSE</th><tr>";
+		// $counter=1;
+		// $bgcolor ="";
+		// $style="";
 	while($row=$complaint->fetch()){
 
 
-		if($counter%2==0){
-			$bgcolor="Coral";
-			$style='color:black';
-		}
-		else{
-			$bgcolor = "PapayaWhip";
-			$style='color:black';
-		}
+		// if($counter%2==0){
+		// 	$bgcolor="Coral";
+		// 	$style='color:black';
+		// }
+		// else{
+		// 	$bgcolor = "PapayaWhip";
+		// 	$style='color:black';
+		// }
 
 
 
-		echo "<tr bgcolor='$bgcolor' style='$style'>
+		echo "<tr >
 		<td>{$row['COMPLAINTID']}</td>
 		<td>{$row['STUDENTID']}</td>
 		<td>{$row['DATE']}</td>
@@ -133,7 +140,7 @@
 
 		</tr>";
 
-		$counter++;
+
 
 
 	}

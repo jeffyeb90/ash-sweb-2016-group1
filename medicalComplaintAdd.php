@@ -1,14 +1,20 @@
+<?php
+session_start();
+if(!isset($_SESSION['USER'])){
+
+	header("location:login.php");
+	exit();
+}
+
+?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <title>Ashesi | Student Medical Details</title>
-
-
 			  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <!-- Loading Flat UI -->
         <link href="css/style.css" rel="stylesheet">
-
         <!-- 	Web Browser thumbnail image -->
         <link rel="shortcut icon" href="#">
     </head>
@@ -17,30 +23,46 @@
     <body>
         <div class="navigation">
             <img src="images/logo.jpg" alt="" class="logo">
-						<ul id="dropdown1" class="dropdown-content">
-							<li><a href="medicalComplaintAdd.php">Add </a></li>
-							<li class="divider"></li>
-							<li><a href="medicalComplaintList.php">View </a></li>
-							<li class="divider"></li>
-							<li><a href="editComplaints.php">Edit </a></li>
-						</ul>
-						<ul id="dropdown2" class="dropdown-content">
-							<li><a href="studentslist.php">View </a></li>
-							<li class="divider"></li>
-							<li><a href="editStudentRecord.php">Edit </a></li>
-						</ul>
+
+
             <ul class="menu">
                 <li><a href="studentslist.php">HOME</a></li>
-								<li><a class="dropdown-button" href="#!" data-activates="dropdown1">COMPLAINTS</a></li>
-								<li><a class="dropdown-button" href="#!" data-activates="dropdown2">STUDENT RECORDS</a></li>
+
+
+
+								<li class="dropdown" id="complaints"><a  class="dropdown-button">COMPLAINTS</a>
+                <ul class="dropdown-content">
+    							<li><a href="medicalComplaintAdd.php">Add </a></li>
+
+    							<li><a href="medicalComplaintList.php">View </a></li>
+
+
+    						</ul>
+
+                </li>
+			        <li class="dropdown" id="records"><a class="dropdown-button2" >STUDENT RECORDS</a>
+                  <ul class="dropdown-content2">
+                      <li><a href="studentslist.php">View </a></li>
+
+                  </ul>
+
+                </li>
 								<li><a href="generateReport.php">GET REPORT</a></li>
                 <li><a href="medicalComplaintAdd.php" class="btn">NEW COMPLAINT</a></li>
-                <li><img src="images/profie.jpg" alt="" class="profile-pic"></li>
+                <li><a href='logout.php' class='btn'>Logout</a><li>
+                <li><img src="images/profie.jpg" alt="" class="profile-pic"><br>
+                  <?php
+
+
+                $id=$_SESSION['USER'];
+                echo $id['FIRSTNAME']." " .$id['LASTNAME'];
+                ?></li>
             </ul>
         </div>
 
+
 					<?php
-					$strStatusMessage="Display Users";
+					$strStatusMessage="Add Medical Complaint";
 
 					if(isset($_REQUEST['message'])){
 						$strStatusMessage=$_REQUEST['message'];
@@ -51,38 +73,29 @@
 						<?php echo  $strStatusMessage ?>
 					</div>
 
-		<div class="row">
-			  <div class="col s3 offset-s9"><span class="flow-text">
-      <form action="" method="GET">
-        <div class="input-field">
-          <input id="search" type="search" name="txtSearch">
-          <label for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
-        </div>
-      </form>
-			</span></div>
-		</div>
+
 		<section class="medical-history">
-			<div class="container">
-					<div id="divContent">
 
-					<form action="" method="GET">
-						<div  class="input-field col s12">
-						<div>
-							Student ID: <input type="text" name="studentID" value="<?php if(!isset($_REQUEST['sid'])){}
+
+
+
+					<form  action="" method="GET">
+        <div class="position">
+              <div>
+							Student ID: <br><input class="text" type="text" name="studentID" value="<?php if(!isset($_REQUEST['sid'])){}
 							else{echo $_REQUEST['sid'];}?>">
+</div>
+						<div>
+							<br>Date of Attendance: <br><input class="date1" type="date" name="date">
 						</div>
 						<div>
-							Date of Attendance: <input type="date" name="date">
-						</div>
-						<div>
-							Temperature: <input type="number" name="temp" step="0.01" min="20" max="50" value="37">°C
+							Temperature: <br><input class="number" type="number" name="temp" step="0.01" min="20" max="50" value="37">°C
 						</div>
 						<div>
 
-							Symptoms: <input type="text" name="symptoms">
+							Symptoms: <br><input class="text" type="text" name="symptoms">
 						</div>
-						Diagnosis: <select class="browser-default" name="diagnosis">
+						Diagnosis: <br><select class="select1" name="diagnosis">
 							<?php
 
 							include_once("diseases.php");
@@ -98,25 +111,23 @@
 						</select>
 
 						<div>
-							Cause: <input type="text" name="cause">
+							Cause: <br><input class="text" type="text" name="cause">
 						</div>
 						<div>
-							prescription: <input type="text" name="prescription">
+							Prescription: <br><input class="text" type="text" name="prescription">
 						</div>
 						<div>
-							Nurse ID: <input type="text" name="nurseID">
-						</div>
-						<div>
-							<input type="submit" value="Add">
-						</div>
+							Nurse ID: <br><input class="text" type="text" name="nurseID">
+						</div><br>
+
+
+							<input class="submit" type="submit" value="Add" >
+</div>
 					</form>
 
-					</div>
-			</div>
-	</div>
+
+
 			</section>
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script type="text/javascript" src="js/materialize.min.js"></script>
 
 	</body>
 </html>

@@ -96,7 +96,7 @@ body{
 .position {
   position: absolute;
   right: 380px;
-  top: 180px;
+  top: 150px;
   width: 450px;
   border: 6px solid #65B529;
   padding: 50px;
@@ -120,7 +120,7 @@ table.center{
     margin-right: auto;
 }
 table, td, th{
-     border: 3px, solid black;
+     border: 1px, solid #EDEFF4;
 }
 
 th {
@@ -133,7 +133,7 @@ th, td {
     padding: 15px;
     text-align: left;
 }
-tr:nth-child(even){background-color: #EDEFF4}
+
 .menu{
     list-style-type: none;
     display: inline-block;
@@ -217,7 +217,7 @@ tr:nth-child(even){background-color: #EDEFF4}
 }
 
 .b-list{
-  margin-left:200px;
+    float: right;
     text-align: right;
 }
 
@@ -286,7 +286,7 @@ cursor:hand;
 font-weight:bold;
 background-color:Silver
 }
-.text, select {
+input[type=text], select {
 width: 50%;
 padding: 5px 10px;
 margin: 4px 2px;
@@ -317,7 +317,7 @@ box-sizing: border-box;
 margin-left:6%;
 }
 
-.number1, select {
+input[type=number1], select {
 width: 50%;
 padding: 5px 10px;
 margin: 4px 2px;
@@ -327,7 +327,7 @@ border-radius: 10px;
 box-sizing: border-box;
 margin-left:8%;
 }
-.number, select {
+input[type=number], select {
 width: 50%;
 padding: 5px 10px;
 margin: 4px 2px;
@@ -346,7 +346,7 @@ display: inline-block;
 border: 5px solid #ccc;
 border-radius: 10px;
 box-sizing: border-box;
-margin-left:2%;
+margin-left:8%;
 }
 .select1 {
 width: 50%;
