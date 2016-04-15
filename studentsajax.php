@@ -25,12 +25,20 @@ function searchStudent(){
 	else{
 
   $result=$obj->fetch();
+
   if($result==false){
-    echo '{"result":0,"message":"error searching for name"}';
+    echo '{"result":0,"message":"No student found"}';
   }else{
-  echo '{"result":1,"user":';
+  echo '{"result":1,"user":[';
+	while($result){
   echo json_encode($result);
-  echo "}";
+
+	$result=$obj->fetch();
+if($result!=false){
+	echo ",";
+}
+}
+echo "]}";
 }
 }
 
