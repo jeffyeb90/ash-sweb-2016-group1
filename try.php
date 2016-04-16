@@ -42,6 +42,32 @@
 }
 </style>
 
+
+</head>
+<body>
+
+<h2>Modal Example</h2>
+<button id="myBtn">Open Modal</button>
+
+<!-- Trigger/Open The Modal -->
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">×</span>
+  <form action="" method="GET">
+    Test: <input type=text name="name">
+
+  </form>
+  <!-- Modal content -->
+
+
+
+  </div>
+
+</div>
+
 <script>
 // Get the modal
 var modal = document.getElementById('myModal');
@@ -69,32 +95,6 @@ window.onclick = function(event) {
     }
 }
 </script>
-</head>
-<body>
-
-<h2>Modal Example</h2>
-<button id="myBtn">Open Modal</button>
-
-<!-- Trigger/Open The Modal -->
-
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close">×</span>
-  <form action="" method="GET">
-    Test: <input type=text name="name">
-
-  </form>
-  <!-- Modal content -->
-
-
-
-  </div>
-
-</div>
-
-
 
 </body>
 </html>

@@ -77,14 +77,7 @@ if(!isset($_SESSION['USER'])){
 
 				}
 				function editName(obj,id){
-					var modal = document.getElementById('myModal');
-
-					// Get the button that opens the modal
-var btn = document.getElementById("btn");
-
-					// When the user clicks the button, open the modal
-					btn.onclick = function() {
-    modal.style.display = "block";
+				"<button id='myBtn'>Open Modal</button><div id='myModal' class='modal'><div class='modal-content'>  <span class='close'>×</span><form action='' method='GET'>Test: <input type=text name='name'></form></div></div> <span class='clickspot' onclick='saveComplaint("+id+")' >save</span>"
 }
 			}
 
@@ -98,16 +91,7 @@ var btn = document.getElementById("btn");
 
 
     <body>
-			<button id="myBtn">Open Modal</button>
-			<div id="myModal" class="modal">
-			    <div class="modal-content">
-			        <span class="close">×</span>
-			  <form action="" method="GET">
-			    Test: <input type=text name="name">
 
-			  </form>
-			</div>
-		</div>
         <div class="navigation">
             <img src="images/logo.jpg" alt="" class="logo">
 
