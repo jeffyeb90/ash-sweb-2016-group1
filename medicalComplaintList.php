@@ -20,30 +20,7 @@ if(!isset($_SESSION['USER'])){
 
 				<script type="text/javascript" src="js/jquery-1.12.1.js"></script>
       	<script type="text/javascript">
-				var modal = document.getElementById('myModal');
 
-				// Get the button that opens the modal
-				var btn = document.getElementById("myBtn");
-
-				// Get the <span> element that closes the modal
-				var span = document.getElementsByClassName("close")[0];
-
-				// When the user clicks the button, open the modal
-				btn.onclick = function() {
-				    modal.style.display = "block";
-				}
-
-				// When the user clicks on <span> (x), close the modal
-				span.onclick = function() {
-				    modal.style.display = "none";
-				}
-
-				// When the user clicks anywhere outside of the modal, close it
-				window.onclick = function(event) {
-				    if (event.target == modal) {
-				        modal.style.display = "none";
-				    }
-				}
 
 				function saveComplaint(recordID){
 					//		console.log(recordID);
@@ -76,16 +53,18 @@ if(!isset($_SESSION['USER'])){
 					}
 
 				}
-				function editName(obj,id){
-				"<button id='myBtn'>Open Modal</button><div id='myModal' class='modal'><div class='modal-content'>  <span class='close'>×</span><form action='' method='GET'>Test: <input type=text name='name'></form></div></div> <span class='clickspot' onclick='saveComplaint("+id+")' >save</span>"
-}
+				function editName(obj,cid,sid,date,temp,symptoms,name,cause,presc,firstname,lastname){
+					var currentName=obj.innerHTML;
+				 $result="";
+
+					obj.innerHTML="<span id='myBtn'></span><div id='myModal' class='modal'><div class='modal-content'><span class='close'>×</span>Content space<form action='updateComplaint.php' method='GET'><input type='hidden' name='complaintID' value="+cid+"><div>Student ID: <input type='text' name='studentID' value="+sid+"></div><div>Date: <input type='date' name='date' value="+date+"/></div><div>Temperature: <input type='text' name='temperature' value="+temp+" /></div>	<div>Symptoms: <input type='text' name='symptoms' value='symptoms'/></div><div>Diagnosis: <select class='browser-default' name='diagnosis'><option value='name' </option>';         		</select></div><div>Cause: <input type='text' name='cause' value='cause';/></div><div>Prescription: <input type='text' name='prescription' value='presc';/></div><div>Nurse ID: <input type='text' name='nurseID' value='firstname';/></div>	<input type='submit' name= 'save' value='Update' onclick='saveComplaint("+cid+")'></form></div></div></div>";
+
 			}
 
 
 
 
-}
-				}
+
 				</script>
     </head>
 
@@ -193,7 +172,9 @@ if(!isset($_SESSION['USER'])){
 		// }
 
 
-
+	$symptoms = str_replace( ',', ' and', $row['SYMPTOMS'] );
+	$cause = str_replace( ',', ' and', $row['CAUSE'] );
+	$prescription = str_replace( ',', ' and', $row['PRESCRIPTION'] );
 		echo "<tr >
 		<td>{$row['COMPLAINTID']}</td>
 		<td>{$row['STUDENTID']}</td>
@@ -204,12 +185,12 @@ if(!isset($_SESSION['USER'])){
 		<td>{$row['CAUSE']}</td>
 		<td>{$row['PRESCRIPTION']}</td>
 		<td>{$row['FIRSTNAME']} {$row['LASTNAME']}</td>
-		<td  <span id='btn' onclick='editName(this,{$row['COMPLAINTID']})'>UPDATE</span>
-		<a href='editComplaints.php?complaintID={$row['COMPLAINTID']}'>Update</a>
-		<a href='viewComplaintDetails.php?cid={$row['COMPLAINTID']}'>View Details</a>
-		</td>
 
-
+		<td>
+		<span
+		 onclick='editName(this,{$row['COMPLAINTID']},{$row['STUDENTID']},{$row['DATE']},
+{$row['TEMPERATURE']})'  id='myBtn' > UPDATE </span><span><a href='editComplaints.php?complaintID={$row['COMPLAINTID']}'>Update</a></span>
+		<span><a href='viewComplaintDetails.php?cid={$row['COMPLAINTID']}'>View Details</a></span></td>
 		</tr>";
 
 

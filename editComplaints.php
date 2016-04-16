@@ -88,8 +88,8 @@
 						<form action="updateComplaint.php" method="GET">
 						<input type="hidden" name="complaintID" value="<?php echo $row['COMPLAINTID'] ?>">
 						<div>Student ID: <input type="text" name="studentID" value="<?php echo $row['STUDENTID'] ?>";/></div>
-						<div>Date: <input type="date" name="date" value="<?php echo $row['DATE'] ?>"/>
-						<div>Temperature: <input type="text" name="temperature" value="<?php echo $row['TEMPERATURE'] ?>"/>
+						<div>Date: <input type="date" name="date" value="<?php echo $row['DATE'] ?>"/></div>
+						<div>Temperature: <input type="text" name="temperature" value="<?php echo $row['TEMPERATURE'] ?>"/></div>
 						<div>Symptoms: <input type="text" name="symptoms" value="<?php echo $row['SYMPTOMS'] ?>"/></div>
           <div>
               Diagnosis: <select class="browser-default" name="diagnosis">
@@ -114,12 +114,12 @@
   				      ?>
   						</select>
             </div>
-						
+
 						<div>Cause: <input type="text" name="cause" value="<?php echo $row['CAUSE'] ?>";/></div>
 						<div>Prescription: <input type="text" name="prescription" value="<?php echo $row['PRESCRIPTION'] ?>";/></div>
 						<div>Nurse ID: <input type="text" name="nurseID" value="<?php echo $row['NURSEID'] ?>";/></div>
 
-						</div>
+
 
 						<input type="submit" name= "save" value="Update">
 		</form>
@@ -127,8 +127,7 @@
 				</td>
 			</tr>
 		</table>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
+  
   </section>
 	</body>
 </html>
