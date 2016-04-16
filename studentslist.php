@@ -92,6 +92,7 @@ var result="";
 			        <li class="dropdown" id="records"><a class="dropdown-button2" >STUDENT RECORDS</a>
                   <ul class="dropdown-content2">
                       <li><a href="studentslist.php">View </a></li>
+											
 
                   </ul>
 

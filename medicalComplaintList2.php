@@ -17,7 +17,6 @@ if(!isset($_SESSION['USER'])){
         <link href="css/style.css" rel="stylesheet">
         <!-- 	Web Browser thumbnail image -->
         <link rel="shortcut icon" href="#">
-
 				<script type="text/javascript" src="js/jquery-1.12.1.js"></script>
       	<script type="text/javascript">
 
@@ -53,28 +52,17 @@ if(!isset($_SESSION['USER'])){
 
 				}
 				function editName(obj,id){
-					var modal = document.getElementById('myModal');
-
-					// Get the button that opens the modal
-var btn = document.getElementById("btn");
-
-					// When the user clicks the button, open the modal
-					btn.onclick = function() {
-    modal.style.display = "block";
-}
-			}
-
-
-
-
-}
+				//	console.log(id);
+					var currentName=obj.innerHTML;
+					obj.innerHTML="<input id='txtName' type='text' > <span class='clickspot' onclick='saveName("+id+")' >save</span>";
+					$("#txtName").val(currentName);
+					currentObject=obj;
 				}
 				</script>
     </head>
 
 
     <body>
-			
         <div class="navigation">
             <img src="images/logo.jpg" alt="" class="logo">
 
@@ -187,7 +175,7 @@ var btn = document.getElementById("btn");
 		<td>{$row['CAUSE']}</td>
 		<td>{$row['PRESCRIPTION']}</td>
 		<td>{$row['FIRSTNAME']} {$row['LASTNAME']}</td>
-		<td  <button id='btn' onclick='editName(this,{$row['COMPLAINTID']})'>UPDATE</button>
+		<td <button onclick='editName(this,{$row['COMPLAINTID']})'>UPDATE</button>
 		<a href='editComplaints.php?complaintID={$row['COMPLAINTID']}'>Update</a>
 		<a href='viewComplaintDetails.php?cid={$row['COMPLAINTID']}'>View Details</a>
 		</td>
