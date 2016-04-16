@@ -41,28 +41,6 @@
     cursor: pointer;
 }
 </style>
-</head>
-<body>
-
-<h2>Modal Example</h2>
-<div id="myModal" class="modal">
-<form action=POST>
-  Test: <input type=text name="name">
-</form>
-<div>
-<!-- Trigger/Open The Modal -->
-<button id="myBtn">Open Modal</button>
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">×</span>
-    <p>Some text in the Modal..</p>
-  </div>
-
-</div>
 
 <script>
 // Get the modal
@@ -91,6 +69,32 @@ window.onclick = function(event) {
     }
 }
 </script>
+</head>
+<body>
+
+<h2>Modal Example</h2>
+<button id="myBtn">Open Modal</button>
+
+<!-- Trigger/Open The Modal -->
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">×</span>
+  <form action="" method="GET">
+    Test: <input type=text name="name">
+
+  </form>
+  <!-- Modal content -->
+
+
+
+  </div>
+
+</div>
+
+
 
 </body>
 </html>

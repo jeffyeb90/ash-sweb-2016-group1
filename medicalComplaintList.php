@@ -20,6 +20,30 @@ if(!isset($_SESSION['USER'])){
 
 				<script type="text/javascript" src="js/jquery-1.12.1.js"></script>
       	<script type="text/javascript">
+				var modal = document.getElementById('myModal');
+
+				// Get the button that opens the modal
+				var btn = document.getElementById("myBtn");
+
+				// Get the <span> element that closes the modal
+				var span = document.getElementsByClassName("close")[0];
+
+				// When the user clicks the button, open the modal
+				btn.onclick = function() {
+				    modal.style.display = "block";
+				}
+
+				// When the user clicks on <span> (x), close the modal
+				span.onclick = function() {
+				    modal.style.display = "none";
+				}
+
+				// When the user clicks anywhere outside of the modal, close it
+				window.onclick = function(event) {
+				    if (event.target == modal) {
+				        modal.style.display = "none";
+				    }
+				}
 
 				function saveComplaint(recordID){
 					//		console.log(recordID);
@@ -74,7 +98,16 @@ var btn = document.getElementById("btn");
 
 
     <body>
-			
+			<button id="myBtn">Open Modal</button>
+			<div id="myModal" class="modal">
+			    <div class="modal-content">
+			        <span class="close">×</span>
+			  <form action="" method="GET">
+			    Test: <input type=text name="name">
+
+			  </form>
+			</div>
+		</div>
         <div class="navigation">
             <img src="images/logo.jpg" alt="" class="logo">
 
@@ -187,7 +220,7 @@ var btn = document.getElementById("btn");
 		<td>{$row['CAUSE']}</td>
 		<td>{$row['PRESCRIPTION']}</td>
 		<td>{$row['FIRSTNAME']} {$row['LASTNAME']}</td>
-		<td  <button id='btn' onclick='editName(this,{$row['COMPLAINTID']})'>UPDATE</button>
+		<td  <span id='btn' onclick='editName(this,{$row['COMPLAINTID']})'>UPDATE</span>
 		<a href='editComplaints.php?complaintID={$row['COMPLAINTID']}'>Update</a>
 		<a href='viewComplaintDetails.php?cid={$row['COMPLAINTID']}'>View Details</a>
 		</td>
