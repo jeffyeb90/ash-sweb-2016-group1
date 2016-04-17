@@ -57,7 +57,7 @@ if(!isset($_SESSION['USER'])){
 					var currentName=obj.innerHTML;
 				 $result="";
 
-					obj.innerHTML="<span id='myBtn'></span><div id='myModal' class='modal'><div class='modal-content'><span class='close'>×</span>Content space<form action='updateComplaint.php' method='GET'><input type='hidden' name='complaintID' value="+cid+"><div>Student ID: <input type='text' name='studentID' value="+sid+"></div><div>Date: <input type='date' name='date' value="+date+"/></div><div>Temperature: <input type='text' name='temperature' value="+temp+" /></div>	<div>Symptoms: <input type='text' name='symptoms' value='symptoms'/></div><div>Diagnosis: <select class='browser-default' name='diagnosis'><option value='name' </option>';         		</select></div><div>Cause: <input type='text' name='cause' value='cause';/></div><div>Prescription: <input type='text' name='prescription' value='presc';/></div><div>Nurse ID: <input type='text' name='nurseID' value='firstname';/></div>	<input type='submit' name= 'save' value='Update' onclick='saveComplaint("+cid+")'></form></div></div></div>";
+					obj.innerHTML="<span id='myBtn'></span><div id='myModal' class='modal'><div class='modal-content'><span class='close'>×</span><b>UPDATE MEDICAL COMPLAINT</b><form action='updateComplaint.php' method='GET'><input type='hidden' name='complaintID' value="+cid+"><div>Student ID: <input type='text' name='studentID' value="+sid+"></div><div>Date: <input type='date' name='date' value="+date+"></div><div>Temperature: <input type='text' name='temperature' value="+temp+" /></div>	<div>Symptoms: <input type='text' name='symptoms' value='symptoms'/></div><div>Diagnosis: <select class='browser-default' name='diagnosis'><option value='name' </option>';         		</select></div><div>Cause: <input type='text' name='cause' value='cause';/></div><div>Prescription: <input type='text' name='prescription' value='presc';/></div><div>Nurse ID: <input type='text' name='nurseID' value='firstname';/></div>	<input type='submit' name= 'save' value='Update' onclick='saveComplaint("+cid+")'></form></div></div></div>";
 
 			}
 
@@ -156,26 +156,15 @@ if(!isset($_SESSION['USER'])){
 
 	echo "<table class='center'>
 		<tr><th>COMPLAINT ID</th><th>STUDENT ID</th><th>DATE</th><th>TEMPERATURE</th><th>SYMPTOMS</th><th>DIAGNOSIS</th><th>CAUSE<th>PRESCRIPTION</th><th>NURSE</th><tr>";
-		// $counter=1;
-		// $bgcolor ="";
-		// $style="";
+
 	while($row=$complaint->fetch()){
 
 
-		// if($counter%2==0){
-		// 	$bgcolor="Coral";
-		// 	$style='color:black';
-		// }
-		// else{
-		// 	$bgcolor = "PapayaWhip";
-		// 	$style='color:black';
-		// }
+	$symptoms = str_replace(',', ' and', $row['SYMPTOMS'] );
 
-
-	$symptoms = str_replace( ',', ' and', $row['SYMPTOMS'] );
-	$cause = str_replace( ',', ' and', $row['CAUSE'] );
+	$cause = str_replace( ',', ' and ', $row['CAUSE'] );
 	$prescription = str_replace( ',', ' and', $row['PRESCRIPTION'] );
-		echo "<tr >
+		echo "<tr>
 		<td>{$row['COMPLAINTID']}</td>
 		<td>{$row['STUDENTID']}</td>
 		<td>{$row['DATE']}</td>
@@ -189,12 +178,10 @@ if(!isset($_SESSION['USER'])){
 		<td>
 		<span
 		 onclick='editName(this,{$row['COMPLAINTID']},{$row['STUDENTID']},{$row['DATE']},
-{$row['TEMPERATURE']})'  id='myBtn' > UPDATE </span><span><a href='editComplaints.php?complaintID={$row['COMPLAINTID']}'>Update</a></span>
-		<span><a href='viewComplaintDetails.php?cid={$row['COMPLAINTID']}'>View Details</a></span></td>
-		</tr>";
-
-
-
+{$row['TEMPERATURE']},$symptoms)'  id='myBtn' > UPDATE </span>
+<span><a href='editComplaints.php?complaintID={$row['COMPLAINTID']}'>Update</a></span>
+<span><a href='viewComplaintDetails.php?cid={$row['COMPLAINTID']}'>View Details</a></span>
+</td></tr>";
 
 	}
 	echo "</table>
