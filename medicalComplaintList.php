@@ -17,64 +17,15 @@ if(!isset($_SESSION['USER'])){
         <link href="css/style.css" rel="stylesheet">
         <!-- 	Web Browser thumbnail image -->
         <link rel="shortcut icon" href="#">
-
 				<script type="text/javascript" src="js/jquery-1.12.1.js"></script>
       	<script type="text/javascript">
 
-				function saveComplaint(recordID){
-					//		console.log(recordID);
-					var theUrl="medicalComplaintAjax.php?uc="+recordID+"&txtName="+$("#txtName").val();
-			 		$.ajax(theUrl,
-			 		{
-			 			async:true,complete:saveComplaintComplete
-			 		});
-					divStatus.innerHTML="Name saved";
-					//console.log($("#txtName").val());
-					currentObject.innerHTML=$("#txtName").val();
 
-
-
-
-
-				}
-				function saveComplaintComplete(xhr,status){
-					if(status!="success"){
-						divStatus.innerHTML="error while updating page";
-						return;
-					}
-					//console.log(xhr.responseText);
-					var obj=$.parseJSON(xhr.responseText);
-					if(obj.result==0){
-						divStatus.innerHTML=obj.message;
-					}
-					else{
-						divStatus.innerHTML="name has been changed";
-					}
-
-				}
-				function editName(obj,id){
-					var modal = document.getElementById('myModal');
-
-					// Get the button that opens the modal
-var btn = document.getElementById("btn");
-
-					// When the user clicks the button, open the modal
-					btn.onclick = function() {
-    modal.style.display = "block";
-}
-			}
-
-
-
-
-}
-				}
 				</script>
     </head>
 
 
     <body>
-			
         <div class="navigation">
             <img src="images/logo.jpg" alt="" class="logo">
 
@@ -187,8 +138,7 @@ var btn = document.getElementById("btn");
 		<td>{$row['CAUSE']}</td>
 		<td>{$row['PRESCRIPTION']}</td>
 		<td>{$row['FIRSTNAME']} {$row['LASTNAME']}</td>
-		<td  <button id='btn' onclick='editName(this,{$row['COMPLAINTID']})'>UPDATE</button>
-		<a href='editComplaints.php?complaintID={$row['COMPLAINTID']}'>Update</a>
+		<td><a href='editComplaints.php?complaintID={$row['COMPLAINTID']}'>Update</a>
 		<a href='viewComplaintDetails.php?cid={$row['COMPLAINTID']}'>View Details</a>
 		</td>
 
