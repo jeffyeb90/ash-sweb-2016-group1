@@ -6,6 +6,9 @@ switch($cmd){
 	case 1:
 	searchStudent();
   break;
+  	case 2:
+  	getStudentByID();
+  	break;
   default:
   echo "wrong command";
   break;
@@ -44,7 +47,32 @@ echo "]}";
 
 
 }
+function getStudentByID(){
+	if(!isset($_REQUEST['sid'])){
+		echo "Student ID not provided";
+		exit();
+	}
+	$sid = $_REQUEST['sid'];
+	include_once("students.php");
 
+	$obj = new students();
+	$result = $obj->getStudentByID($sid);
+	if(!$result){
+		echo '{"result":0, "mesage": "error getting student information"}';
+		exit();
+	}
+	$row=$obj->fetch();
+	if(!$row){
+		echo '{"result":0, "message": "Student not found"}';
+
+	}
+	else{
+		echo '{"result":1, "student":';
+		echo json_encode($row);
+		echo '}';
+	}
+
+}
 
 
 ?>

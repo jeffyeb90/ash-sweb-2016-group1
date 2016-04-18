@@ -116,6 +116,7 @@
 		}
 
 	}
-
-
+$obj = new students();
+$result = $obj->getStudentByID(4893);
+echo $result;
 	?>
