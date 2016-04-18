@@ -1,14 +1,20 @@
+<?php
+session_start();
+if(!isset($_SESSION['USER'])){
+
+	header("location:login.php");
+	exit();
+}
+
+?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <title>Ashesi | Student Medical Details</title>
-
-
 			  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-				
+
         <!-- Loading Flat UI -->
         <link href="css/style.css" rel="stylesheet">
-
         <!-- 	Web Browser thumbnail image -->
         <link rel="shortcut icon" href="#">
     </head>
@@ -17,30 +23,46 @@
     <body>
         <div class="navigation">
             <img src="images/logo.jpg" alt="" class="logo">
-						<ul id="dropdown1" class="dropdown-content">
-							<li><a href="medicalComplaintAdd.php">Add </a></li>
-							<li class="divider"></li>
-							<li><a href="medicalComplaintList.php">View </a></li>
-							<li class="divider"></li>
-							<li><a href="editComplaints.php">Edit </a></li>
-						</ul>
-						<ul id="dropdown2" class="dropdown-content">
-							<li><a href="studentslist.php">View </a></li>
-							<li class="divider"></li>
-							<li><a href="editStudentRecord.php">Edit </a></li>
-						</ul>
+
+
             <ul class="menu">
                 <li><a href="studentslist.php">HOME</a></li>
-								<li><a class="dropdown-button" href="#!" data-activates="dropdown1">COMPLAINTS</a></li>
-								<li><a class="dropdown-button" href="#!" data-activates="dropdown2">STUDENT RECORDS</a></li>
+
+
+
+								<li class="dropdown" id="complaints"><a  class="dropdown-button">COMPLAINTS</a>
+                <ul class="dropdown-content">
+    							<li><a href="medicalComplaintAdd.php">Add </a></li>
+
+    							<li><a href="medicalComplaintList.php">View </a></li>
+
+
+    						</ul>
+
+                </li>
+			        <li class="dropdown" id="records"><a class="dropdown-button2" >STUDENT RECORDS</a>
+                  <ul class="dropdown-content2">
+                      <li><a href="studentslist.php">View </a></li>
+
+                  </ul>
+
+                </li>
 								<li><a href="generateReport.php">GET REPORT</a></li>
                 <li><a href="medicalComplaintAdd.php" class="btn">NEW COMPLAINT</a></li>
-                <li><img src="images/profie.jpg" alt="" class="profile-pic"></li>
+                <li><a href='logout.php' class='btn'>Logout</a><li>
+                <li><img src="images/profie.jpg" alt="" class="profile-pic"><br>
+                  <?php
+
+
+                $id=$_SESSION['USER'];
+                echo $id['FIRSTNAME']." " .$id['LASTNAME'];
+                ?></li>
             </ul>
         </div>
 
+
 					<?php
-					$strStatusMessage="Display Users";
+					$strStatusMessage="Display Student Complaints";
 
 					if(isset($_REQUEST['message'])){
 						$strStatusMessage=$_REQUEST['message'];
@@ -53,13 +75,7 @@
 
 		<div class="row">
 			  <div class="col s3 offset-s9"><span class="flow-text">
-      <form action="" method="GET">
-        <div class="input-field">
-          <input id="search" type="search" name="txtSearch">
-          <label for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
-        </div>
-      </form>
+
 			</span></div>
 		</div>
 
@@ -104,7 +120,7 @@
                             echo "<li><p>Email: {$row['EMAIL']}
 
 
-														<a href='mailto:{$row['EMAIL']}?Subject=Notification%20from%20Clinic' target='_top'>Send Mail</a></p></li>";
+														<a href='mailto:{$row['EMAIL']}?Subject=Notification%20from%20Clinic' target='_top'  class='btn'>Send Mail</a></p></li>";
 
                             echo "<li><p>Phone: {$row['PHONENUMBER']}</p></li></ul></div>
 														<section class='medical-history'>";
@@ -128,7 +144,7 @@
                                     echo "<li><p>Diagnosis: {$row['DIAGNOSIS']}</p></li>";
                                     echo "<li><p>{$row['CAUSE']}</p></li>";
                                     echo "<li><p>{$row['PRESCRIPTION']}</p></li>
-                                    <li><p><a href='viewComplaintDetails.php?cid='{$row['COMPLAINTID']}' class='btn'>View Details</a></p></li></ul></div>";
+                                    <li><p><a href='viewComplaintDetails.php?cid={$row['COMPLAINTID']}' class='btn'>View Details</a></p></li></ul></div>";
 
                                     $row = $obj->fetch();
                                     $rowNum++;

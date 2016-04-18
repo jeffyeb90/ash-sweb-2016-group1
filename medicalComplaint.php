@@ -57,6 +57,14 @@
             return $this->query($strQuery);
         }
 
+        function searchComplaints($text=false){
+          $filter=false;
+          if($text!=false){
+            $filter=" diseases.NAME like '$text' or STUDENTID like '$text' ";
+          }
+          return $this->getComplaints($filter);
+        }
+
 		/**
 		*get complaint records based on the filter
 		*@param string condition to filter. If false, filter will not be applied

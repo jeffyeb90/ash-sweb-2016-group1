@@ -1,30 +1,3 @@
-<html>
-	<head>
-		<title>Log In</title>
-		<link rel="stylesheet" href="css/style.css">
-		<script>
-
-		</script>
-	</head>
-	<body>
-
-		<table>
-			<tr>
-				<td colspan="2" id="pageheader">
-		Log In Page
-				</td>
-			</tr>
-			<tr>
-				<td id="mainnav">
-					<div class="menuitem">menu 1</div>
-					<div class="menuitem">menu 2</div>
-				</td>
-				<td id="content">
-					<div id="divPageMenu">
-						<span class="menuitem" >page menu 1</span>
-						<input type="text" id="txtSearch" />
-						<span class="menuitem">search</span>
-					</div>
 
           <?php
 
@@ -47,8 +20,12 @@
         $result=$obj->fetch();
 				if(($email!=NULL) && ($password!=NULL)){
 				if(($result['EMAIL']==$email) &&($result['PASSWORD'])==$password){
-    echo "Nurse Logged In";
-	echo'<script> window.location.href="studentslist.php";</script>';
+          session_start();
+          $_SESSION['USER']=$result;
+
+
+          echo "Nurse Logged In";
+	         echo'<script> window.location.href="studentslist.php";</script>';
 				}
 
 				else{
@@ -70,25 +47,36 @@
 
   ?>
 
-          <div id="divStatus" class="status">
-                    </div>
-                    <div id="divContent">
 
-                      <form action="login.php" method="GET">
+	<html>
+		<head>
+			<title>Log In</title>
+			<link rel="stylesheet" href="css/style.css">
+
+		</head>
+
+		<body>
+
+			<div id="header" > <h2>Ashesi University Clinic</h2> </div>
+				<div class="image">  <img src="images/1.JPG" border="5"/></div>
+
+	  <form action="login.php" method="GET">
+
+		<section class="container">
+			<div class="login">
+				<h2>   Nurse Login</h2>
 
 
-                  <div><h5>Email:</h5> <input type="text" name="email" value=""/></div>
-              <div><h5>Password: </h5>  <input type="password" name="password" value=""/></div>
 
-            </div>
-            <div>
-                  <input type="submit" height = "80" value="Log In" >
-                      </form>
-                    </div>
-                  </table>
-									<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-                  <script type="text/javascript" src="js/materialize.min.js"></script>
-                </section>
-                </body>
+												<p><input class="text" type="text" name="email" value="" placeholder="Username or Email"></p>
+												<p><input type="password" name="password" value="" placeholder="Password"></p>
 
-              </html>
+																	<input class="submit" type="submit" value="Log In">
+																		</div>
+																			</form>
+
+																</section>
+															</div>
+																</body>
+
+															</html>

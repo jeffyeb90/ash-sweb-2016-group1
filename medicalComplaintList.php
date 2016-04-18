@@ -1,106 +1,117 @@
+<?php
+session_start();
+if(!isset($_SESSION['USER'])){
+	header("location:login.php");
+	exit();
+}
+?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <title>Ashesi | Student Medical Details</title>
-
-
 			  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-				
+
         <!-- Loading Flat UI -->
         <link href="css/style.css" rel="stylesheet">
-
         <!-- 	Web Browser thumbnail image -->
         <link rel="shortcut icon" href="#">
+				<script type="text/javascript" src="js/jquery-1.12.1.js"></script>
+      	<script type="text/javascript">
+				</script>
     </head>
 
 
     <body>
         <div class="navigation">
             <img src="images/logo.jpg" alt="" class="logo">
-						<ul id="dropdown1" class="dropdown-content">
-							<li><a href="medicalComplaintAdd.php">Add </a></li>
-							<li class="divider"></li>
-							<li><a href="medicalComplaintList.php">View </a></li>
-							<li class="divider"></li>
-							<li><a href="editComplaints.php">Edit </a></li>
-						</ul>
-						<ul id="dropdown2" class="dropdown-content">
-							<li><a href="studentslist.php">View </a></li>
-							<li class="divider"></li>
-							<li><a href="editStudentRecord.php">Edit </a></li>
-						</ul>
+
+
             <ul class="menu">
                 <li><a href="studentslist.php">HOME</a></li>
-								<li><a class="dropdown-button" href="#!" data-activates="dropdown1">COMPLAINTS</a></li>
-								<li><a class="dropdown-button" href="#!" data-activates="dropdown2">STUDENT RECORDS</a></li>
+
+
+
+								<li class="dropdown" id="complaints"><a  class="dropdown-button">COMPLAINTS</a>
+                <ul class="dropdown-content">
+    							<li><a href="medicalComplaintAdd.php">Add </a></li>
+
+    							<li><a href="medicalComplaintList.php">View </a></li>
+
+
+    						</ul>
+
+                </li>
+			        <li class="dropdown" id="records"><a class="dropdown-button2" >STUDENT RECORDS</a>
+                  <ul class="dropdown-content2">
+                      <li><a href="studentslist.php">View </a></li>
+
+                  </ul>
+
+                </li>
 								<li><a href="generateReport.php">GET REPORT</a></li>
                 <li><a href="medicalComplaintAdd.php" class="btn">NEW COMPLAINT</a></li>
-                <li><img src="images/profie.jpg" alt="" class="profile-pic"></li>
+                <li><a href='logout.php' class='btn'>Logout</a><li>
+                <li><img src="images/profie.jpg" alt="" class="profile-pic"><br>
+                  <?php
+                $id=$_SESSION['USER'];
+                echo $id['FIRSTNAME']." " .$id['LASTNAME'];
+                ?></li>
             </ul>
         </div>
 
-					
-
-		<div class="row">
-			  <div class="col s3 offset-s9"><span class="flow-text">
-      <form action="" method="GET">
-        <div class="input-field">
-          <input id="search" type="search" name="txtSearch">
-          <label for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
-        </div>
-      </form>
-			</span></div>
-		</div>
-		
 					<?php
 					$strStatusMessage="Display Medical Complaints";
-
 					if(isset($_REQUEST['message'])){
 						$strStatusMessage=$_REQUEST['message'];
 					}
-
-
-
 	?>
-
 					<div id="divStatus" class="status">
 						<?php echo  $strStatusMessage ?>
 					</div>
-					
-<section class="medical-history">
+
+          <div class="row">
+
+            <form action="" method="GET">
+              <div class="input-field">
+                <input id="search" type="text" name="txtSearch">
+                <input type="submit" value="search" class="button"></input>
+
+              </div>
+            </form>
+      			</span></div>
+      		</div>
+		<section class="medical-history">
+
+
+
+
 <?php
 	include_once("medicalComplaint.php");
-
 	$complaint = new medicalComplaint();
-
-	$result=$complaint->getComplaints();
-
+  if(isset($_REQUEST['txtSearch'])){
+    $result=$complaint->searchComplaints($_REQUEST['txtSearch']);
+  }else{
+    $result=$complaint->getComplaints();
+  }
 	if($result==false){
 		echo "Error getting Medical Complaints.";
 		exit();
 	}
-
-	echo "<div style='overflow-x:auto;'><table class='center'>
+	echo "<table class='center'>
 		<tr><th>COMPLAINT ID</th><th>STUDENT ID</th><th>DATE</th><th>TEMPERATURE</th><th>SYMPTOMS</th><th>DIAGNOSIS</th><th>CAUSE<th>PRESCRIPTION</th><th>NURSE</th><tr>";
-		$counter=1;
-		$bgcolor ="";
-		$style="";
+		// $counter=1;
+		// $bgcolor ="";
+		// $style="";
 	while($row=$complaint->fetch()){
-
-
-		if($counter%2==0){
-			$bgcolor="white";
-			$style="color:black";
-		}
-		else{
-			$bgcolor = "#EDEFF4";
-			$style="color:black";
-		}
-
-
-
-		echo "<tr bgcolor='$bgcolor' style='$style'>
+		// if($counter%2==0){
+		// 	$bgcolor="Coral";
+		// 	$style='color:black';
+		// }
+		// else{
+		// 	$bgcolor = "PapayaWhip";
+		// 	$style='color:black';
+		// }
+		echo "<tr >
 		<td>{$row['COMPLAINTID']}</td>
 		<td>{$row['STUDENTID']}</td>
 		<td>{$row['DATE']}</td>
@@ -113,20 +124,12 @@
 		<td><a href='editComplaints.php?complaintID={$row['COMPLAINTID']}'>Update</a>
 		<a href='viewComplaintDetails.php?cid={$row['COMPLAINTID']}'>View Details</a>
 		</td>
-
-
 		</tr>";
-
-		$counter++;
-
-
 	}
 	echo "</table>
 	";
-
 ?>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
+
 </section>
 </body>
 </html>
