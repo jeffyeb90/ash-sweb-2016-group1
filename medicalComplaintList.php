@@ -22,9 +22,9 @@ if(!isset($_SESSION['USER'])){
       	<script type="text/javascript">
 
 
-				function saveComplaint(recordID){
+				function saveComplaint(cid,sid,date,temp,symptoms,name,cause,presc,nid){
 					//		console.log(recordID);
-					var theUrl="medicalComplaintAjax.php?uc="+recordID+"&txtName="+$("#txtName").val();
+					var theUrl="medicalComplaintAjax.php?uc="+cid+"&sid="+$("#studentID").val()+"&date="+$("#date").val()+"&temp="+$("#temperature").val()+"&sympt="+$("#symptoms").val()+"&diag="+$("#diagnosis").val();
 			 		$.ajax(theUrl,
 			 		{
 			 			async:true,complete:saveComplaintComplete
@@ -53,11 +53,11 @@ if(!isset($_SESSION['USER'])){
 					}
 
 				}
-				function editName(cid,sid,date,temp,symptoms,name,cause,presc,firstname,lastname){
+				function editName(cid,sid,date,temp,symptoms,name,cause,presc,nid){
 				//	var currentName=obj.innerHTML;
 
 
-					$("body").append("<span id='myBtn'></span><div id='myModal' class='modal'><div class='modal-content'><span class='close'>×</span><b>UPDATE MEDICAL COMPLAINT</b><div class='position'><form action='' method='GET'><input type='hidden' name='complaintID' value="+cid+"><div>Student ID: "+sid+"</div><div>Date: <input  class='date1' type='date' name='date' value="+date+"></div><div>Temperature: <input class='number' type='text' name='temperature' value="+temp+" ></div>	<div>Symptoms: <input class='text' type='text' name='symptoms' value="+symptoms+"></div><div>Diagnosis: <select class='browser-default' name='diagnosis'><option value='name' </option>"+name+"</select></div><div>Cause: <input class='text' type='text' name='cause' value="+cause+"></div><div>Prescription: <input class='text' type='text' name='prescription' value="+presc+"></div><div>Nurse ID: <input class='text' type='text' name='nurseID' value="+firstname+" "+lastname+"></div>	<input  class='submit' type='submit' name= 'save' value='Update' onclick='saveComplaint("+cid+")'></div></form></div></div></div>");
+					$("body").append("<span id='myBtn'></span><div id='myModal' class='modal'><div class='modal-content'><span class='close'>×</span><b>UPDATE MEDICAL COMPLAINT</b><div class='position'><form action='' method='GET'><input type='hidden' name='complaintID' value="+cid+"><div>Student ID: <input id='studentID' type='text' class='text' value="+sid+"</div><div>Date: <input  class='date1' type='date' id='date' value="+date+"></div><div>Temperature: <input class='number' type='text' id='temperature' value="+temp+" ></div>	<div>Symptoms: <input class='text' type='text' id='symptoms' value="+symptoms+"></div><div>Diagnosis: <select class='browser-default' id='diagnosis'><option value='name' </option>"+name+"</select></div><div>Cause: <input class='text' type='text' name='cause' value="+cause+"></div><div>Prescription: <input class='text' type='text' name='prescription' value="+presc+"></div><div>Nurse ID: <input class='text' type='text' name='nurseID' value="+nid+"></div>	<input  class='submit' type='submit' name= 'save' value='Update' onclick='saveComplaint("+cid+","+date+","+temp+","+symptoms+","+name+","+cause+",	"+presc+","+nid+")'></div></form></div></div></div>");
 
 			}
 
@@ -181,7 +181,7 @@ if(!isset($_SESSION['USER'])){
 		 <?php echo '"'.$row['DATE'].'"'?>,<?php echo $row['TEMPERATURE'] ?>,
 		 <?php echo '"'.$symptoms.'"' ?>,
 		 <?php echo'"'.$row['NAME'].'"' ?>,
-		 <?php echo '"'.$cause.'"' ?>,<?php echo '"'.$prescription.'"' ?>,<?php echo '"'.$row['FIRSTNAME'].'"' ?>, <?php echo '"'.$row['LASTNAME'].'"' ?>)'  id='myBtn' > UPDATE </span>
+		 <?php echo '"'.$cause.'"' ?>,<?php echo '"'.$prescription.'"' ?>,<?php echo '"'.$row['FIRSTNAME'].'"' ?>)'  id='myBtn' > UPDATE </span>
 <?php
 
 echo "<span><a href='editComplaints.php?complaintID={$row['COMPLAINTID']}'>Update</a></span>

@@ -72,7 +72,7 @@
 		**/
 
 		function getComplaints($filter=false){
-			 $strQuery="select COMPLAINTID, STUDENTID, DATE, TEMPERATURE, SYMPTOMS, diseases.NAME, CAUSE, PRESCRIPTION, nurses.FIRSTNAME, nurses.LASTNAME from medicalcomplaint left join diseases on medicalcomplaint.DIAGNOSIS=diseases.DISEASEID left join nurses on  medicalComplaint.NURSEID=nurses.NURSEID";
+			 $strQuery="select COMPLAINTID, STUDENTID, DATE, TEMPERATURE, SYMPTOMS, diseases.NAME, CAUSE, PRESCRIPTION,  nurses.NURSEID, nurses.FIRSTNAME, nurses.LASTNAME from medicalcomplaint left join diseases on medicalcomplaint.DIAGNOSIS=diseases.DISEASEID left join nurses on  medicalComplaint.NURSEID=nurses.NURSEID";
 
 
 
