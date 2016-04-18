@@ -9,11 +9,15 @@ switch($cmd){
   	case 2:
   	getStudentByID();
   	break;
+  	case 3: 
+  	updateStudent();
+  	break;
   default:
   echo "wrong command";
   break;
 }
 }
+
 
 function searchStudent(){
 	$name=$_REQUEST['txtName'];
@@ -49,7 +53,7 @@ echo "]}";
 }
 function getStudentByID(){
 	if(!isset($_REQUEST['sid'])){
-		echo "Student ID not provided";
+		echo '{"result": 0, "message": "Student ID not provided"}';
 		exit();
 	}
 	$sid = $_REQUEST['sid'];
@@ -71,8 +75,34 @@ function getStudentByID(){
 		echo json_encode($row);
 		echo '}';
 	}
-
 }
+
+	function updateStudent(){
+		if((!isset($_REQUEST['sid']))&&(!isset($_REQUEST['weight']))&&(!isset($_REQUEST['height']))&&(!isset($_REQUEST['bloodType']))){
+			echo '{"result": 0, "message": "Updated information not provided"}';
+			exit();
+			
+		}
+		include_once("students.php");
+		$sid = $_REQUEST['sid'];
+		$weight = $_REQUEST['weight'];
+		$height = $_REQUEST['height'];
+		$bloodType = $_REQUEST['bloodType'];
+		$obj = new students();
+		$result=$obj->updateStudentRecord($sid, $weight, $height, $bloodType);
+		//echo $result;
+		if($result==false){
+			echo '{"result": 0, "message" :"error updating user"}';
+			exit();
+		}
+		else{
+			echo '{"result": 1, "message": "Student record updated"}';
+		}
+		}
+		
+	
+
+
 
 
 ?>
