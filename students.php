@@ -41,7 +41,7 @@
 		function searchStudents($text=false){
 			$filter=false;
 			if($text!=false){
-				$filter=" students.USERNAME like '$text' or students.FIRSTNAME like '$text' or students.LASTNAME like '$text' ";
+				$filter=" students.USERNAME like '%$text%' or students.FIRSTNAME like '%$text%' or students.LASTNAME like '%$text%' ";
 			}
 			return $this->getStudents($filter);
 		}

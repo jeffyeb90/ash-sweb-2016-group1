@@ -47,7 +47,7 @@ var result="";
 						obj.user[length-1].HEIGHT+"</td><td>"+obj.user[length-1].WEIGHT+"</td><td>"+obj.user[length-1].BLOODTYPE+"</td><td>"+obj.user[length-1].CONTACTFIRSTNAME +" "+obj.user[length-1].CONTACTLASTNAME+"</td><td><a  href='editStudentRecord.php?studentID="+obj.user[length-1].STUDENTID+"' class='button'>Update</a><br><a href='viewStudentComplaints.php?sid="+obj.user[length-1].STUDENTID+
 						"'class='button'>View</a><br><a href='medicalComplaintAdd.php?sid="+obj.user[length-1].STUDENTID+"' class='button'>Add Medical Complaint</a><br></td></tr>";
 						length-=1;
-						console.log(length);
+						//console.log(length);
 					}
 					table.innerHTML=result;
       	}
