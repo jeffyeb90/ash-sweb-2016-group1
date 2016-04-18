@@ -53,11 +53,11 @@ if(!isset($_SESSION['USER'])){
 					}
 
 				}
-				function editName(obj,cid,sid,date,temp,symptoms,name,cause,presc,firstname,lastname){
-					var currentName=obj.innerHTML;
-				 $result="";
+				function editName(cid,sid,date,temp,symptoms,name,cause,presc,firstname,lastname){
+				//	var currentName=obj.innerHTML;
 
-					obj.innerHTML="<span id='myBtn'></span><div id='myModal' class='modal'><div class='modal-content'><span class='close'>×</span><b>UPDATE MEDICAL COMPLAINT</b><form action='updateComplaint.php' method='GET'><input type='hidden' name='complaintID' value="+cid+"><div>Student ID: <input type='text' name='studentID' value="+sid+"></div><div>Date: <input type='date' name='date' value="+date+"></div><div>Temperature: <input type='text' name='temperature' value="+temp+" /></div>	<div>Symptoms: <input type='text' name='symptoms' value='symptoms'/></div><div>Diagnosis: <select class='browser-default' name='diagnosis'><option value='name' </option>';         		</select></div><div>Cause: <input type='text' name='cause' value='cause';/></div><div>Prescription: <input type='text' name='prescription' value='presc';/></div><div>Nurse ID: <input type='text' name='nurseID' value='firstname';/></div>	<input type='submit' name= 'save' value='Update' onclick='saveComplaint("+cid+")'></form></div></div></div>";
+
+					$("body").append("<span id='myBtn'></span><div id='myModal' class='modal'><div class='modal-content'><span class='close'>×</span><b>UPDATE MEDICAL COMPLAINT</b><div class='position'><form action='' method='GET'><input type='hidden' name='complaintID' value="+cid+"><div>Student ID: "+sid+"</div><div>Date: <input  class='date1' type='date' name='date' value="+date+"></div><div>Temperature: <input class='number' type='text' name='temperature' value="+temp+" ></div>	<div>Symptoms: <input class='text' type='text' name='symptoms' value="+symptoms+"></div><div>Diagnosis: <select class='browser-default' name='diagnosis'><option value='name' </option>"+name+"</select></div><div>Cause: <input class='text' type='text' name='cause' value="+cause+"></div><div>Prescription: <input class='text' type='text' name='prescription' value="+presc+"></div><div>Nurse ID: <input class='text' type='text' name='nurseID' value="+firstname+" "+lastname+"></div>	<input  class='submit' type='submit' name= 'save' value='Update' onclick='saveComplaint("+cid+")'></div></form></div></div></div>");
 
 			}
 
@@ -159,10 +159,10 @@ if(!isset($_SESSION['USER'])){
 
 	while($row=$complaint->fetch()){
 
-
 	$symptoms = str_replace(',', ' and', $row['SYMPTOMS'] );
 
 	$cause = str_replace( ',', ' and ', $row['CAUSE'] );
+	//ECHO $symptoms;
 	$prescription = str_replace( ',', ' and', $row['PRESCRIPTION'] );
 		echo "<tr>
 		<td>{$row['COMPLAINTID']}</td>
@@ -175,11 +175,16 @@ if(!isset($_SESSION['USER'])){
 		<td>{$row['PRESCRIPTION']}</td>
 		<td>{$row['FIRSTNAME']} {$row['LASTNAME']}</td>
 
-		<td>
+		<td>";?>
 		<span
-		 onclick='editName(this,{$row['COMPLAINTID']},{$row['STUDENTID']},{$row['DATE']},
-{$row['TEMPERATURE']},$symptoms)'  id='myBtn' > UPDATE </span>
-<span><a href='editComplaints.php?complaintID={$row['COMPLAINTID']}'>Update</a></span>
+		 onclick='editName(<?php echo $row['COMPLAINTID']?>,<?php echo $row['STUDENTID']?>,
+		 <?php echo '"'.$row['DATE'].'"'?>,<?php echo $row['TEMPERATURE'] ?>,
+		 <?php echo '"'.$symptoms.'"' ?>,
+		 <?php echo'"'.$row['NAME'].'"' ?>,
+		 <?php echo '"'.$cause.'"' ?>,<?php echo '"'.$prescription.'"' ?>,<?php echo '"'.$row['FIRSTNAME'].'"' ?>, <?php echo '"'.$row['LASTNAME'].'"' ?>)'  id='myBtn' > UPDATE </span>
+<?php
+
+echo "<span><a href='editComplaints.php?complaintID={$row['COMPLAINTID']}'>Update</a></span>
 <span><a href='viewComplaintDetails.php?cid={$row['COMPLAINTID']}'>View Details</a></span>
 </td></tr>";
 
