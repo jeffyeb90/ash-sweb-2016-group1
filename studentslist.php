@@ -21,6 +21,7 @@ if(!isset($_SESSION['USER'])){
       	<script type="text/javascript">
 
 
+				var currentObject = null;
 
 				function viewDetailsComplete(xhr,status){
 					if(status!="success"){
@@ -44,11 +45,12 @@ if(!isset($_SESSION['USER'])){
 				}
 
 				function viewDetails(obj,userid){
-				currentObject=obj;
-				var theUrl="usersajax.php?cmd=2&uc="+userid;
+
+				var theUrl="studentsajax.php?cmd=2&uc="+userid;
 				$.ajax(theUrl,
-					{async:true,complete:viewUserComplete}
+					{async:true,complete:viewDetailsComplete}
 					);
+						currentObject=obj;
 				}
 				function searchStudentInfo(){
 
@@ -79,11 +81,10 @@ var result="";
 					var length=obj.user.length;
 					console.log(obj.user);
 					console.log(length);
-					result+="<div style='overflow-x:auto;'><table class='center' id='table'><tr><th>ID</th><th>USER NAME</th><th>FULL NAME</th><th>GENDER</th><th>PHONE NUMBER</th><th>CONTROLS</th></tr>"
+					result+="<div style='overflow-x:auto;'><table class='center' id='table'><tr><th>ID</th><th>USER NAME</th><th>FULL NAME</th><th>GENDER</th><th>PHONE NUMBER</th></tr>"
 					while(length>0){
 						result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.user[length-1].STUDENTID+"</td><td>"+obj.user[length-1].USERNAME+"</td><td>"+obj.user[length-1].FIRSTNAME +" "+obj.user[length-1].LASTNAME+"</td><td>"
-						+obj.user[length-1].GENDER+"</td> <td>"+obj.user[length-1].PHONENUMBER+"</td><td>"."<td onclick='viewDetails(this,obj.user.STUDENTID)'>View More</td>"+obj.user[length-1].CONTACTFIRSTNAME
-						 +" "+obj.user[length-1].CONTACTLASTNAME+"</td><td><a  href='editStudentRecord.php?studentID="+obj.user[length-1].STUDENTID+"' class='button'>Update</a><br><a href='viewStudentComplaints.php?sid="+obj.user[length-1].STUDENTID+
+						+obj.user[length-1].GENDER+"</td> <td>"+obj.user[length-1].PHONENUMBER+"</td><td onclick='viewDetails(this,obj.user[length-1].STUDENTID)'>View More</td><td><a  href='editStudentRecord.php?studentID="+obj.user[length-1].STUDENTID+"' class='button'>Update</a><br><a href='viewStudentComplaints.php?sid="+obj.user[length-1].STUDENTID+
 						"'class='button'>View</a><br><a href='medicalComplaintAdd.php?sid="+obj.user[length-1].STUDENTID+"' class='button'>Add Medical Complaint</a><br></td></tr>";
 						length-=1;
 						console.log(length);

@@ -8,6 +8,7 @@ switch($cmd){
   break;
 	case 2:
 	viewStudentInfo();
+	break;
   default:
   echo "wrong command";
   break;
@@ -58,7 +59,7 @@ function viewStudentInfo(){
 
 	$usercode=$_REQUEST["uc"];
 	//create an object of users
-	$obj=new users();
+	$obj=new students();
 	// call get user method
 	$result=$obj->getStudentByID($usercode);
 	if($result==false){
