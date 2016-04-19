@@ -6,6 +6,8 @@ switch($cmd){
 	case 1:
 	searchStudent();
   break;
+	case 2:
+	viewStudentInfo();
   default:
   echo "wrong command";
   break;
@@ -45,6 +47,36 @@ echo "]}";
 
 }
 
+function viewStudentInfo(){
 
+	include_once("students.php");
+	//check if there is a user code
+	if(!isset($_REQUEST['uc'])){
+		echo '{"result":0,"message":"User code not provided"}';
+		return;
+	}
+
+	$usercode=$_REQUEST["uc"];
+	//create an object of users
+	$obj=new users();
+	// call get user method
+	$result=$obj->getStudentByID($usercode);
+	if($result==false){
+		echo'{"result":0,"message":"could not find user "}';
+		return;
+	}
+
+	$row = $obj->fetch();
+	if($row==false){
+		echo '{"result":0,"message":"could not get user information"}';
+		return;
+	}
+
+	echo '{"result":1,"user":';
+		echo json_encode($row);
+	echo "}";
+
+}
+}
 
 ?>

@@ -54,13 +54,19 @@
 			<link rel="stylesheet" href="css/style.css">
 
 		</head>
-
+    <script>
+    function validate(){
+      //check data
+      alert("Confirm");
+      return true;
+    }
+    </script>
 		<body>
 
 			<div id="header" > <h2>Ashesi University Clinic</h2> </div>
 				<div class="image">  <img src="images/1.JPG" border="5"/></div>
 
-	  <form action="login.php" method="GET">
+	  <form action="login.php" method="GET" onsubmit="validate()">
 
 		<section class="container">
 			<div class="login">
