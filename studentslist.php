@@ -20,7 +20,37 @@ if(!isset($_SESSION['USER'])){
         <script type="text/javascript" src="js/jquery-1.12.1.js"></script>
       	<script type="text/javascript">
 
-        function searchStudentInfo(){
+
+
+				function viewDetailsComplete(xhr,status){
+					if(status!="success"){
+						divStatus.innerHTML="error sending request";
+						return;
+					}
+
+					var obj=JSON.parse(xhr.responseText);
+					console.log(xhr.responseText);
+					if(obj.result==0){
+						//echo"dsdsd";
+						divStatus.innerHTML=obj.message;
+					}else{
+						//"ds";
+
+						divStatus.innerHTML="User info retrieved";
+
+						currentObject.innerHTML= obj.user.HEIGHT + " "+obj.user.WEIGHT;
+
+				}
+				}
+
+				function viewDetails(obj,userid){
+				currentObject=obj;
+				var theUrl="usersajax.php?cmd=2&uc="+userid;
+				$.ajax(theUrl,
+					{async:true,complete:viewUserComplete}
+					);
+				}
+				function searchStudentInfo(){
 
       		var theUrl="studentsajax.php?cmd=1&txtName="+$("#search").val();
 
@@ -31,7 +61,6 @@ if(!isset($_SESSION['USER'])){
 
 
       	}
-
 
       function searchStudentInfoComplete(xhr, status){
       	if(status!="success"){
@@ -50,10 +79,11 @@ var result="";
 					var length=obj.user.length;
 					console.log(obj.user);
 					console.log(length);
-					result+="<div style='overflow-x:auto;'><table class='center' id='table'><tr><th>ID</th><th>USER NAME</th><th>FULL NAME</th><th>GENDER</th><th>PHONE NUMBER</th><th>HEIGHT</th><th>WEIGHT</th><th>BLOOD TYPE</th><th>EMERGENCY CONTACT</th><th>CONTROLS</th></tr>"
+					result+="<div style='overflow-x:auto;'><table class='center' id='table'><tr><th>ID</th><th>USER NAME</th><th>FULL NAME</th><th>GENDER</th><th>PHONE NUMBER</th><th>CONTROLS</th></tr>"
 					while(length>0){
-						result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.user[length-1].STUDENTID+"</td><td>"+obj.user[length-1].USERNAME+"</td><td>"+obj.user[length-1].FIRSTNAME +" "+obj.user[length-1].LASTNAME+"</td><td>"+obj.user[length-1].GENDER+"</td> <td>"+obj.user[length-1].PHONENUMBER+"</td><td>"+
-						obj.user[length-1].HEIGHT+"</td><td>"+obj.user[length-1].WEIGHT+"</td><td>"+obj.user[length-1].BLOODTYPE+"</td><td>"+obj.user[length-1].CONTACTFIRSTNAME +" "+obj.user[length-1].CONTACTLASTNAME+"</td><td><a  href='editStudentRecord.php?studentID="+obj.user[length-1].STUDENTID+"' class='button'>Update</a><br><a href='viewStudentComplaints.php?sid="+obj.user[length-1].STUDENTID+
+						result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.user[length-1].STUDENTID+"</td><td>"+obj.user[length-1].USERNAME+"</td><td>"+obj.user[length-1].FIRSTNAME +" "+obj.user[length-1].LASTNAME+"</td><td>"
+						+obj.user[length-1].GENDER+"</td> <td>"+obj.user[length-1].PHONENUMBER+"</td><td>"."<td onclick='viewDetails(this,obj.user.STUDENTID)'>View More</td>"+obj.user[length-1].CONTACTFIRSTNAME
+						 +" "+obj.user[length-1].CONTACTLASTNAME+"</td><td><a  href='editStudentRecord.php?studentID="+obj.user[length-1].STUDENTID+"' class='button'>Update</a><br><a href='viewStudentComplaints.php?sid="+obj.user[length-1].STUDENTID+
 						"'class='button'>View</a><br><a href='medicalComplaintAdd.php?sid="+obj.user[length-1].STUDENTID+"' class='button'>Add Medical Complaint</a><br></td></tr>";
 						length-=1;
 						console.log(length);
@@ -92,7 +122,7 @@ var result="";
 			        <li class="dropdown" id="records"><a class="dropdown-button2" >STUDENT RECORDS</a>
                   <ul class="dropdown-content2">
                       <li><a href="studentslist.php">View </a></li>
-											
+
 
                   </ul>
 
@@ -143,7 +173,7 @@ var result="";
 
 
 echo "<div style='overflow-x:auto;'><table class='center' id='table'>
-<tr><th>ID</th><th>USER NAME</th><th>FULL NAME</th><th>GENDER</th><th>PHONE NUMBER</th><th>HEIGHT</th><th>WEIGHT</th><th>BLOOD TYPE</th><th>EMERGENCY CONTACT</th><th>CONTROLS</th></tr>";
+<tr><th>ID</th><th>USER NAME</th><th>FULL NAME</th><th>GENDER</th><th>PHONE NUMBER</th><th>CONTROLS</th></tr>";
 
 
 echo "</table>";
