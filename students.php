@@ -117,9 +117,9 @@
 		}
 
 	}
- $obj = new students();
-// $result = $obj->getStudentByID(4893);
-// echo $result;
- $row = $obj->updateStudentRecord(3424323, 45, 1.5, 'A');
- echo $row;
+//  $obj = new students();
+// // $result = $obj->getStudentByID(4893);
+// // echo $result;
+//  $row = $obj->updateStudentRecord(3424323, 45, 1.5, 'A');
+//  echo $row;
 	?>

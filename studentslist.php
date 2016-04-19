@@ -40,18 +40,52 @@ if(!isset($_SESSION['USER'])){
 var result="";
 					var length=obj.user.length;
 					console.log(obj.user);
-					console.log(length);
+					//console.log(length);
 					result+="<div style='overflow-x:auto;'><table class='center' id='table'><tr><th>ID</th><th>USER NAME</th><th>FULL NAME</th><th>GENDER</th><th>PHONE NUMBER</th><th>HEIGHT</th><th>WEIGHT</th><th>BLOOD TYPE</th><th>EMERGENCY CONTACT</th><th>CONTROLS</th></tr>"
 					while(length>0){
 						result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.user[length-1].STUDENTID+"</td><td>"+obj.user[length-1].USERNAME+"</td><td>"+obj.user[length-1].FIRSTNAME +" "+obj.user[length-1].LASTNAME+"</td><td>"+obj.user[length-1].GENDER+"</td> <td>"+obj.user[length-1].PHONENUMBER+"</td><td>"+
-						obj.user[length-1].HEIGHT+"</td><td>"+obj.user[length-1].WEIGHT+"</td><td>"+obj.user[length-1].BLOODTYPE+"</td><td>"+obj.user[length-1].CONTACTFIRSTNAME +" "+obj.user[length-1].CONTACTLASTNAME+"</td><td><a  href='editStudentRecord.php?studentID="+obj.user[length-1].STUDENTID+"' class='button'>Update</a><br><a href='viewStudentComplaints.php?sid="+obj.user[length-1].STUDENTID+
+						obj.user[length-1].HEIGHT+"</td><td>"+obj.user[length-1].WEIGHT+"</td><td>"+obj.user[length-1].BLOODTYPE+"</td><td>"+obj.user[length-1].CONTACTFIRSTNAME +" "+obj.user[length-1].CONTACTLASTNAME+"</td><td><span  onclick='update("+obj.user[length-1].STUDENTID+")' class='btn'>Update</span><br><a href='viewStudentComplaints.php?sid="+obj.user[length-1].STUDENTID+
 						"'class='button'>View</a><br><a href='medicalComplaintAdd.php?sid="+obj.user[length-1].STUDENTID+"' class='button'>Add Medical Complaint</a><br></td></tr>";
 						length-=1;
+						 
 						//console.log(length);
 					}
 					table.innerHTML=result;
       	}
       }
+       var updatedStudent;
+      function getStudentComplete(xhr, status){
+        if(status!="success"){
+          alert("error retrieving student information");
+          return;
+        }
+        var object=$.parseJSON(xhr.responseText);
+        
+        if(object.result==0){
+          alert(""+object.message);
+
+        }
+        else{
+          //alert("Height:"+object.student.HEIGHT+" ");
+        //  return object.student;
+          updatedStudent= object.student;
+        }
+      }
+      function getStudent(sid){
+        var url="studentsajax.php?cmd=2&sid="+sid;
+        $.ajax(url,{
+          async:true, complete:getStudentComplete
+        });
+   //prompt("url", url);
+      }
+      function update(sid){
+        var student = getStudent(sid);
+      	//alert(""+sid);
+        //alert("Height:" +student.HEIGHT);
+      	alert("Height:" +updatedStudent.HEIGHT+ "ypp");
+      }
+      
+     
 		window.onload= searchStudentInfo;
       </script>
     </head>
@@ -112,7 +146,7 @@ var result="";
          <form action="" method="GET">
             <div class="input-field">
               <input onkeyup="searchStudentInfo()"id="search" type="text" name="txtSearch">
-              <span onclick="searchStudentInfo()" value="search" class="button">SEARCH</ispan>
+              <span onclick="searchStudentInfo()" value="search" class="button">SEARCH</span>
             </div>
           </form>
 			</span></div>
