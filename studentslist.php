@@ -7,7 +7,7 @@ if(!isset($_SESSION['USER'])){
 }
 
 ?>
-<html lang="en">
+<html>
     <head>
         <meta charset="utf-8">
         <title>Ashesi | Student Medical Details</title>
@@ -23,34 +23,65 @@ if(!isset($_SESSION['USER'])){
 
 				var currentObject = null;
 
+
 				function viewDetailsComplete(xhr,status){
+
 					if(status!="success"){
 						divStatus.innerHTML="error sending request";
 						return;
 					}
 
+				//	var modal = document.getElementById('position');
+
+					// Get the button that opens the modal
+					var btn = document.getElementById("myBtn")
+					var modal = document.getElementById("myModal");
+
+
+					// Get the <span> element that closes the modal
+					var span = document.getElementsByClassName("close")[0];
+							// When the user clicks anywhere outside of the modal, close it
+					window.onclick = function(event) {
+					    if (event.target == modal) {
+					        modal.style.display = "none";
+					    }
+					}
+
 					var obj=JSON.parse(xhr.responseText);
+					var result2 ="";
 					console.log(xhr.responseText);
+
 					if(obj.result==0){
 						//echo"dsdsd";
 						divStatus.innerHTML=obj.message;
 					}else{
+					result2+="<div id='myModal' class='modal'><div class='modal-content'><span class='close'>x</span><p><b> Height <b>obj.user.HEIGHT <br><b> Weight <b>obj.user.WEIGHT</p></div></div>";
 						//"ds";
+						btn.onclick = function() {
+								modal.style.display = "block";
+								modal.innerHTML= result2;
+						}
 
-						divStatus.innerHTML="User info retrieved";
 
-						currentObject.innerHTML= obj.user.HEIGHT + " "+obj.user.WEIGHT;
+						}
+			// When the user clicks on the button, open the modal
 
-				}
-				}
+
+			}
+
+			// When the user clicks on <span> (x), close the modal
+
+
+
+
 
 				function viewDetails(obj,userid){
-
+	      currentObject=obj;
 				var theUrl="studentsajax.php?cmd=2&uc="+userid;
 				$.ajax(theUrl,
 					{async:true,complete:viewDetailsComplete}
 					);
-						currentObject=obj;
+
 				}
 				function searchStudentInfo(){
 
@@ -78,13 +109,17 @@ if(!isset($_SESSION['USER'])){
       	else{
 					divStatus.innerHTML='Display Students';
 var result="";
+
 					var length=obj.user.length;
+					$id = obj.user[length-1].STUDENTID;
 					console.log(obj.user);
 					console.log(length);
 					result+="<div style='overflow-x:auto;'><table class='center' id='table'><tr><th>ID</th><th>USER NAME</th><th>FULL NAME</th><th>GENDER</th><th>PHONE NUMBER</th></tr>"
+
 					while(length>0){
+
 						result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.user[length-1].STUDENTID+"</td><td>"+obj.user[length-1].USERNAME+"</td><td>"+obj.user[length-1].FIRSTNAME +" "+obj.user[length-1].LASTNAME+"</td><td>"
-						+obj.user[length-1].GENDER+"</td> <td>"+obj.user[length-1].PHONENUMBER+"</td><td onclick='viewDetails(this,obj.user[length-1].STUDENTID)'>View More</td><td><a  href='editStudentRecord.php?studentID="+obj.user[length-1].STUDENTID+"' class='button'>Update</a><br><a href='viewStudentComplaints.php?sid="+obj.user[length-1].STUDENTID+
+						+obj.user[length-1].GENDER+"</td> <td>"+obj.user[length-1].PHONENUMBER+"</td><td onclick='viewDetails(this,$id)'><button id='myBtn'>View More</button></td><td><a  href='editStudentRecord.php?studentID="+obj.user[length-1].STUDENTID+"' class='button'>Update</a><br><a href='viewStudentComplaints.php?sid="+obj.user[length-1].STUDENTID+
 						"'class='button'>View</a><br><a href='medicalComplaintAdd.php?sid="+obj.user[length-1].STUDENTID+"' class='button'>Add Medical Complaint</a><br></td></tr>";
 						length-=1;
 						console.log(length);
@@ -167,7 +202,12 @@ var result="";
 
 
 
+			  </div>
 
+			</div>
+
+
+			</div>
 
 
 <?php
