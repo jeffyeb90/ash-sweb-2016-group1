@@ -10,11 +10,83 @@ if(!isset($_SESSION['USER'])){
         <meta charset="utf-8">
         <title>Ashesi | Student Medical Details</title>
 			  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+      /* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 
-        <!-- Loading Flat UI -->
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+    </style>
+       
         <link href="css/style.css" rel="stylesheet">
-        <!-- 	Web Browser thumbnail image -->
+        
         <link rel="shortcut icon" href="#">
+
         <script type="text/javascript" src="js/jquery-1.12.1.js"></script>
       	<script type="text/javascript">
         function searchStudentInfo(){
@@ -53,7 +125,7 @@ var result="";
 					table.innerHTML=result;
       	}
       }
-       var updatedStudent;
+       var updatedStudent=null;
       function getStudentComplete(xhr, status){
         if(status!="success"){
           alert("error retrieving student information");
@@ -78,11 +150,76 @@ var result="";
         });
    //prompt("url", url);
       }
+
+      function updateStudentComplete(status, xhr){
+        if(status!="success"){
+          divStatus.innerHTML = "error sending request";
+          return;
+        }
+
+        var response = $.parseJSON(xhr.responseText);
+        if(response.result==0){
+          divStatus.innerHTML=response.message;
+        }
+        else{
+
+        }
+
+      }
+
+      function updateStudent(sid, height, weight, bloodType){
+        var url = "studentsajax.php?cmd=3&sid="+sid+"&weight="+weight+"&height="+height+"bloodType="+bloodType;
+        $.ajax(url,{
+          async:true, complete:updateStudentComplete
+        });
+      }
       function update(sid){
-        var student = getStudent(sid);
+       getStudent(sid);
       	//alert(""+sid);
         //alert("Height:" +student.HEIGHT);
-      	alert("Height:" +updatedStudent.HEIGHT+ "ypp");
+      	//alert("Height:" +updatedStudent.HEIGHT);
+      //  if(updatedStudent){
+        var sid=updatedStudent.STUDENTID;
+        //alert(""+sid);
+        var weight=updatedStudent.WEIGHT;
+        var height=updatedStudent.HEIGHT;
+        var bloodType=updatedStudent.BLOODTYPE;
+
+        var groupA, groupB, groupAB, groupO="";
+        if(bloodType=="A"){
+          groupA="selected";
+        }
+        else if(bloodType=="B"){
+          groupB="selected";
+        }
+        else if(bloodType=="AB"){
+          groupAB="selected";
+        }
+        else{
+          groupO="selected";
+        }
+
+        var modal="";
+        modal+="<div class='modal-content'><div class='modal-header'><span class='close'>x</span><h2>Edit Student Record</h2><div><div class='position' action='update.php' method='GET'><input type='hidden' name='sid' value="+sid+"><div>Weight: <input class='text' type='text' name='weight'value="+weight+"> kg</div><div>Height: <input class='text' type='text' name='height' value="+height+"> m</div><div>Blood Type:<select class='select name='bloodtype'><option "+groupA+" value ='A'>A</option><option "+groupB+" value ='B'>B</option><option "+groupAB +"value ='AB'>AB</option><option "+groupO +"value ='O'>O</option></select><input class='submit' type='submit' name= 'save' value='Update'></div></div>";
+       // alert(""+modal);
+      // alert(""+document.getElementById("myModal").innerHTML);
+       var m= document.getElementById("myModal");
+       m.innerHTML=modal;
+       m.style.display="block";
+       //var span=document.getElementByClassName('close')[0];
+       window.onclick=function(event){
+          if(event.target==m){
+            m.style.display="none";
+          }
+       }
+       // span.onclick=function(){
+       //  m.style.display="none";
+       // }
+      // alert(""+m.innerHTML);
+     // }
+      // else{
+      //   alert("error");
+      // }
       }
       
      
@@ -162,9 +299,17 @@ var result="";
 echo "<div style='overflow-x:auto;'><table class='center' id='table'>
 <tr><th>ID</th><th>USER NAME</th><th>FULL NAME</th><th>GENDER</th><th>PHONE NUMBER</th><th>HEIGHT</th><th>WEIGHT</th><th>BLOOD TYPE</th><th>EMERGENCY CONTACT</th><th>CONTROLS</th></tr>";
 echo "</table>";
+
+
 ?>
 </div>
+<?php
+echo "<div id='myModal' class='modal'>oh []
+</div>";
+?>
 </section>
+
+
 
 </body>
 </html>
