@@ -32,14 +32,23 @@ function updateComplaint(){
 	$complaint=new medicalComplaint();
 
   $result=$complaint->updateComplaint($complaintID, $studentID, $temperature, $symptoms, $diagnosis, $cause, $prescription, $nurseID);
+
+  $result=$complaint->getComplaints();
   $row=$complaint->fetch();
-  if($result==false){
+  if($row==false){
     echo '{"result":0,"message":"error updating name"}';
 	    }
 	  else{
-      echo '{"result":1,"complaint":';
+      echo '{"result":1,"complaint":[';
+    	while($row){
       echo json_encode($row);
-      echo "}";
+
+    	$row=$complaint->fetch();
+    if($row!=false){
+    	echo ",";
+    }
+    }
+    echo "]}";
 	}
 
 }
