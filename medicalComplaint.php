@@ -1,9 +1,15 @@
 <?php
 /**
-
 *@author Efua Bainson, Makafui Fie and Andrew Abbeyquaye
 *@method string addComplaint(integer $studentID, date $date, decimal $temperature, string $symptoms, string $diagnosis, string $cause, string $prescription, integer $nurseID)
-*@method bool getAllMedicalComplaints($filter)
+*@method bool getAllMedicalComplaints(string $filter)
+*@method string searchComplaint(string  $text)
+*@method string getComplaints( string $filter)
+*@method string searchComplaintsByStudentID Complaint(integer  $text)
+*@method integer diseaseFrequency()
+*@method bool updateComplaint(integer $complaintID, integer $studentID, date $date, decimal $temperature, string $symptoms, string $diagnosis, string $cause, string $prescription, integer $nurseID)
+*@method string getComplaintByID(integer $complaintID)
+*@method integer getMedicalComplaint(integer $complaintID)
 */
  include_once("databasehelper.php");
  /**
@@ -14,6 +20,7 @@
 
     }
     /**
+    *adds a  medical complaint
   	*@param string studentID identification number of the student
   	*@param string date date
   	*@param string temperature temperature
@@ -56,7 +63,11 @@
             //var_dump($strQuery);
             return $this->query($strQuery);
         }
-
+        /**
+        *searches for medical complaints
+        *@param string mixed condition to text. If false, then text will not be applied
+        *@return boolean true if successful, else false
+        */
         function searchComplaints($text=false){
           $filter=false;
           if($text!=false){
@@ -95,20 +106,38 @@
 
 			return $this->getComplaints($filter);
 		}
-
+    /**
+    *sfind the frequency with which diseases occur
+    *@return boolean returns true if successful or false
+    */
     function diseaseFrequency(){
       $strQuery="select diseases.NAME, count(DIAGNOSIS) FROM medicalComplaint inner join diseases on diseases.DISEASEID=medicalComplaint.DIAGNOSIS GROUP BY DIAGNOSIS";
 
       return $this->query($strQuery);
   }
-
-
+  /**
+  	*update a medical complaint
+  *@param string complaintID identification number of the complaint
+  *@param string studentID identification number of the student
+  *@param string date date
+  *@param string temperature temperature
+  *@param string symptoms symptoms shown by the student
+  *@param string diagnosis diagnosis given by nurse
+  *@param string cause cause of illness
+  *@param string prescription prescription made by nurse
+  *@param string nurseID identification number of the nurse
+  *@return boolean returns true if successful or false
+  */
 		function updateComplaint($complaintID, $studentID, $temperature, $symptoms, $diagnosis, $cause, $prescription, $nurseID){
 				$strQuery="Update medicalcomplaint set STUDENTID=$studentID,  TEMPERATURE=$temperature, SYMPTOMS='$symptoms', DIAGNOSIS='$diagnosis', CAUSE='$cause', PRESCRIPTION='$prescription', NURSEID='$nurseID' where COMPLAINTID = $complaintID";
 
         return $this->query($strQuery);
 		}
-
+    /**
+    *get complaint given the id
+      *@param string complaint id
+    *@return boolean returns true if successful or false
+    */
 		function getComplaintByID($complaintID){
 			$strQuery="select COMPLAINTID, STUDENTID, DATE, TEMPERATURE, SYMPTOMS, DIAGNOSIS, CAUSE, PRESCRIPTION, NURSEID from medicalcomplaint where COMPLAINTID=$complaintID";
 			return $this->query($strQuery);

@@ -1,5 +1,8 @@
 <?php
-
+/**
+*@author Efua Bainson and Andrew Abbeyquaye
+*@method string updateComplaint()
+*/
 if(isset($_REQUEST['cmd'])){
 $cmd=$_REQUEST['cmd'];
 switch($cmd){
@@ -11,7 +14,10 @@ switch($cmd){
 	break;
 }
 }
-
+/**
+*updates a medical complaint
+*@return all medical complaints
+*/
 function updateComplaint(){
 	if(!isset($_REQUEST['cid'])){
 		echo '{"result":0,"message":"complaint code is not correct"}';
