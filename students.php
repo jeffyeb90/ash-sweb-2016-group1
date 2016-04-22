@@ -107,7 +107,7 @@
 		function updateStudentRecord($studentID, $weight, $height, $bloodtype){
 
 			$strQuery="Update studenthasrecord set HEIGHT='$height', WEIGHT='$weight', BLOODTYPE='$bloodtype' where STUDENTID=$studentID";
-			//echo $strQuery;
+			
 			return $this->query($strQuery);
 		}
 
@@ -122,4 +122,4 @@
 // // echo $result;
 //  $row = $obj->updateStudentRecord(3424323, 45, 1.5, 'A');
 //  echo $row;
-	?>
+?>
