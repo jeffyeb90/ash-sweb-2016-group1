@@ -45,10 +45,14 @@
 									}else{
 
 			// When the user clicks on the button, open the modal
-					 $("body").append("<div id='myModal' class='modal12'><div class='modal-content12'><span class='close'>x</span><h3> STUDENT DETAILS<h3><table border = 1 ><tr><th>HEIGHT</th><th>WEIGHT</th><th>BLOODTYPE</th></tr><tr><td bgcolor=  #65B529>" +obj.user.HEIGHT +"m "+ "</td><td bgcolor= #65B529>" +obj.user.WEIGHT +"kg "+ "</td><td bgcolor=  #65B529>"+obj.user.BLOODTYPE+"</td></tr>");
+			var modal="";
+					 modal+="<div class='modal-content12'><span class='close'>x</span><h3> STUDENT DETAILS<h3><table border = 1><tr><th>HEIGHT</th><th>WEIGHT</th><th>BLOODTYPE</th></tr><tr><td bgcolor=  #65B529>" +obj.user.HEIGHT +"m "+ "</td><td bgcolor= #65B529>" +obj.user.WEIGHT +"kg "+ "</td><td bgcolor=  #65B529>"+obj.user.BLOODTYPE+"</td></tr></div>";
 
+					 var modalView = document.getElementById('myModal');
+
+			modalView.innerHTML=modal;
 			document.getElementById('myModal').style.display="block";
-			var modalView = document.getElementById('myModal');
+
 
 			// When the user clicks anywhere outside of the modal, close it
 			window.onclick = function(event) {
@@ -211,6 +215,9 @@
 
 				echo "</table>";
 				?>
+				<php
+				echo "<div id='myModal' class='modal12'></div>";
+		
 				</div>
 				</section>
 
