@@ -20,6 +20,7 @@
         $result=$obj->fetch();
 				if(($email!=NULL) && ($password!=NULL)){
 				if(($result['EMAIL']==$email) &&($result['PASSWORD'])==$password){
+          	error_reporting(0);
           session_start();
           $_SESSION['USER']=$result;
 
