@@ -42,7 +42,7 @@
 									}else{
 
 			// When the user clicks on the button, open the modal
-					 $("body").append("<div id='myModal' class='modal'><div class='modal-content'><span class='close'>x</span><h3> Student Details<h3><table border = 1 ><tr><th>Height</th><th>Weight</th><th>BloodType</th></tr><tr><td bgcolor=  #65B529>" +obj.user.HEIGHT +"m "+ "</td><td bgcolor= #65B529>" +obj.user.WEIGHT +"kg "+ "</td><td bgcolor=  #65B529>"+obj.user.BLOODTYPE+"</td></tr>");
+					 $("body").append("<div id='myModal' class='modal12'><div class='modal-content12'><span class='close'>x</span><h3> STUDENT DETAILS<h3><table border = 1 ><tr><th>HEIGHT</th><th>WEIGHT</th><th>BLOODTYPE</th></tr><tr><td bgcolor=  #65B529>" +obj.user.HEIGHT +"m "+ "</td><td bgcolor= #65B529>" +obj.user.WEIGHT +"kg "+ "</td><td bgcolor=  #65B529>"+obj.user.BLOODTYPE+"</td></tr>");
 
 			document.getElementById('myModal').style.display="block";
 			var modalView = document.getElementById('myModal');
@@ -108,7 +108,7 @@
 
 
 										result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.user[length-1].STUDENTID+"</td><td>"+obj.user[length-1].USERNAME+"</td><td>"+obj.user[length-1].FIRSTNAME +" "+obj.user[length-1].LASTNAME+"</td><td>"
-										+obj.user[length-1].GENDER+"</td> <td>"+obj.user[length-1].PHONENUMBER+"</td><td onclick='viewDetails(this,"+obj.user[length-1].STUDENTID+")'><button id='myBtn'>View More</button></td><td><a  href='editStudentRecord.php?studentID="+obj.user[length-1].STUDENTID+"' class='button'>Update</a><br><a href='viewStudentComplaints.php?sid="+obj.user[length-1].STUDENTID+
+										+obj.user[length-1].GENDER+"</td> <td>"+obj.user[length-1].PHONENUMBER+"</td><td onclick='viewDetails(this,"+obj.user[length-1].STUDENTID+")'><button class='btn'>View More</button></td><td><a  href='editStudentRecord.php?studentID="+obj.user[length-1].STUDENTID+"' class='button'>Update</a><br><a href='viewStudentComplaints.php?sid="+obj.user[length-1].STUDENTID+
 										"'class='button'>View</a><br><a href='medicalComplaintAdd.php?sid="+obj.user[length-1].STUDENTID+"' class='button'>Add Medical Complaint</a><br></td></tr>";
 										length-=1;
 										console.log(length);
