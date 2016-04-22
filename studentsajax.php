@@ -88,9 +88,10 @@ function getStudentByID(){
 		$weight = $_REQUEST['weight'];
 		$height = $_REQUEST['height'];
 		$bloodType = $_REQUEST['bloodType'];
+		
 		$obj = new students();
 		$result=$obj->updateStudentRecord($sid, $weight, $height, $bloodType);
-		//echo $result;
+		
 		if($result==false){
 			echo '{"result": 0, "message" :"error updating user"}';
 			exit();

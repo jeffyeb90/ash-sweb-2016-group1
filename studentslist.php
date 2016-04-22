@@ -101,7 +101,7 @@ if(!isset($_SESSION['USER'])){
       		divStatus.innerHTML="error while getting information";
       		return;
       	}
-      	var obj=JSON.parse(xhr.responseText);
+      	var obj=$.JSON.parse(xhr.responseText);
       	if(obj.result==0){
 					divStatus.innerHTML=obj.message;
 					table.innerHTML="No result found";
@@ -111,12 +111,11 @@ if(!isset($_SESSION['USER'])){
 					divStatus.innerHTML='Display Students';
 var result="";
 					var length=obj.user.length;
-					console.log(obj.user);
+					//console.log(obj.user);
 					//console.log(length);
-					result+="<div style='overflow-x:auto;'><table class='center' id='table'><tr><th>ID</th><th>USER NAME</th><th>FULL NAME</th><th>GENDER</th><th>PHONE NUMBER</th><th>HEIGHT</th><th>WEIGHT</th><th>BLOOD TYPE</th><th>EMERGENCY CONTACT</th><th>CONTROLS</th></tr>"
+					result+="<div style='overflow-x:auto;'><table class='center' id='table'><tr><th>ID</th><th>USER NAME</th><th>FULL NAME</th><th>GENDER</th><th>PHONE NUMBER</th><th>CONTROLS</th></tr>"
 					while(length>0){
-						result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.user[length-1].STUDENTID+"</td><td>"+obj.user[length-1].USERNAME+"</td><td>"+obj.user[length-1].FIRSTNAME +" "+obj.user[length-1].LASTNAME+"</td><td>"+obj.user[length-1].GENDER+"</td> <td>"+obj.user[length-1].PHONENUMBER+"</td><td>"+
-						obj.user[length-1].HEIGHT+"</td><td>"+obj.user[length-1].WEIGHT+"</td><td>"+obj.user[length-1].BLOODTYPE+"</td><td>"+obj.user[length-1].CONTACTFIRSTNAME +" "+obj.user[length-1].CONTACTLASTNAME+"</td><td><span  onclick='update("+obj.user[length-1].STUDENTID+")' class='btn'>Update</span><br><a href='viewStudentComplaints.php?sid="+obj.user[length-1].STUDENTID+
+						result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.user[length-1].STUDENTID+"</td><td>"+obj.user[length-1].USERNAME+"</td><td>"+obj.user[length-1].FIRSTNAME +" "+obj.user[length-1].LASTNAME+"</td><td>"+obj.user[length-1].GENDER+"</td> <td>"+obj.user[length-1].PHONENUMBER+"</td><td><span  onclick='update("+obj.user[length-1].STUDENTID+")' class='btn'>Update</span><br><a href='viewStudentComplaints.php?sid="+obj.user[length-1].STUDENTID+
 						"'class='button'>View</a><br><a href='medicalComplaintAdd.php?sid="+obj.user[length-1].STUDENTID+"' class='button'>Add Medical Complaint</a><br></td></tr>";
 						length-=1;
 						 
@@ -137,53 +136,16 @@ var result="";
           alert(""+object.message);
 
         }
-        else{
+\        else{
           //alert("Height:"+object.student.HEIGHT+" ");
         //  return object.student;
-          updatedStudent= object.student;
-        }
-      }
-      function getStudent(sid){
-        var url="studentsajax.php?cmd=2&sid="+sid;
-        $.ajax(url,{
-          async:true, complete:getStudentComplete
-        });
-   //prompt("url", url);
-      }
+         // updatedStudent= object.student;
 
-      function updateStudentComplete(status, xhr){
-        if(status!="success"){
-          divStatus.innerHTML = "error sending request";
-          return;
-        }
-
-        var response = $.parseJSON(xhr.responseText);
-        if(response.result==0){
-          divStatus.innerHTML=response.message;
-        }
-        else{
-
-        }
-
-      }
-
-      function updateStudent(sid, height, weight, bloodType){
-        var url = "studentsajax.php?cmd=3&sid="+sid+"&weight="+weight+"&height="+height+"bloodType="+bloodType;
-        $.ajax(url,{
-          async:true, complete:updateStudentComplete
-        });
-      }
-      function update(sid){
-       getStudent(sid);
-      	//alert(""+sid);
-        //alert("Height:" +student.HEIGHT);
-      	//alert("Height:" +updatedStudent.HEIGHT);
-      //  if(updatedStudent){
-        var sid=updatedStudent.STUDENTID;
-        //alert(""+sid);
-        var weight=updatedStudent.WEIGHT;
-        var height=updatedStudent.HEIGHT;
-        var bloodType=updatedStudent.BLOODTYPE;
+          var sid=object.student.STUDENTID;
+        
+        var weight=object.student.WEIGHT;
+        var height=object.student.HEIGHT;
+        var bloodType=object.student.BLOODTYPE;
 
         var groupA, groupB, groupAB, groupO="";
         if(bloodType=="A"){
@@ -200,10 +162,10 @@ var result="";
         }
 
         var modal="";
-        modal+="<div class='modal-content'><div class='modal-header'><span class='close'>x</span><h2>Edit Student Record</h2><div><div class='position' action='update.php' method='GET'><input type='hidden' name='sid' value="+sid+"><div>Weight: <input class='text' type='text' name='weight'value="+weight+"> kg</div><div>Height: <input class='text' type='text' name='height' value="+height+"> m</div><div>Blood Type:<select class='select name='bloodtype'><option "+groupA+" value ='A'>A</option><option "+groupB+" value ='B'>B</option><option "+groupAB +"value ='AB'>AB</option><option "+groupO +"value ='O'>O</option></select><input class='submit' type='submit' name= 'save' value='Update'></div></div>";
+        modal+="<div class='modal-content'><b>Edit Student Record</b><span id='close'>×</span><div class='position'><input type='hidden' id='sid' value="+sid+"><div>Weight: <input class='text' type='text' id='weight'value="+weight+"> kg</div><div>Height: <input class='text' type='text' id='height' value="+height+"> m</div><div>Blood Type:<select class='select' id='bloodtype'><option "+groupA+" value ='A'>A</option><option "+groupB+" value ='B'>B</option><option "+groupAB +"value ='AB'>AB</option><option "+groupO +"value ='O'>O</option></select><input class='submit' type='submit' name= 'save' value='Update' onclick='updateStudent("+sid+")'></div></div>";
        // alert(""+modal);
       // alert(""+document.getElementById("myModal").innerHTML);
-       var m= document.getElementById("myModal");
+       m= document.getElementById("myModal");
        m.innerHTML=modal;
        m.style.display="block";
        //var span=document.getElementByClassName('close')[0];
@@ -212,14 +174,56 @@ var result="";
             m.style.display="none";
           }
        }
-       // span.onclick=function(){
-       //  m.style.display="none";
-       // }
-      // alert(""+m.innerHTML);
-     // }
-      // else{
-      //   alert("error");
-      // }
+       var close=document.getElementById("close");
+       close.onclick=function(){
+        m.style.display="none";
+          
+        }
+       }
+      }
+      function getStudent(sid){
+        var url="studentsajax.php?cmd=2&sid="+sid;
+        $.ajax(url,{
+          async:true, complete:getStudentComplete
+        });
+   prompt("url", url);
+      }
+
+      function updateStudentComplete(xhr, status){
+        if(status!="success"){
+          divStatus.innerHTML = "error sending request";
+          return;
+        }
+
+        var response = $.parseJSON(xhr.responseText);
+        if(response.result==0){
+          divStatus.innerHTML=response.message;
+        }
+        else{
+            alert("User updated!");
+            divStatus.innerHTML="User successfully updated.";
+        }
+
+      }
+
+      function updateStudent(sid){
+        var editedHeight=$("#height").val();
+        var editedWeight=$("#weight").val();
+        var editedBloodType=$("#bloodtype option:selected").text();
+        m.style.display="none";
+       // console.log($("#bloodtype"));
+        //$("#bloodtype").val("hek");
+       
+        var url = "studentsajax.php?cmd=3&sid="+sid+"&weight="+editedWeight+"&height="+editedHeight+"&bloodType="+editedBloodType;
+        $.ajax(url,{
+          async:true, complete:updateStudentComplete
+        });
+        //prompt("url",url);
+      }
+      function update(sid){
+        
+      getStudent(sid);
+      	
       }
       
      
