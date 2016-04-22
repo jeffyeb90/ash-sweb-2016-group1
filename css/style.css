@@ -9,11 +9,11 @@
     display: none; /* Hidden by default */
     position: absolute;; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 180px ;
-    top: 100px;
-    width: 50%; /* Full width */
-    height: 50%; /* Full height */
+    padding-top: 50px; /* Location of the box */
+    left: 650px ;
+    top: 160px;
+    width: 40%; /* Full width */
+    height: 45%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -23,9 +23,9 @@
 .modal-content {
     background-color: #fefefe;
     margin: auto;
-    padding: 40px;
-    border: 1px solid #888;
-    width: 80%;
+    padding: 80px;
+    width: 50%;
+
 }
 
 /* The Close Button */
