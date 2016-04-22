@@ -217,7 +217,7 @@
 				?>
 				<php
 				echo "<div id='myModal' class='modal12'></div>";
-		
+
 				</div>
 				</section>
 

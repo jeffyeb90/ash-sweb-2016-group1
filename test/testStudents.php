@@ -58,7 +58,7 @@ public function testGetStudentByID(){
   			$testStudentID,// studentID
   			));
 
-  		$this->assertEquals(true,$obj->query("select * from studentHasRecord where STUDENTID=$strTestStudentID"));
+  		$this->assertEquals(true,$obj->query("select * from studentHasRecord where STUDENTID=$testStudentID"));
   		//count the number of fields
   		$this->assertCount(4,$obj->fetch());
       }
