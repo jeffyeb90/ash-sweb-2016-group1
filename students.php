@@ -114,6 +114,15 @@
 			$strQuery="Select STUDENTID, HEIGHT, WEIGHT, BLOODTYPE from studenthasrecord where STUDENTID=$studentID";
 			return $this->query($strQuery);
 		}
+		function listUsers($filter=false){
+			$strQuery="select * from students";
+			if($filter!=false){
+				$strQuery=$strQuery . " where $filter";
+			}
+			//echo $strQuery;
+			return $this->query($strQuery);
+		}
+
 
 	}
 
