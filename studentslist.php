@@ -117,6 +117,7 @@
                         {
                             async:true, complete:getStudentComplete
                         });
+                        prompt("", url);
                  
                     }
                     /**

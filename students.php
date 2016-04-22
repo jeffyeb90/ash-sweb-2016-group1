@@ -103,23 +103,36 @@
 			return $this->query($strQuery);
 		}
 
-
+		/**
+		*update a student record
+		*@param double studentID
+		*@param double wright
+		*@param double height
+		*@param string bloodType
+		*@return boolean returns true if successful or false
+		*/
 		function updateStudentRecord($studentID, $weight, $height, $bloodtype){
-
-			$strQuery="Update studenthasrecord set HEIGHT='$height', WEIGHT='$weight', BLOODTYPE='$bloodtype' where STUDENTID=$studentID";
+			/**
+			*@var string $strQuery should contain insert query
+			*/
+			$strQuery="Update studenthasrecord set HEIGHT=$height, WEIGHT=$weight, BLOODTYPE='$bloodtype' where STUDENTID=$studentID";
 			
 			return $this->query($strQuery);
 		}
+		/**
+		*update a student record
+		*@param double studentID
+		*@return boolean returns true if successful or false
+		*/
 
 		function getStudentByID($studentID){
+			/**
+			*@var string $strQuery should contain insert query
+			*/
 			$strQuery="Select STUDENTID, HEIGHT, WEIGHT, BLOODTYPE from studenthasrecord where STUDENTID=$studentID";
 			return $this->query($strQuery);
 		}
 
 	}
-//  $obj = new students();
-// // $result = $obj->getStudentByID(4893);
-// // echo $result;
-//  $row = $obj->updateStudentRecord(3424323, 45, 1.5, 'A');
-//  echo $row;
+
 ?>
