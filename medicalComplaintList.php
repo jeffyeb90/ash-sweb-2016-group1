@@ -23,9 +23,9 @@ if(!isset($_SESSION['USER'])){
 
 
 				function saveComplaint(cid){
-							console.log(cid);
-					var theUrl="medicalComplaintAjax.php?&cmd=1&cid="+cid+"&sid="+$("#studentID").val()+"&date="+$("#date").val()+"&temp="+$("#temperature").val()+"&sympt="+$("#symptoms").val()+"&diag="+$("#diagnosis").val()+"&cause="+$("#cause").val()+"&presc="+$("#prescription").val()+"&nid="+$("#nurseID").val();
 
+					var theUrl="medicalComplaintAjax.php?&cmd=1&cid="+cid+"&sid="+$("#studentID").val()+"&date="+$("#date").val()+"&temp="+$("#temperature").val()+"&sympt="+$("#symptoms").val()+"&diag="+$("#diagnosis option:selected").val()+"&cause="+$("#cause").val()+"&presc="+$("#prescription").val()+"&nid="+$("#nurseID").val();
+					//prompt("theUrl",theUrl);
 			 		$.ajax(theUrl,
 			 		{
 			 			async:true,complete:saveComplaintComplete
@@ -33,9 +33,10 @@ if(!isset($_SESSION['USER'])){
 					divStatus.innerHTML="Complaint saved";
 					//console.log($("#txtName").val());
 					//currentObject.innerHTML=$("#txtName").val();
+					document.getElementById('myModal').style.display="none";
 
 				}
-
+					var select="";
 				function saveComplaintComplete(xhr,status){
 					if(status!="success"){
 						divStatus.innerHTML="error while updating page";
@@ -47,38 +48,63 @@ if(!isset($_SESSION['USER'])){
 						divStatus.innerHTML=obj.message;
 					}
 					else{
+						divStatus.innerHTML="Display Complaints";
+
+
+						var lengthOfDisease=obj.disease.length;
+						console.log(lengthOfDisease);
+
+						while(lengthOfDisease>0){
+							var selected="";
+							select+="<option value="+obj.disease[lengthOfDisease-1].DISEASEID+">"+obj.disease[lengthOfDisease-1].NAME+"</option>";
+							lengthOfDisease-=1;
+						}
 
 						var result="";
 						var length=obj.complaint.length;
-						
+
 						result+="<div style='overflow-x:auto;'><table class='center' id='table' ><tr><th>COMPLAINTID</th><th>STUDENT ID</th><th>DATE</th><th>TEMPERATURE</th><th>SYMPTOMS</th><th>DIAGNOSIS</th><th>CAUSE<th>PRESCRIPTION</th><th>NURSE</th><th>CONTROLS</th><tr>"
 						while(length>0){
-							divStatus.innerHTML=obj.complaint[length-1].COMPLAINTID;
+
 							result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.complaint[length-1].COMPLAINTID+"</td><td>"+obj.complaint[length-1].STUDENTID+"</td><td>"+obj.complaint[length-1].DATE +"</td><td> "+obj.complaint[length-1].TEMPERATURE+"</td><td>"+obj.complaint[length-1].SYMPTOMS+"</td> <td>"+obj.complaint[length-1].NAME+"</td><td>"+
-							obj.complaint[length-1].CAUSE+"</td><td>"+obj.complaint[length-1].PRESCRIPTION+"</td><td>"+obj.complaint[length-1].FIRSTNAME +" "+obj.complaint[length-1].LASTNAME+"</td><td><span onclick='editName("+obj.complaint[length-1].COMPLAINTID+","+obj.complaint[length-1].STUDENTID+","+obj.complaint[length-1].DATE
-							+","+obj.complaint[length-1].TEMPERATURE+",&apos;"+obj.complaint[length-1].SYMPTOMS+"&apos;,&apos;"+obj.complaint[length-1].NAME+"&apos;,&apos;"+obj.complaint[length-1].CAUSE+"&apos;,&apos;"+obj.complaint[length-1].PRESCRIPTION+"&apos;,&apos;"+obj.complaint[length-1].FIRSTNAME+"&apos;)'id='myBtn' >UPDATE</span><br><span><a href='editComplaints.php?complaintID="+obj.complaint[length-1].COMPLAINTID+"'>Update</a></span><br><span><a href='viewComplaintDetails.php?cid="+obj.complaint[length-1].COMPLAINTID+"'>View Details</a></span>	</td></tr>";
+							obj.complaint[length-1].CAUSE+"</td><td>"+obj.complaint[length-1].PRESCRIPTION+"</td><td>"+obj.complaint[length-1].FIRSTNAME +" "+obj.complaint[length-1].LASTNAME+"</td><td><span onclick='editName("+obj.complaint[length-1].COMPLAINTID+","+obj.complaint[length-1].STUDENTID+",&apos;"+obj.complaint[length-1].DATE
+							+"&apos;,"+obj.complaint[length-1].TEMPERATURE+",&apos;"+obj.complaint[length-1].SYMPTOMS+"&apos;,&apos;"+obj.complaint[length-1].NAME+"&apos;,"+obj.complaint[length-1].DISEASEID+",&apos;"+obj.complaint[length-1].CAUSE+"&apos;,&apos;"+obj.complaint[length-1].PRESCRIPTION+"&apos;,"+obj.complaint[length-1].NURSEID+")'id='myBtn' >UPDATE</span><br><span><a href='viewComplaintDetails.php?cid="+obj.complaint[length-1].COMPLAINTID+"'>View Details</a></span>	</td></tr>";
 							length-=1;
 
 						}
 						table.innerHTML=result;
+
 					}
 
 
 				}
 
 
-				function editName(cid,sid,date,temp,symptoms,name,cause,presc,nid){
+				function editName(cid,sid,date,temp,symptoms,name,diagnosisId,cause,presc,nid){
 				//	var currentName=obj.innerHTML;
-				console.log(cid);
 
-					$("body").append("<span id='myBtn'></span><div id='myModal' class='modal'><div class='modal-content'><span class='close'>×</span><b>UPDATE MEDICAL COMPLAINT</b><div class='position'><form action='' method='GET'><input type='hidden' name='complaintID' value="+cid+"><div>Student ID: <input id='studentID' type='text' class='text' value="+sid+"></div><div>Date: <input  class='date1' type='date' id='date' value="+date+"></div><div>Temperature: <input class='number' type='text' id='temperature' value="+temp+" ></div>	<div>Symptoms: <input class='text' type='text' id='symptoms' value="+symptoms+"></div><div>Diagnosis: <select class='browser-default' id='diagnosis'><option value='name' </option>"+name+"</select></div><div>Cause: <input class='text' type='text' id='cause' value="+cause+"></div><div>Prescription: <input class='text' type='text' id='prescription' value="+presc+"></div><div>Nurse ID: <input class='text' type='text' id='nurseID' value="+nid+"></div>	<input  class='submit' type='submit' name= 'save' value='Update' onclick='saveComplaint("+cid+","+date+","+temp+","+symptoms+","+name+","+cause+",	"+presc+","+nid+")'></div></form></div></div></div>");
+
+					$("body").append("<div id='myModal' class='modal'><div class='modal-content'><span class='close'>×</span><b>UPDATE MEDICAL COMPLAINT</b><div class='position'><form action='' method='GET'><input type='hidden' name='complaintID' value="+cid+"><div>Student ID: <input id='studentID' type='text' class='text' value="+sid+"></div><div>Date: <input  class='date1' type='date' id='date' value="+date+"></div><div>Temperature: <input class='number' type='text' id='temperature' value="+temp+" ></div>	<div>Symptoms: <input class='text' type='text' id='symptoms' value="+symptoms+"></div><div>Diagnosis: <select class='select1' name='selector' id='diagnosis'>"+select+"</select></div><div>Cause: <input class='text' type='text' id='cause' value="+cause+"></div><div>Prescription: <input class='text' type='text' id='prescription' value="+presc+"></div><div>Nurse ID: <input class='text' type='text' id='nurseID' value="+nid+"></div>	<input  class='submit' type='submit' name= 'save' value='Update' onclick='saveComplaint("+cid+")'></div></form></div></div></div>");
+					document.getElementById('myModal').style.display="block";
+
+					var modal = document.getElementById('myModal');
+					window.onclick = function(event) {
+					    if (event.target == modal) {
+					        modal.style.display = "none";
+					    }
+					}
+					var span = document.getElementsByClassName("close")[0];
+					span.onclick = function() {
+					    modal.style.display = "none";
+					}
 
 			}
 
 
 
 
-	window.onload= saveComplaint;
+
+			window.onload= saveComplaint;
 				</script>
     </head>
 
@@ -167,8 +193,7 @@ if(!isset($_SESSION['USER'])){
 		echo "Error getting Medical Complaints.";
 		exit();
 	}
-	echo "<table class='center' id='table'>
-		<tr><th>java COMPLAINT ID</th><th>STUDENT ID</th><th>DATE</th><th>TEMPERATURE</th><th>SYMPTOMS</th><th>DIAGNOSIS</th><th>CAUSE<th>PRESCRIPTION</th><th>NURSE</th><tr>";
+	echo "<table class='center' id='table'>";
 
 
 	echo "</table>";

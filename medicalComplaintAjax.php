@@ -44,11 +44,27 @@ function updateComplaint(){
       echo json_encode($row);
 
     	$row=$complaint->fetch();
-    if($row!=false){
-    	echo ",";
+			if($row!=false){
+				echo ",";
+			}
     }
-    }
-    echo "]}";
+echo "]";
+		include_once("diseases.php");
+		$disease=new diseases();
+		$value=$disease->getAllDiseases();
+		$value=$disease->fetch();
+		 	echo ',"disease":[';
+		while($value){
+
+			echo json_encode($value);
+
+			$value=$disease->fetch();
+		if($value!=false){
+			echo ",";
+		}
+		}
+		echo "]}";
+
 	}
 
 }
