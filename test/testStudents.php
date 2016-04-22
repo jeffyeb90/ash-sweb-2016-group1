@@ -38,12 +38,29 @@ class testStudent extends PHPUnit_Framework_TestCase
 		$this->assertCount(4,$obj->fetch());
     }
 
+  /**
+  *Test getStudentByID
+  *@return boolean returns true if results match or false if otherwise
+  */
+
 public function testGetStudentByID(){
+  /**
+  *@var int $testStudentID should contain ID of student
+  *@var StudentObject $obj should create an instance of student class
+  */
 
+  		// generate test studentID
+  		$testStudentID=2;
+          $obj=new students();
 
+          $this->assertEquals(true,
+  		$obj->getStudentByID(
+  			$testStudentID,// studentID
+  			));
 
-
-}
-
+  		$this->assertEquals(true,$obj->query("select * from studentHasRecord where STUDENTID=$strTestStudentID"));
+  		//count the number of fields
+  		$this->assertCount(4,$obj->fetch());
+      }
 
 }
