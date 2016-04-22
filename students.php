@@ -21,9 +21,9 @@
 		function getStudents($filter=false){
 			$strQuery= "select students.STUDENTID, USERNAME, students.FIRSTNAME, students.LASTNAME,
 			GENDER, students.EMAIL, students.PHONENUMBER, HEIGHT, WEIGHT, BLOODTYPE,
-			emergencyContact.FIRSTNAME as CONTACTFIRSTNAME, emergencyContact.LASTNAME as CONTACTLASTNAME
-			from students left join s on students.STUDENTID= studentHasRecord.STUDENTID left join emergencyContact on
-			students.emergencyContactID= emergencyContact.CONTACTID";
+			emergencycontact.FIRSTNAME as CONTACTFIRSTNAME, emergencycontact.LASTNAME as CONTACTLASTNAME
+			from students left join studenthasrecord on students.STUDENTID= studenthasrecord.STUDENTID left join emergencycontact on
+			students.EMERGENCYCONTACTID= emergencycontact.CONTACTID";
 
 
 
@@ -45,6 +45,7 @@
 			}
 			return $this->getStudents($filter);
 		}
+
 
 
 		/**
@@ -102,7 +103,7 @@
 
 		function updateStudentRecord($studentID, $weight, $height, $bloodtype){
 
-			$strQuery="Update studentHasRecord set HEIGHT='$height', WEIGHT='$weight', BLOODTYPE='$bloodtype' where STUDENTID=$studentID";
+			$strQuery="Update studenthasrecord set HEIGHT='$height', WEIGHT='$weight', BLOODTYPE='$bloodtype' where STUDENTID=$studentID";
 			return $this->query($strQuery);
 		}
 		/**
@@ -111,7 +112,7 @@
 		*@return boolean returns true if successful or false
 		*/
 		function getStudentByID($studentID){
-			$strQuery="Select STUDENTID, HEIGHT, WEIGHT, BLOODTYPE from studentHasRecord where STUDENTID=$studentID";
+			$strQuery="Select STUDENTID, HEIGHT, WEIGHT, BLOODTYPE from studenthasrecord where STUDENTID=$studentID";
 			return $this->query($strQuery);
 		}
 

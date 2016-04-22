@@ -3,7 +3,7 @@
 
 *@author Efua Bainson, Makafui Fie and Andrew Abbeyquaye
 *@method string addComplaint(integer $studentID, date $date, decimal $temperature, string $symptoms, string $diagnosis, string $cause, string $prescription, integer $nurseID)
-*@method bool getAllmedicalComplaints($filter)
+*@method bool getAllMedicalComplaints($filter)
 */
  include_once("databasehelper.php");
  /**
@@ -28,7 +28,7 @@
       /**
       *@var string $strQuery Contains sql statement
       */
-      $strQuery="insert into medicalComplaint set
+      $strQuery="insert into medicalcomplaint set
   						STUDENTID=$studentID,
   						DATE='$date',
   						TEMPERATURE=$temperature,
@@ -46,7 +46,7 @@
         *@param string mixed condition to filter. If false, then filter will not be applied
         *@return boolean true if successful, else false
         */
-        function getAllmedicalComplaints($filter=false){
+        function getAllMedicalComplaints($filter=false){
             $strQuery="select COMPLAINTID, students.STUDENTID, students.FIRSTNAME, students.LASTNAME, EMAIL, PHONENUMBER, DATE,TEMPERATURE,SYMPTOMS,DIAGNOSIS,CAUSE,PRESCRIPTION,NURSEID, IMAGE from students left join medicalComplaint on students.STUDENTID=medicalComplaint.STUDENTID";
 
             if($filter!=false){
@@ -72,7 +72,7 @@
 		**/
 
 		function getComplaints($filter=false){
-			 $strQuery="select COMPLAINTID, STUDENTID, DATE, TEMPERATURE, SYMPTOMS, diseases.NAME, CAUSE, PRESCRIPTION, nurses.FIRSTNAME, nurses.LASTNAME from medicalComplaint left join diseases on medicalComplaint.DIAGNOSIS=diseases.DISEASEID left join nurses on  medicalComplaint.NURSEID=nurses.NURSEID";
+			 $strQuery="select COMPLAINTID, STUDENTID, DATE, TEMPERATURE, SYMPTOMS, diseases.NAME, CAUSE, PRESCRIPTION, nurses.FIRSTNAME, nurses.LASTNAME from medicalcomplaint left join diseases on medicalcomplaint.DIAGNOSIS=diseases.DISEASEID left join nurses on  medicalComplaint.NURSEID=nurses.NURSEID";
 
 
 
@@ -104,12 +104,12 @@
 
 
 		function updateComplaint($complaintID, $studentID, $temperature, $symptoms, $diagnosis, $cause, $prescription, $nurseID){
-				$strQuery="Update medicalComplaint set STUDENTID=$studentID,  TEMPERATURE=$temperature, SYMPTOMS='$symptoms', DIAGNOSIS='$diagnosis', CAUSE='$cause', PRESCRIPTION='$prescription', NURSEID='$nurseID' where COMPLAINTID = $complaintID";
+				$strQuery="Update medicalcomplaint set STUDENTID=$studentID,  TEMPERATURE=$temperature, SYMPTOMS='$symptoms', DIAGNOSIS='$diagnosis', CAUSE='$cause', PRESCRIPTION='$prescription', NURSEID='$nurseID' where COMPLAINTID = $complaintID";
 				return $this->query($strQuery);
 		}
 
 		function getComplaintByID($complaintID){
-			$strQuery="select COMPLAINTID, STUDENTID, DATE, TEMPERATURE, SYMPTOMS, DIAGNOSIS, CAUSE, PRESCRIPTION, NURSEID from medicalComplaint where COMPLAINTID=$complaintID";
+			$strQuery="select COMPLAINTID, STUDENTID, DATE, TEMPERATURE, SYMPTOMS, DIAGNOSIS, CAUSE, PRESCRIPTION, NURSEID from medicalcomplaint where COMPLAINTID=$complaintID";
 			return $this->query($strQuery);
 		}
 
@@ -119,7 +119,7 @@
         *@param string complaint id
         *@return boolean true if successful, else false
         */
-        function getmedicalComplaint($complaintID){
+        function getMedicalComplaint($complaintID){
             $strQuery = "SELECT * FROM medicalComplaint WHERE COMPLAINTID=$complaintID";
             return $this->query($strQuery);
         }
