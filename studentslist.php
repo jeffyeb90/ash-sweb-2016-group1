@@ -1,4 +1,7 @@
-				<?php
+		<?php
+/**
+  *@author Jeffrey Takyi-Yeboah
+  */
 				session_start();
 				if(!isset($_SESSION['USER'])){
 
@@ -6,7 +9,7 @@
 					exit();
 				}
 
-				?>
+	?>
 				<html>
 				    <head>
 				        <meta charset="utf-8">

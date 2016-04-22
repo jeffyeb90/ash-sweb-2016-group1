@@ -4,6 +4,7 @@ include_once("../students.php");
 *@author Jeffrey Takyi-Yebaoh
 *testStudent  class
 * @method boolean testAddStudentRecord() should return a boolean result after test
+* @method boolean testGetStudentByID() should  return a boolean result after test
 */
 
 class testStudent extends PHPUnit_Framework_TestCase
@@ -37,6 +38,12 @@ class testStudent extends PHPUnit_Framework_TestCase
 		$this->assertCount(4,$obj->fetch());
     }
 
+public function testGetStudentByID(){
+
+
+
+
+}
 
 
 }
