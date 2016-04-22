@@ -2,9 +2,9 @@
 <?php
 	include_once("databasehelper.php");
 	/**
-	*Students class
-
-	* @method boolean addStudentRecord() should insert a student and return a boolean result
+	*@author Jeffrey Takyi-Yeboah
+	*Student  class
+	* @method boolean getStudentByID() should find  student details using studentID and return a boolean result
 	* @method students() is a constructor of the student class
 	*/
 
@@ -45,10 +45,6 @@
 			}
 			return $this->getStudents($filter);
 		}
-
-
-
-
 
 
 		/**
@@ -109,11 +105,21 @@
 			$strQuery="Update studenthasrecord set HEIGHT='$height', WEIGHT='$weight', BLOODTYPE='$bloodtype' where STUDENTID=$studentID";
 			return $this->query($strQuery);
 		}
-
+		/**
+		*Finds a student using Student ID
+		*@param int studentID
+		*@return boolean returns true if successful or false
+		*/
 		function getStudentByID($studentID){
 			$strQuery="Select STUDENTID, HEIGHT, WEIGHT, BLOODTYPE from studenthasrecord where STUDENTID=$studentID";
 			return $this->query($strQuery);
 		}
+
+		/**
+		*list students records based on a filter
+		*@param string condition to filter. If false, the condition will not be applied.
+		*@return boolean true if successful, false if unsuccessful
+		*/
 		function listUsers($filter=false){
 			$strQuery="select * from students";
 			if($filter!=false){
