@@ -1,3 +1,13 @@
+<?php
+error_reporting(0);
+session_start();
+if(!isset($_SESSION['USER'])){
+
+	header("location:login.php");
+	exit();
+}
+
+?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -114,7 +124,7 @@
   				      ?>
   						</select>
             </div>
-						
+
 						<div>Cause: <input type="text" name="cause" value="<?php echo $row['CAUSE'] ?>";/></div>
 						<div>Prescription: <input type="text" name="prescription" value="<?php echo $row['PRESCRIPTION'] ?>";/></div>
 						<div>Nurse ID: <input type="text" name="nurseID" value="<?php echo $row['NURSEID'] ?>";/></div>

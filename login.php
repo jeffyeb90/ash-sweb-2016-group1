@@ -1,7 +1,6 @@
+  <?php
 
-          <?php
-
-                //initialize
+//initialize
   include_once("students.php");
   /**
   *@author Jeffrey Takyi-Yeboah
@@ -15,29 +14,26 @@
 
        if($row==false){
                 echo "Error finding nurse";
+                exit();
 }
-      else{
+
         $result=$obj->fetch();
-				if(($email!=NULL) && ($password!=NULL)){
-				if(($result['EMAIL']==$email) &&($result['PASSWORD'])==$password){
+        if(!$result){
+  				//username or password must be wrong
+  				echo "username or password is wrong.";
+  			}
+          error_reporting(0);
           session_start();
+
           $_SESSION['USER']=$result;
+          header("location:studentslist.php");
 
-
-          echo "Nurse Logged In";
-	         echo'<script> window.location.href="studentslist.php";</script>';
-				}
-
-				else{
-					echo"User not found";
 				}
 
 
 
 
-       }
-		 }
-	 }
+
 
 
 

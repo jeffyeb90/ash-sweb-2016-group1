@@ -1,4 +1,11 @@
 <?php
+error_reporting(0);
+session_start();
+if(!isset($_SESSION['USER'])){
+
+	header("location:login.php");
+	exit();
+}
 /**
 *@author makafui fie
 */
