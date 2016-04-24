@@ -7,10 +7,10 @@ if(isset($_REQUEST['cmd'])){
 $cmd=$_REQUEST['cmd'];
 switch($cmd){
 	case 1:
-	updateComplaint();
+		updateComplaint();
 	break;
 	default:
-	echo "wrong command";
+		echo "wrong command";
 	break;
 }
 }

@@ -17,6 +17,31 @@ if(!isset($_SESSION['USER'])){
         <link href="css/style.css" rel="stylesheet">
         <!-- 	Web Browser thumbnail image -->
         <link rel="shortcut icon" href="#">
+				<script type="text/javascript" src="js/jquery-1.12.1.js"></script>
+				<script type="text/javascript">
+
+				function validateText(){
+					var rgText=/[a-zA-Z]/;
+					var numTxt=/[0-9]/;
+
+				 if(!rgText.test(prescription.value)){
+
+						alert("Diagnosis not valid");
+
+				 }
+				 if(!numTxt.test(studentID.value)){
+
+						alert("Student ID is not valid");
+
+				 }
+				 if(!numTxt.test(nurseID.value)){
+
+					 alert("Student ID is not valid");
+
+				}
+
+			 }
+			 </script>
     </head>
 
 
@@ -79,25 +104,23 @@ if(!isset($_SESSION['USER'])){
 
 
 
-					<form  action="" method="GET">
+					<form  action="" method="GET" onsubmit="validateText()">
         <div class="position">
               <div>
-							Student ID: <br><input class="text" type="text" name="studentID" value="<?php if(!isset($_REQUEST['sid'])){}
-							else{echo $_REQUEST['sid'];}?>">
+							Student ID: <br><input class="text" type="text" name="studentID" id="studentID" value="<?php if(!isset($_REQUEST['sid'])){}
+							else{echo $_REQUEST['sid'];}?>" required>
 </div>
 						<div>
-							<br>Date of Attendance: <br><input class="date1" type="date" name="date">
+							<br>Date of Attendance: <br><input class="date1" type="date" name="date" id="date" required>
 						</div>
 						<div>
-							Temperature: <br><input class="number" type="number" name="temp" step="0.01" min="20" max="50" value="37">°C
+							Temperature: <br><input class="number" type="number" name="temp" id="temp" step="0.01" min="20" max="50" value="37" required>°C
 						</div>
 						<div>
-
-							Symptoms: <br><input class="text" type="text" name="symptoms">
+							Symptoms: <br><input class="text" type="text" name="symptoms" id="symptoms" required>
 						</div>
-						Diagnosis: <br><select class="select1" name="diagnosis">
+						Diagnosis: <br><select class="select1" name="diagnosis" id="diagnosis" required>
 							<?php
-
 							include_once("diseases.php");
 				      	$disease=new diseases();
 				      	$result=$disease->getAllDiseases();
@@ -109,24 +132,18 @@ if(!isset($_SESSION['USER'])){
 				        	}
 				      ?>
 						</select>
-
 						<div>
-							Cause: <br><input class="text" type="text" name="cause">
+							Cause: <br><input class="text" type="text" name="cause" id="cause">
 						</div>
 						<div>
-							Prescription: <br><input class="text" type="text" name="prescription">
+							Prescription: <br><input class="text" type="text" name="prescription" id="prescription" required>
 						</div>
 						<div>
-							Nurse ID: <br><input class="text" type="text" name="nurseID">
+							Nurse ID: <br><input class="text" type="text" name="nurseID" id="nurseID" required>
 						</div><br>
-
-
 							<input class="submit" type="submit" value="Add" >
-</div>
+						</div>
 					</form>
-
-
-
 			</section>
 
 	</body>
