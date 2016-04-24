@@ -82,6 +82,8 @@
 			}
 			return $this->query($strQuery);
 		}
+     
+     
 		/**
 		*search for medical complaints using student ID as a filter
 		*@param string student ID to filter by. If false, calls getComplaints function to display all complaints
