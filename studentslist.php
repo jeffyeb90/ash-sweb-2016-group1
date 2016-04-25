@@ -6,12 +6,12 @@
 					session_start();
 					if(!isset($_SESSION['USER'])){
 
-				 echo'<script> window.location.href="login.php";</script>';
+				header('location:login.php');
 						exit();
 					}
 
 		?>
-					<html>
+
 					<html lang="en">
 							<head>
 									<meta charset="utf-8">
@@ -124,7 +124,7 @@
 
 
 					      }
-							window.onload= searchStudentInfo;
+						//window.onload= searchStudentInfo;
 					      </script>
 					    </head>
 
@@ -185,7 +185,7 @@
 										</div>
 
 							<div class="row">
-					         <form action="" method="GET">
+					         <form >
 					            <div class="input-field">
 					              <input onkeyup="searchStudentInfo()"id="search" type="text" name="txtSearch">
 					              <span onclick="searchStudentInfo()" value="search" <button class="button">SEARCH</button></span>
