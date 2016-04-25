@@ -25,27 +25,8 @@
 
 					<script type="text/javascript" src="js/jquery-1.12.1.js"></script>
 	      	<script type="text/javascript">
-					function validateText(){
-						var rgText=/[a-zA-Z]/;
-						var numTxt=/[0-9]/;
 
-					 if(!rgText.test(prescription.value)){
-							alert("Diagnosis is not valid");
-							return false;
 
-					 }
-					 if(!numTxt.test(studentID.value)){
-							alert("Student ID is not valid");
-							return false;
-
-					 }
-					 if(!numTxt.test(nurseID.value)){
-						 alert("Student ID is not valid");
-						 return false;
-
-					}
-
-				 }
 					function saveComplaint(cid){
 
 						var theUrl="medicalComplaintAjax.php?&cmd=1&cid="+cid+"&sid="+$("#studentID").val()+"&date="+$("#date").val()+"&temp="+$("#temperature").val()+"&sympt="+$("#symptoms").val()+"&diag="+$("#diagnosis option:selected").val()+"&cause="+$("#cause").val()+"&presc="+$("#prescription").val()+"&nid="+$("#nurseID").val();
@@ -103,25 +84,8 @@
 
 					}
 
-					function editName(cid,sid,date,temp,symptoms,name,diagnosisId,cause,presc,nid){
-					//	var currentName=obj.innerHTML;
 
 
-						$("body").append("<div id='myModal' class='modal'><div class='modal-content'><span class='close'>×</span><b>UPDATE MEDICAL COMPLAINT</b><div class='position'><form action='' method='GET' onsubmit='return validateText()'><input type='hidden' name='complaintID' value="+cid+"><div>Student ID: <br><input id='studentID' type='text' class='text' value="+sid+" required></div><div>Date: <br><input  class='date1' type='date' id='date' value="+date+" required></div><div>Temperature: <br><input class='number' type='text' id='temperature' value="+temp+" required></div>	<div>Symptoms: <br><input class='text' type='text' id='symptoms' value="+symptoms+" required></div><div>Diagnosis: <br><select class='select1' name='selector' id='diagnosis'>"+select+"</select></div><div>Cause: <br><input class='text' type='text' id='cause' value="+cause+"></div><div>Prescription: <br><input class='text' type='text' id='prescription' value="+presc+" required></div><div>Nurse ID: <br><input class='text' type='text' id='nurseID' value="+nid+" required></div>	<input  class='submit' type='submit' name= 'save' value='Update' onclick='saveComplaint("+cid+")'></div></form></div></div></div>");
-						document.getElementById('myModal').style.display="block";
-
-						var modal = document.getElementById('myModal');
-						window.onclick = function(event) {
-						    if (event.target == modal) {
-						        modal.style.display = "none";
-						    }
-						}
-						var span = document.getElementsByClassName("close")[0];
-						span.onclick = function() {
-						    modal.style.display = "none";
-						}
-
-				}
 
 				window.onload= saveComplaint;
 					</script>
@@ -193,14 +157,32 @@
 	      			</span></div>
 	      		</div>
 			<section class="medical-history">
-			<table class='center' id='table'>
-
-
-				</table>
 
 
 
 
+	<?php
+		include_once("medicalComplaint.php");
+
+		$complaint = new medicalComplaint();
+	  if(isset($_REQUEST['txtSearch'])){
+	    $result=$complaint->searchComplaints($_REQUEST['txtSearch']);
+	  }else{
+	    $result=$complaint->getComplaints();
+	  }
+
+
+		if($result==false){
+			echo "Error getting Medical Complaints.";
+			exit();
+		}
+		echo "<table class='center' id='table'>";
+
+
+		echo "</table>";
+
+
+	?>
 
 	</section>
 	</body>

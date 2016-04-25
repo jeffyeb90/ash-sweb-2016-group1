@@ -47,7 +47,7 @@ if(!isset($_SESSION['USER'])){
       	}
       	else{
 					divStatus.innerHTML='Display Students';
-var result="";
+					var result="";
 					var length=obj.user.length;
 					console.log(obj.user);
 					console.log(length);

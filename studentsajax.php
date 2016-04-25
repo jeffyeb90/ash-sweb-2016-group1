@@ -24,22 +24,22 @@ function searchStudent(){
 	}
 	else{
 
-  $result=$obj->fetch();
+  	$result=$obj->fetch();
 
-  if($result==false){
-    echo '{"result":0,"message":"No student found"}';
-  }else{
-  echo '{"result":1,"user":[';
-	while($result){
-  echo json_encode($result);
+  	if($result==false){
+    	echo '{"result":0,"message":"No student found"}';
+  	}else{
+  		echo '{"result":1,"user":[';
+					while($result){
+  					echo json_encode($result);
 
-	$result=$obj->fetch();
-if($result!=false){
-	echo ",";
-}
-}
-echo "]}";
-}
+						$result=$obj->fetch();
+						if($result!=false){
+							echo ",";
+						}
+		}
+		echo "]}";
+	}
 }
 
 

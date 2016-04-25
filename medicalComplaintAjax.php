@@ -4,15 +4,15 @@
 *@method string updateComplaint()
 */
 if(isset($_REQUEST['cmd'])){
-$cmd=$_REQUEST['cmd'];
-switch($cmd){
-	case 1:
-		updateComplaint();
-	break;
-	default:
-		echo "wrong command";
-	break;
-}
+	$cmd=$_REQUEST['cmd'];
+	switch($cmd){
+		case 1:
+			updateComplaint();
+		break;
+		default:
+			echo "wrong command";
+		break;
+	}
 }
 /**
 *updates a medical complaint

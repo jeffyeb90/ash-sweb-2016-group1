@@ -25,21 +25,21 @@ if(!isset($_SESSION['USER'])){
 					var numTxt=/[0-9]/;
 
 				 if(!rgText.test(prescription.value)){
-
 						alert("Diagnosis not valid");
+						return false;
+
 
 				 }
 				 if(!numTxt.test(studentID.value)){
-
 						alert("Student ID is not valid");
+						return false;
 
 				 }
 				 if(!numTxt.test(nurseID.value)){
-
 					 alert("Student ID is not valid");
+					 return false;
 
 				}
-
 			 }
 			 </script>
     </head>
@@ -104,7 +104,7 @@ if(!isset($_SESSION['USER'])){
 
 
 
-					<form  action="" method="GET" onsubmit="validateText()">
+					<form  action="" method="GET" onsubmit="return validateText()">
         <div class="position">
               <div>
 							Student ID: <br><input class="text" type="text" name="studentID" id="studentID" value="<?php if(!isset($_REQUEST['sid'])){}
