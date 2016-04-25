@@ -25,7 +25,7 @@ if(!isset($_SESSION['USER'])){
 					var numTxt=/[0-9]/;
 
 				 if(!rgText.test(prescription.value)){
-						alert("Diagnosis not valid");
+						alert("Diagnosis is not valid");
 						return false;
 
 
