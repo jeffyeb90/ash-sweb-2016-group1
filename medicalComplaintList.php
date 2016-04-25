@@ -25,6 +25,7 @@
 
 					<script type="text/javascript" src="js/jquery-1.12.1.js"></script>
 	      	<script type="text/javascript">
+
 					function validateText(){
 						var rgText=/[a-zA-Z]/;
 						var numTxt=/[0-9]/;
@@ -46,18 +47,31 @@
 					}
 
 				 }
-					function saveComplaint(cid){
+				 function saveComplaint(cid){
+					 if( validateText()==false){
+						 return;
+					 }
 
+					 var theUrl="medicalComplaintAjax.php?&cmd=1&cid="+cid+"&sid="+$("#studentID").val()+"&date="+$("#date").val()+"&temp="+$("#temperature").val()+"&sympt="+$("#symptoms").val()+"&diag="+$("#diagnosis option:selected").val()+"&cause="+$("#cause").val()+"&presc="+$("#prescription").val()+"&nid="+$("#nurseID").val();
+					 //prompt("theUrl",theUrl);
+					 $.ajax(theUrl,
+					 {
+						 async:true,complete:saveComplaintComplete
+					 });
+					 divStatus.innerHTML="Complaint saved";
+					 //console.log($("#txtName").val());
+					 //currentObject.innerHTML=$("#txtName").val();
+					 document.getElementById('myModal').style.display="none";
+				 }
+
+					function viewComplaint(cid){
 						var theUrl="medicalComplaintAjax.php?&cmd=1&cid="+cid+"&sid="+$("#studentID").val()+"&date="+$("#date").val()+"&temp="+$("#temperature").val()+"&sympt="+$("#symptoms").val()+"&diag="+$("#diagnosis option:selected").val()+"&cause="+$("#cause").val()+"&presc="+$("#prescription").val()+"&nid="+$("#nurseID").val();
 						//prompt("theUrl",theUrl);
 				 		$.ajax(theUrl,
 				 		{
 				 			async:true,complete:saveComplaintComplete
 				 		});
-						divStatus.innerHTML="Complaint saved";
-						//console.log($("#txtName").val());
-						//currentObject.innerHTML=$("#txtName").val();
-						document.getElementById('myModal').style.display="none";
+
 
 					}
 						var select="";
@@ -123,7 +137,7 @@
 
 				}
 
-				window.onload= saveComplaint;
+				window.onload= viewComplaint;
 					</script>
 	    </head>
 
