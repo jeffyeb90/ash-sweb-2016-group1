@@ -2,11 +2,9 @@
 error_reporting(0);
 session_start();
 if(!isset($_SESSION['USER'])){
-
-	header("location:login.php");
+echo'<script> window.location.href="login.php";</script>';
 	exit();
 }
-
 ?>
 <html lang="en">
     <head>
@@ -132,6 +130,7 @@ if(!isset($_SESSION['USER'])){
 
 	</body>
 </html>
+
 <?php
   include_once("medicalComplaint.php");
   $complaint=new medicalComplaint();

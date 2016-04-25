@@ -22,8 +22,10 @@ function searchStudent(){
 	$obj=new students();
 	$row=$obj->searchStudents($name);
 
+
 	if($row==false){
 		echo '{"result":0,"message":"error searching name"}';
+		exit();
 	}
 	else{
 

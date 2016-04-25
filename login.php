@@ -26,7 +26,7 @@
           session_start();
 
           $_SESSION['USER']=$result;
-          header("location:studentslist.php");
+        echo'<script> window.location.href="studentslist.php";</script>';
 
 				}
 
