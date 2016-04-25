@@ -78,8 +78,9 @@
 
 			if($filter!=false){
 				$strQuery=$strQuery . " where $filter";
-
 			}
+            //echo $strQuery;
+            
 			return $this->query($strQuery);
 		}
      

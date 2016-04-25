@@ -23,48 +23,34 @@
 	        <!-- 	Web Browser thumbnail image -->
 	        <link rel="shortcut icon" href="#">
 
-					<script type="text/javascript" src="js/jquery-1.12.1.js"></script>
+            <script type="text/javascript" src="js/jquery-1.12.1.js"></script>
 	      	<script type="text/javascript">
 
+                function saveComplaint(cid){
+                    var theUrl="medicalComplaintAjax.php?cmd=2&cid="+cid;
+                    $.ajax(theUrl,{
+                        async:true,complete:saveComplaintComplete
+                    });
+                    divStatus.innerHTML="Complaint saved";
+                    //console.log($("#txtName").val());
+                    //currentObject.innerHTML=$("#txtName").val();
+                    //document.getElementById('myModal').style.display="none";
+                    
+                }
 
-					function saveComplaint(cid){
-
-						var theUrl="medicalComplaintAjax.php?&cmd=1&cid="+cid+"&sid="+$("#studentID").val()+"&date="+$("#date").val()+"&temp="+$("#temperature").val()+"&sympt="+$("#symptoms").val()+"&diag="+$("#diagnosis option:selected").val()+"&cause="+$("#cause").val()+"&presc="+$("#prescription").val()+"&nid="+$("#nurseID").val();
-						//prompt("theUrl",theUrl);
-				 		$.ajax(theUrl,
-				 		{
-				 			async:true,complete:saveComplaintComplete
-				 		});
-						divStatus.innerHTML="Complaint saved";
-						//console.log($("#txtName").val());
-						//currentObject.innerHTML=$("#txtName").val();
-						document.getElementById('myModal').style.display="none";
-
-					}
-						var select="";
+				    
 					function saveComplaintComplete(xhr,status){
 						if(status!="success"){
 							divStatus.innerHTML="error while updating page";
 							return;
 						}
-
+                        
 						var obj=$.parseJSON(xhr.responseText);
 						if(obj.result==0){
 							divStatus.innerHTML=obj.message;
 						}
 						else{
 							divStatus.innerHTML="Display Complaints";
-
-
-							var lengthOfDisease=obj.disease.length;
-							console.log(lengthOfDisease);
-
-							while(lengthOfDisease>0){
-								var selected="";
-								select+="<option value="+obj.disease[lengthOfDisease-1].DISEASEID+">"+obj.disease[lengthOfDisease-1].NAME+"</option>";
-								lengthOfDisease-=1;
-							}
-
 							var result="";
 							var length=obj.complaint.length;
 
@@ -73,7 +59,7 @@
 
 								result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.complaint[length-1].COMPLAINTID+"</td><td>"+obj.complaint[length-1].STUDENTID+"</td><td>"+obj.complaint[length-1].DATE +"</td><td> "+obj.complaint[length-1].TEMPERATURE+"</td><td>"+obj.complaint[length-1].SYMPTOMS+"</td> <td>"+obj.complaint[length-1].NAME+"</td><td>"+
 								obj.complaint[length-1].CAUSE+"</td><td>"+obj.complaint[length-1].PRESCRIPTION+"</td><td>"+obj.complaint[length-1].FIRSTNAME +" "+obj.complaint[length-1].LASTNAME+"</td><td><span onclick='editName("+obj.complaint[length-1].COMPLAINTID+","+obj.complaint[length-1].STUDENTID+",&apos;"+obj.complaint[length-1].DATE
-								+"&apos;,"+obj.complaint[length-1].TEMPERATURE+",&apos;"+obj.complaint[length-1].SYMPTOMS+"&apos;,&apos;"+obj.complaint[length-1].NAME+"&apos;,"+obj.complaint[length-1].DISEASEID+",&apos;"+obj.complaint[length-1].CAUSE+"&apos;,&apos;"+obj.complaint[length-1].PRESCRIPTION+"&apos;,"+obj.complaint[length-1].NURSEID+")'id='myBtn' >UPDATE</span><br><span><a href='viewComplaintDetails.php?cid="+obj.complaint[length-1].COMPLAINTID+"'>View Details</a></span>	</td></tr>";
+								+"&apos;,"+obj.complaint[length-1].TEMPERATURE+",&apos;"+obj.complaint[length-1].SYMPTOMS+"&apos;,&apos;"+obj.complaint[length-1].NAME+"&apos;,"+obj.complaint[length-1].DISEASEID+",&apos;"+obj.complaint[length-1].CAUSE+"&apos;,&apos;"+obj.complaint[length-1].PRESCRIPTION+"&apos;,"+obj.complaint[length-1].NURSEID+")'id='myBtn' >UPDATE</span><br><a><span onClick='saveComplaint("+ obj.complaint[length-1].COMPLAINTID+")'>View Details</span></a>	</td></tr>";
 								length-=1;
 
 							}
@@ -88,7 +74,7 @@
 
 
 				window.onload= saveComplaint;
-					</script>
+            </script>
 	    </head>
 
 
@@ -157,33 +143,9 @@
 	      			</span></div>
 	      		</div>
 			<section class="medical-history">
-
-
-
-
-	<?php
-		include_once("medicalComplaint.php");
-
-		$complaint = new medicalComplaint();
-	  if(isset($_REQUEST['txtSearch'])){
-	    $result=$complaint->searchComplaints($_REQUEST['txtSearch']);
-	  }else{
-	    $result=$complaint->getComplaints();
-	  }
-
-
-		if($result==false){
-			echo "Error getting Medical Complaints.";
-			exit();
-		}
-		echo "<table class='center' id='table'>";
-
-
-		echo "</table>";
-
-
-	?>
-
-	</section>
+                <table class='center' id="table">
+                    
+                </table>
+            </section>
 	</body>
 	</html>
