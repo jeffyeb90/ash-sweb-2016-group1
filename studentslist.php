@@ -5,6 +5,7 @@
 	 exit();
   }
 ?>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -54,6 +55,16 @@
   					         table.innerHTML=result;
         	            }
                     }
+                    /**
+                    *function to validate user's input
+                    *@param string string
+                    *@return boolean
+                    */
+                    function validate(string){
+                        var regex=/\d+(\.?\d{1,2})?/;
+                        return regex.test(string);
+                    }
+
                      /**
                      *callback function for searchStudentInfo AJAX function. Receives the status of the AJAX request and rows of information as a JSON object. Displays modal containing form for editing
                      *@param xhr XMLHTTPRequest response object
@@ -93,11 +104,17 @@
                             }
 
                             var modalInfo="";
-                            modalInfo+="<div class='modal-content'><b><h3>Edit Student Record</b></h3><div class='position'><input type='hidden' id='sid' value="+sid+"><div>Weight: <input class='text' type='text' id='weight'value="+weight+"> kg</div><div>Height: <input class='text' type='text' id='height' value="+height+"> m</div><div>Blood Type:<select class='select' id='bloodtype'><option "+groupA+" value ='A'>A</option><option "+groupB+" value ='B'>B</option><option "+groupAB +"value ='AB'>AB</option><option "+groupO +"value ='O'>O</option></select><input class='submit' type='submit' name= 'save' value='Update' onclick='updateStudent("+sid+")'></div></div>";
+                            modalInfo+="<div class='modal-content'><span class='close'>x</span><b>EDIT STUDENT RECORD</b><div class='position'><input type='hidden' id='sid' value="+sid+"><div>Weight: <input class='text' type='text' id='weight'value="+weight+"> kg</div><div>Height: <input class='text' type='text' id='height' value="+height+"> m</div><div>Blood Type:<select class='select' id='bloodtype'><option "+groupA+" value ='A'>A</option><option "+groupB+" value ='B'>B</option><option "+groupAB +"value ='AB'>AB</option><option "+groupO +"value ='O'>O</option></select><input class='submit' type='submit' name= 'save' value='Update' onclick='updateStudent("+sid+")'></div></div>";
                          
                             modal= document.getElementById("myModal");
                             modal.innerHTML=modalInfo;
                             modal.style.display="block";
+
+                            var span=document.getElementsByClassName('close')[0];
+            
+                            span.onclick=function(){
+                                modal.style.display="none";
+                            }
                          
                             window.onclick=function(event){
                               if(event.target==modal){
@@ -117,7 +134,7 @@
                         {
                             async:true, complete:getStudentComplete
                         });
-                        prompt("", url);
+                        
                  
                     }
                     /**
@@ -148,7 +165,21 @@
                     */
                     function updateStudent(sid){
                         var editedHeight=$("#height").val();
+                       
+                        var error=validate(editedHeight);
+                        if(error==false){
+                           
+                            alert("Please enter a decimal value for the height");
+                            return;
+                        }
                         var editedWeight=$("#weight").val();
+                        
+                        var heightError=validate(editedWeight);
+                        if(heightError==false){
+                            
+                            alert("Please enter a decimal value for the weight");
+                            return;
+                        }
                         var editedBloodType=$("#bloodtype option:selected").text();
                         modal.style.display="none";
                      

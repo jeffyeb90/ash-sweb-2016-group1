@@ -22,7 +22,7 @@ include_once("..\students.php");
 			$row=$student->fetch();
 			$this->assertEquals(2343243, $row['STUDENTID']);
 		}
-
+ 
 
 	}
 ?>
