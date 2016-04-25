@@ -1,4 +1,8 @@
 <?php
+/**
+*@author Andrew Abbeyquaye
+*@method void viewComplaintDetails()
+*/
 include_once('medicalComplaint.php');
 
 if(isset($_REQUEST['cmd'])){
@@ -17,7 +21,10 @@ if(isset($_REQUEST['cmd'])){
 }
 
 
-
+/**
+*view complaints details based on the parameter passed in the URL
+*@return void
+*/
 function viewComplaintDetails(){
     if(!isset($_REQUEST['cid'])){
         echo '{"result": 0, "message": "Error viewing complaint details"}';
