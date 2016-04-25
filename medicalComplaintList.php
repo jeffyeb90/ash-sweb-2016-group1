@@ -40,7 +40,7 @@
 
 					 }
 					 if(!numTxt.test(nurseID.value)){
-						 alert("Student ID is not valid");
+						 alert("Nurse ID is not valid");
 						 return false;
 
 					}
