@@ -51,17 +51,15 @@
 					 if(validateText()==false){
 						 return;
 					 }
-
 					 var theUrl="medicalComplaintAjax.php?&cmd=1&cid="+cid+"&sid="+$("#studentID").val()+"&date="+$("#date").val()+"&temp="+$("#temperature").val()+"&sympt="+$("#symptoms").val()+"&diag="+$("#diagnosis option:selected").val()+"&cause="+$("#cause").val()+"&presc="+$("#prescription").val()+"&nid="+$("#nurseID").val();
-					 //prompt("theUrl",theUrl);
+
 					 $.ajax(theUrl,
 					 {
 						 async:true,complete:saveComplaintComplete
 					 });
 					 divStatus.innerHTML="Complaint saved";
-					 //console.log($("#txtName").val());
-					 //currentObject.innerHTML=$("#txtName").val();
-					 document.getElementById('myModal').style.display="none";
+
+					 document.getElementById('Modal').style.display="none";
 				 }
 
 					function viewComplaint(cid){
@@ -103,8 +101,8 @@
 							while(length>0){
 
 								result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.complaint[length-1].COMPLAINTID+"</td><td>"+obj.complaint[length-1].STUDENTID+"</td><td>"+obj.complaint[length-1].DATE +"</td><td> "+obj.complaint[length-1].TEMPERATURE+"</td><td>"+obj.complaint[length-1].SYMPTOMS+"</td> <td>"+obj.complaint[length-1].NAME+"</td><td>"+
-								obj.complaint[length-1].CAUSE+"</td><td>"+obj.complaint[length-1].PRESCRIPTION+"</td><td>"+obj.complaint[length-1].FIRSTNAME +" "+obj.complaint[length-1].LASTNAME+"</td><td><span onclick='editName("+obj.complaint[length-1].COMPLAINTID+","+obj.complaint[length-1].STUDENTID+",&apos;"+obj.complaint[length-1].DATE
-								+"&apos;,"+obj.complaint[length-1].TEMPERATURE+",&apos;"+obj.complaint[length-1].SYMPTOMS+"&apos;,&apos;"+obj.complaint[length-1].NAME+"&apos;,"+obj.complaint[length-1].DISEASEID+",&apos;"+obj.complaint[length-1].CAUSE+"&apos;,&apos;"+obj.complaint[length-1].PRESCRIPTION+"&apos;,"+obj.complaint[length-1].NURSEID+")'id='myBtn' >UPDATE</span><br><a><span onClick='showComplaint("+ obj.complaint[length-1].COMPLAINTID+", true)'>VIEW DETAILS</span></a></td></tr>";
+								obj.complaint[length-1].CAUSE+"</td><td>"+obj.complaint[length-1].PRESCRIPTION+"</td><td>"+obj.complaint[length-1].FIRSTNAME +" "+obj.complaint[length-1].LASTNAME+"</td><td><a><span onClick='editName("+obj.complaint[length-1].COMPLAINTID+","+obj.complaint[length-1].STUDENTID+",&apos;"+obj.complaint[length-1].DATE
+								+"&apos;,"+obj.complaint[length-1].TEMPERATURE+",&apos;"+obj.complaint[length-1].SYMPTOMS+"&apos;,&apos;"+obj.complaint[length-1].NAME+"&apos;,"+obj.complaint[length-1].DISEASEID+",&apos;"+obj.complaint[length-1].CAUSE+"&apos;,&apos;"+obj.complaint[length-1].PRESPRESCRIPTION+"&apos;,"+obj.complaint[length-1].NURSEID+ ")'id='myBtn' >UPDATE</span></a><br><a><span onClick='showComplaint("+ obj.complaint[length-1].COMPLAINTID+", true)'>VIEW DETAILS</span></a></td></tr>";
 
 								length-=1;
 
@@ -116,13 +114,11 @@
 					}
 
 					function editName(cid,sid,date,temp,symptoms,name,diagnosisId,cause,presc,nid){
-					//	var currentName=obj.innerHTML;
 
+						$("body").append("<div id='Modal' class='modal'><div class='modal-content'><span class='close'>×</span><b>UPDATE MEDICAL COMPLAINT</b><div class='position'><form action='' method='GET' onsubmit='return validateText()'><input type='hidden' name='complaintID' value="+cid+"><div>Student ID: <br><input id='studentID' type='text' class='text' value="+sid+" required></div><div>Date: <br><input  class='date1' type='date' id='date' value="+date+" required></div><div>Temperature: <br><input class='number' type='text' id='temperature' value="+temp+" required></div>	<div>Symptoms: <br><input class='text' type='text' id='symptoms' value="+symptoms+" required></div><div>Diagnosis: <br><select class='select1' name='selector' id='diagnosis'>"+select+"</select></div><div>Cause: <br><input class='text' type='text' id='cause' value="+cause+"></div><div>Prescription: <br><input class='text' type='text' id='prescription' value="+presc+" required></div><div>Nurse ID: <br><input class='text' type='text' id='nurseID' value="+nid+" required></div>	<input  class='submit' type='submit' name= 'save' value='Update' onclick='saveComplaint("+cid+")'></div></form></div></div></div>");
+						document.getElementById('Modal').style.display="block";
 
-						$("body").append("<div id='myModal' class='modal'><div class='modal-content'><span class='close'>×</span><b>UPDATE MEDICAL COMPLAINT</b><div class='position'><form action='' method='GET' onsubmit='return validateText()'><input type='hidden' name='complaintID' value="+cid+"><div>Student ID: <br><input id='studentID' type='text' class='text' value="+sid+" required></div><div>Date: <br><input  class='date1' type='date' id='date' value="+date+" required></div><div>Temperature: <br><input class='number' type='text' id='temperature' value="+temp+" required></div>	<div>Symptoms: <br><input class='text' type='text' id='symptoms' value="+symptoms+" required></div><div>Diagnosis: <br><select class='select1' name='selector' id='diagnosis'>"+select+"</select></div><div>Cause: <br><input class='text' type='text' id='cause' value="+cause+"></div><div>Prescription: <br><input class='text' type='text' id='prescription' value="+presc+" required></div><div>Nurse ID: <br><input class='text' type='text' id='nurseID' value="+nid+" required></div>	<input  class='submit' type='submit' name= 'save' value='Update' onclick='saveComplaint("+cid+")'></div></form></div></div></div>");
-						document.getElementById('myModal').style.display="block";
-
-						var modal = document.getElementById('myModal');
+						var modal = document.getElementById('Modal');
 						window.onclick = function(event) {
 						    if (event.target == modal) {
 						        modal.style.display = "none";
@@ -132,8 +128,8 @@
 						span.onclick = function() {
 						    modal.style.display = "none";
 						}
+					}
 
-				}
 
 				function showSingleComplaintComplete(xhr, status){
 						if(status!="success"){
@@ -165,7 +161,56 @@
 						};
 				}
 
-				window.onload= showComplaint;
+				function showComplaint(cid, single){
+                    var theUrl="medicalComplaintAjax.php?cmd=2&cid="+cid;
+                    
+                    if(single == true){
+                        $.ajax(theUrl,{
+                            async:true,complete:showSingleComplaintComplete
+                        });
+                    }
+                    else{
+                       $.ajax(theUrl,{
+                            async:true,complete:showComplaintComplete
+                        });
+                    }
+                    
+                    divStatus.innerHTML="Complaint saved";  
+                    
+             }
+
+				function showComplaintComplete(xhr,status){
+										if(status!="success"){
+										divStatus.innerHTML="error while updating page";
+										return;
+										}
+										                        
+										var obj=$.parseJSON(xhr.responseText);
+										if(obj.result==0){
+										divStatus.innerHTML=obj.message;
+										}
+										else{
+										divStatus.innerHTML="Display Complaints";
+										var result="";
+										var length=obj.complaint.length;
+
+										result+="<div style='overflow-x:auto;'><table class='center' id='table' ><tr><th>COMPLAINTID</th><th>STUDENT ID</th><th>DATE</th><th>TEMPERATURE</th><th>SYMPTOMS</th><th>DIAGNOSIS</th><th>CAUSE<th>PRESCRIPTION</th><th>NURSE</th><th>CONTROLS</th><tr>"
+										while(length>0){
+
+										result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.complaint[length-1].COMPLAINTID+"</td><td>"+obj.complaint[length-1].STUDENTID+"</td><td>"+obj.complaint[length-1].DATE +"</td><td> "+obj.complaint[length-1].TEMPERATURE+"</td><td>"+obj.complaint[length-1].SYMPTOMS+"</td> <td>"+obj.complaint[length-1].NAME+"</td><td>"+
+										obj.complaint[length-1].CAUSE+"</td><td>"+obj.complaint[length-1].PRESCRIPTION+"</td><td>"+obj.complaint[length-1].FIRSTNAME +" "+obj.complaint[length-1].LASTNAME+"</td><td><a><span onclick='editName("+obj.complaint[length-1].COMPLAINTID+","+obj.complaint[length-1].STUDENTID+",&apos;"+obj.complaint[length-1].DATE
+										+"&apos;,"+obj.complaint[length-1].TEMPERATURE+",&apos;"+obj.complaint[length-1].SYMPTOMS+"&apos;,&apos;"+obj.complaint[length-1].NAME+"&apos;,"+obj.complaint[length-1].DISEASEID+",&apos;"+obj.complaint[length-1].CAUSE+"&apos;,&apos;"+obj.complaint[length-1].PRESCRIPTION+"&apos;,"+obj.complaint[length-1].NURSEID+")'id='myBtn'>UPDATE<span></a><br><a><span onClick='showComplaint("+obj.complaint[length-1].COMPLAINTID+", true)'>View Details</span></a></td></tr>";
+										length-=1;
+
+										}
+										table.innerHTML=result;
+
+										}
+
+
+								}
+
+				window.onload= viewComplaint;
 					</script>
 	    </head>
 
@@ -232,8 +277,8 @@
 
 	              </div>
 	            </form>
-	      			</span></div>
-	      		</div>
+	      			</div>
+
 			<section class="medical-history">
 			<table class='center' id='table'>
 				</table>

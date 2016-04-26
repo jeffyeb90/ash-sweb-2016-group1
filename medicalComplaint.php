@@ -130,13 +130,8 @@
   */
 		function updateComplaint($complaintID, $studentID, $temperature, $symptoms, $diagnosis, $cause, $prescription, $nurseID){
 				$strQuery="Update medicalComplaint set STUDENTID=$studentID,  TEMPERATURE=$temperature, SYMPTOMS='$symptoms', DIAGNOSIS='$diagnosis', CAUSE='$cause', PRESCRIPTION='$prescription', NURSEID='$nurseID' where COMPLAINTID = $complaintID";
-<<<<<<< HEAD
-=======
 				return $this->query($strQuery);
-		}
->>>>>>> c2918f8ad284070bfdb17d1b31433847536d0581
-
-        return $this->query($strQuery);
+		
 		}
     /**
     *get complaint given the id

@@ -86,6 +86,7 @@ echo "]";
 *@return void
 */
 function viewComplaintDetails(){
+	  include_once("medicalComplaint.php");
     if(!isset($_REQUEST['cid'])){
         echo '{"result": 0, "message": "Error viewing complaint details"}';
         $obj = new medicalComplaint();
