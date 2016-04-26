@@ -1,4 +1,5 @@
 <?php
+  error_reporting(0);
   session_start();
   if(!isset($_SESSION['USER'])){
   	header("location:login.php");
@@ -26,6 +27,7 @@
                         {
          	              	async:true,complete:searchStudentInfoComplete
          	            });
+                        
                      }
 
                     
@@ -47,14 +49,65 @@
   					
   					        result+="<div style='overflow-x:auto;'><table class='center' id='table'><tr><th>ID</th><th>USER NAME</th><th>FULL NAME</th><th>GENDER</th><th>PHONE NUMBER</th><th>CONTROLS</th></tr>"
   					        while(length>0){
-  						        result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.user[length-1].STUDENTID+"</td><td>"+obj.user[length-1].USERNAME+"</td><td>"+obj.user[length-1].FIRSTNAME +" "+obj.user[length-1].LASTNAME+"</td><td>"+obj.user[length-1].GENDER+"</td> <td>"+obj.user[length-1].PHONENUMBER+"</td><td><span  onclick='getStudent("+obj.user[length-1].STUDENTID+")' class='btn'>Update</span><br><a href='viewStudentComplaints.php?sid="+obj.user[length-1].STUDENTID+
-  						"'class='button'>View</a><br><a href='medicalComplaintAdd.php?sid="+obj.user[length-1].STUDENTID+"' class='button'>Add Medical Complaint</a><br></td></tr>";
+  						        result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.user[length-1].STUDENTID+"</td><td>"+obj.user[length-1].USERNAME+"</td><td>"+obj.user[length-1].FIRSTNAME +" "+obj.user[length-1].LASTNAME+"</td><td>"+obj.user[length-1].GENDER+"</td> <td>"+obj.user[length-1].PHONENUMBER+"</td><td><span  onclick='getStudent("+obj.user[length-1].STUDENTID+")' class='btn'>Update</span><br><span onclick=viewDetails("+obj.user[length-1].STUDENTID+")><button class='btn'>View More</button></span><br><a href='medicalComplaintAdd.php?sid="+obj.user[length-1].STUDENTID+"' class='button'>Add Medical Complaint</a><br></td></tr>";
 
   						        length-=1;
                              }
   					         table.innerHTML=result;
         	            }
                     }
+                    
+                function viewDetailsComplete(xhr,status){
+
+                                        if(status!="success"){
+                                            divStatus.innerHTML="error sending request";
+                                            return;
+                                        }
+
+                                        var obj=JSON.parse(xhr.responseText);
+
+                                       
+
+                                        if(obj.result==0){
+                                            //echo"dsdsd";
+                                            divStatus.innerHTML=obj.message;
+                                        }else{
+
+                // When the user clicks on the button, open the modal
+                        var modal="";
+                                 modal+="<div class='modal-content12'><span class='close'>x</span><h3> STUDENT DETAILS<h3><table border = 1><tr><th>HEIGHT</th><th>WEIGHT</th><th>BLOODTYPE</th></tr><tr><td bgcolor=  #65B529>" +obj.user.HEIGHT +"m "+ "</td><td bgcolor= #65B529>" +obj.user.WEIGHT +"kg "+ "</td><td bgcolor=  #65B529>"+obj.user.BLOODTYPE+"</td></tr></div>";
+
+                                 var modalView = document.getElementById('myModal');
+
+                        modalView.innerHTML=modal;
+                        document.getElementById('myModal').style.display="block";
+
+
+                        // When the user clicks anywhere outside of the modal, close it
+                        window.onclick = function(event) {
+                            if (event.target == modalView) {
+                                modalView.style.display = "none";
+                            }
+                        }
+
+                        var span = document.getElementsByClassName("close")[0];
+                        // When the user clicks on <span> (x), close the modal
+                        span.onclick = function() {
+                            modalView.style.display = "none";
+                        }
+
+                        }
+                }
+
+                                    function viewDetails(userid){
+                                        console.log(userid);
+                             
+                                    var theUrl="studentsajax.php?cmd=4&uc="+userid;
+                                    $.ajax(theUrl,
+                                        {async:true,complete:viewDetailsComplete}
+                                        );
+
+                                    }
                     /**
                     *function to validate user's input
                     *@param string string
@@ -104,13 +157,13 @@
                             }
 
                             var modalInfo="";
-                            modalInfo+="<div class='modal-content'><span class='close'>x</span><b>EDIT STUDENT RECORD</b><div class='position'><input type='hidden' id='sid' value="+sid+"><div>Weight: <input class='text' type='text' id='weight'value="+weight+"> kg</div><div>Height: <input class='text' type='text' id='height' value="+height+"> m</div><div>Blood Type:<select class='select' id='bloodtype'><option "+groupA+" value ='A'>A</option><option "+groupB+" value ='B'>B</option><option "+groupAB +"value ='AB'>AB</option><option "+groupO +"value ='O'>O</option></select><input class='submit' type='submit' name= 'save' value='Update' onclick='updateStudent("+sid+")'></div></div>";
+                            modalInfo+="<div class='modal-content'><span class='close1'>x</span><b>EDIT STUDENT RECORD</b><div class='position'><input type='hidden' id='sid' value="+sid+"><div>Weight: <input class='text' type='text' id='weight'value="+weight+"> kg</div><div>Height: <input class='text' type='text' id='height' value="+height+"> m</div><div>Blood Type:<select class='select' id='bloodtype'><option "+groupA+" value ='A'>A</option><option "+groupB+" value ='B'>B</option><option "+groupAB +"value ='AB'>AB</option><option "+groupO +"value ='O'>O</option></select><input class='submit' type='submit' name= 'save' value='Update' onclick='updateStudent("+sid+")'></div></div>";
                          
-                            modal= document.getElementById("myModal");
+                            modal= document.getElementById("modal");
                             modal.innerHTML=modalInfo;
                             modal.style.display="block";
 
-                            var span=document.getElementsByClassName('close')[0];
+                            var span=document.getElementsByClassName('close1')[0];
             
                             span.onclick=function(){
                                 modal.style.display="none";
@@ -261,14 +314,15 @@
         		<section class="medical-history">
                 <?php
                     echo "<div style='overflow-x:auto;'><table class='center' id='table'>
-                    <tr><th>ID</th><th>USER NAME</th><th>FULL NAME</th><th>GENDER</th><th>PHONE NUMBER</th><th>HEIGHT</th><th>WEIGHT</th><th>BLOOD TYPE</th><th>EMERGENCY CONTACT</th><th>CONTROLS</th></tr>";
-                    echo "</table>";
+                    <tr><th>ID</th><th>USER NAME</th><th>FULL NAME</th><th>GENDER</th><th>PHONE NUMBER</th></tr>";
+                    echo "</table></div>";
 
+                    echo "<div id='myModal' class='modal12'></div>";
 
                 ?>
                 
                 <?php
-                    echo "<div id='myModal' class='modal'>
+                    echo "<div id='modal' class='modal'>
                     </div>";
                 ?>
             </section>
@@ -277,3 +331,5 @@
 
     </body>
 </html>
+
+					      	
