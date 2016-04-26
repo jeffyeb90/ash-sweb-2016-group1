@@ -48,7 +48,7 @@
 
 				 }
 				 function saveComplaint(cid){
-					 if( validateText()==false){
+					 if(validateText()==false){
 						 return;
 					 }
 
@@ -111,6 +111,7 @@
 
 							}
 							table.innerHTML=result;
+
 
 						}
 
