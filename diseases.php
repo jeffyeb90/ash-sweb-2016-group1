@@ -12,7 +12,6 @@ include_once("databasehelper.php");
 */
 class diseases extends databasehelper{
   function diseases() {
-
    }
    /**
    *Fetchs all the diseases
@@ -21,7 +20,6 @@ class diseases extends databasehelper{
 	function getAllDiseases(){
 		$strQuery="select * from diseases";
 		return $this->query($strQuery);
-
 	}
   /**
   *Adds a disease
@@ -52,8 +50,5 @@ class diseases extends databasehelper{
 		return $this->query($strQuery);
 	}
 
-  
-
 }
-
 ?>

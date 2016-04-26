@@ -83,7 +83,9 @@
 		**/
 
 		function getComplaints($filter=false){
+
 			 $strQuery="select COMPLAINTID, STUDENTID, DATE, TEMPERATURE, SYMPTOMS, diseases.DISEASEID, diseases.NAME, CAUSE, PRESCRIPTION,  nurses.NURSEID, nurses.FIRSTNAME, nurses.LASTNAME from medicalComplaint left join diseases on medicalComplaint.DIAGNOSIS=diseases.DISEASEID left join nurses on  medicalComplaint.NURSEID=nurses.NURSEID";
+
 			if($filter!=false){
 
 				$strQuery=$strQuery . " where $filter";
@@ -131,7 +133,7 @@
 		function updateComplaint($complaintID, $studentID, $temperature, $symptoms, $diagnosis, $cause, $prescription, $nurseID){
 				$strQuery="Update medicalComplaint set STUDENTID=$studentID,  TEMPERATURE=$temperature, SYMPTOMS='$symptoms', DIAGNOSIS='$diagnosis', CAUSE='$cause', PRESCRIPTION='$prescription', NURSEID='$nurseID' where COMPLAINTID = $complaintID";
 				return $this->query($strQuery);
-		
+
 		}
     /**
     *get complaint given the id

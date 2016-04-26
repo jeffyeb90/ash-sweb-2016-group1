@@ -2,9 +2,9 @@
 <?php
 	include_once("databasehelper.php");
 	/**
-	*Students class
-
-	* @method boolean addStudentRecord() should insert a student and return a boolean result
+	*
+	*Student  class
+	* @method boolean getStudentByID() should find  student details using studentID and return a boolean result
 	* @method students() is a constructor of the student class
 	*/
 
@@ -26,12 +26,12 @@
 			students.EMERGENCYCONTACTID= emergencyContact.CONTACTID";
 
 
-
 			if($filter!=false){
 				$strQuery=$strQuery . " where $filter";
 			}
 			return $this->query($strQuery);
 		}
+
 
 		/**
 		*Searches for students by username, firstname, last name
@@ -45,9 +45,6 @@
 			}
 			return $this->getStudents($filter);
 		}
-
-
-
 
 
 
@@ -103,19 +100,57 @@
 			return $this->query($strQuery);
 		}
 
-
+		/**
+		*update a student record
+		*@param double studentID
+		*@param double wright
+		*@param double height
+		*@param string bloodType
+		*@return boolean returns true if successful or false
+		*/
 		function updateStudentRecord($studentID, $weight, $height, $bloodtype){
 
+
 			$strQuery="Update studentHasRecord  set HEIGHT='$height', WEIGHT='$weight', BLOODTYPE='$bloodtype' where STUDENTID=$studentID";
+
+			/**
+			*@var string $strQuery should contain insert query
+			*/
+
+			return $this->query($strQuery);
+		}
+		/**
+		*update a student record
+		*@param double studentID
+		*@return boolean returns true if successful or false
+		*/
+
+		function getStudentByID($studentID){
+
+			$strQuery="Select STUDENTID, HEIGHT, WEIGHT, BLOODTYPE from studentHasRecord where STUDENTID=$studentID";
+
+			/**
+			*@var string $strQuery should contain insert query
+			*/
+
 			return $this->query($strQuery);
 		}
 
-		function getStudentByID($studentID){
-			$strQuery="Select STUDENTID, HEIGHT, WEIGHT, BLOODTYPE from studentHasRecord where STUDENTID=$studentID";
+		/**
+		*list students records based on a filter
+		*@param string condition to filter. If false, the condition will not be applied.
+		*@return boolean true if successful, false if unsuccessful
+		*/
+		function listStudents($filter=false){
+			$strQuery="select STUDENTID,USERNAME,FIRSTNAME,LASTNAME,GENDER,PHONENUMBER from students LIMIT 0,3";
+			if($filter!=false){
+				$strQuery=$strQuery . " where $filter";
+			}
+			//echo $strQuery;
 			return $this->query($strQuery);
 		}
+
 
 	}
 
-
-	?>
+?>

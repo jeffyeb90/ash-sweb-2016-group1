@@ -1,6 +1,6 @@
 <?php
 /**
-	@author makafui fie
+	*@author makafui fie
 */
 	$studentID="";
 	$weight="";
