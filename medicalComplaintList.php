@@ -76,19 +76,17 @@
 					}
 						var select="";
 					function saveComplaintComplete(xhr,status){
+
 						if(status!="success"){
 							divStatus.innerHTML="error while updating page";
 							return;
 						}
-
 						var obj=$.parseJSON(xhr.responseText);
 						if(obj.result==0){
 							divStatus.innerHTML=obj.message;
 						}
 						else{
 							divStatus.innerHTML="Display Complaints";
-
-
 							var lengthOfDisease=obj.disease.length;
 							console.log(lengthOfDisease);
 
@@ -106,13 +104,12 @@
 
 								result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.complaint[length-1].COMPLAINTID+"</td><td>"+obj.complaint[length-1].STUDENTID+"</td><td>"+obj.complaint[length-1].DATE +"</td><td> "+obj.complaint[length-1].TEMPERATURE+"</td><td>"+obj.complaint[length-1].SYMPTOMS+"</td> <td>"+obj.complaint[length-1].NAME+"</td><td>"+
 								obj.complaint[length-1].CAUSE+"</td><td>"+obj.complaint[length-1].PRESCRIPTION+"</td><td>"+obj.complaint[length-1].FIRSTNAME +" "+obj.complaint[length-1].LASTNAME+"</td><td><span onclick='editName("+obj.complaint[length-1].COMPLAINTID+","+obj.complaint[length-1].STUDENTID+",&apos;"+obj.complaint[length-1].DATE
-								+"&apos;,"+obj.complaint[length-1].TEMPERATURE+",&apos;"+obj.complaint[length-1].SYMPTOMS+"&apos;,&apos;"+obj.complaint[length-1].NAME+"&apos;,"+obj.complaint[length-1].DISEASEID+",&apos;"+obj.complaint[length-1].CAUSE+"&apos;,&apos;"+obj.complaint[length-1].PRESCRIPTION+"&apos;,"+obj.complaint[length-1].NURSEID+")'id='myBtn' >UPDATE</span><br><span><a href='viewComplaintDetails.php?cid="+obj.complaint[length-1].COMPLAINTID+"'>View Details</a></span>	</td></tr>";
+								+"&apos;,"+obj.complaint[length-1].TEMPERATURE+",&apos;"+obj.complaint[length-1].SYMPTOMS+"&apos;,&apos;"+obj.complaint[length-1].NAME+"&apos;,"+obj.complaint[length-1].DISEASEID+",&apos;"+obj.complaint[length-1].CAUSE+"&apos;,&apos;"+obj.complaint[length-1].PRESCRIPTION+"&apos;,"+obj.complaint[length-1].NURSEID+")'id='myBtn' >UPDATE</span><br><a><span onClick='showComplaint("+ obj.complaint[length-1].COMPLAINTID+", true)'>VIEW DETAILS</span></a></td></tr>";
+
 								length-=1;
 
 							}
 							table.innerHTML=result;
-
-
 						}
 
 
@@ -138,7 +135,37 @@
 
 				}
 
-				window.onload= viewComplaint;
+				function showSingleComplaintComplete(xhr, status){
+						if(status!="success"){
+								divStatus.innerHTML="error while updating page";
+								return;
+						}
+
+						var obj=$.parseJSON(xhr.responseText);
+						//var modal = "";
+
+						var modal = document.getElementById('myModal');
+
+
+
+						modal.style.display = "block";
+
+						var modalContent = "<span class='close'>x</span><p>Complaint ID: "+obj.complaint[0].COMPLAINTID+"</p><p>Student ID: "+obj.complaint[0].STUDENTID+"</p><p>Date: 2016-03-04</p><p>Temperature: "+obj.complaint[0].TEMPERATURE+"</p><p>Symptoms: "+obj.complaint[0].SYMPTOMS+"</p><p>Diagnosis: "+obj.complaint[0].DIAGNOSIS+"</p><p>Cause: "+obj.complaint[0].CAUSE+"</p><p>Prescription: "+obj.complaint[0].PRESCRIPTION+"</p>";
+
+
+						//Prepare the contents of the modal
+						document.getElementsByClassName("modal-content").innerHTML = " ";
+						$(".modal-content").html(modalContent);
+
+
+						//Close the modal when button is pressed
+						var span = document.getElementsByClassName("close")[0];
+						span.onclick = function(){
+								modal.style.display = "none";
+						};
+				}
+
+				window.onload= showComplaint;
 					</script>
 	    </head>
 
@@ -209,14 +236,19 @@
 	      		</div>
 			<section class="medical-history">
 			<table class='center' id='table'>
-
-
 				</table>
 
-
-
-
-
 	</section>
+
+            <div id="myModal" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+
+
+              </div>
+
+            </div>
+
+
 	</body>
 	</html>
