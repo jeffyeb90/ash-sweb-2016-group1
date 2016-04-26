@@ -1,9 +1,6 @@
 <?php
-<<<<<<< HEAD
-	error_reporting(0);
-=======
 error_reporting(0);
->>>>>>> 20f110938434606bd45f0c2fd71f7c45cfc89864
+
 session_start();
 if(!isset($_SESSION['USER'])){
 
