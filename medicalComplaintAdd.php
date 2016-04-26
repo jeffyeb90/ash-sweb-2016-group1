@@ -118,6 +118,7 @@ echo'<script> window.location.href="login.php";</script>';
 						<div>
 							Symptoms: <br><input class="text" type="text" name="symptoms" id="symptoms" required>
 						</div>
+						<div>
 						Diagnosis: <br><select class="select1" name="diagnosis" id="diagnosis" required>
 							<?php
 							include_once("diseases.php");
@@ -131,6 +132,8 @@ echo'<script> window.location.href="login.php";</script>';
 				        	}
 				      ?>
 						</select>
+						<span class="btn" ><a href="diseasesAdd.php">Add Disease</a></span>
+					</div>
 						<div>
 							Cause: <br><input class="text" type="text" name="cause" id="cause">
 						</div>
