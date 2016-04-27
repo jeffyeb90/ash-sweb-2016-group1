@@ -13,11 +13,63 @@ if(isset($_REQUEST['cmd'])){
 		case 2:
 				viewComplaintDetails();
 				break;
+				case 3:
+						searchComplaint();
+						break;
 
 		default:
 			echo "wrong command";
 		break;
 	}
+}
+
+
+function searchComplaint(){
+	$name=$_REQUEST['txtName'];
+	include_once('medicalComplaint.php');
+	//create an object of users
+	$obj=new medicalComplaint();
+	$row=$obj->searchComplaints($name);
+
+	if($row==false){
+		echo '{"result":0,"message":"error searching"}';
+	}
+	else{
+
+		$result=$obj->fetch();
+
+	if($result==false){
+			echo '{"result":0,"message":"No result found"}';
+		}
+		else{
+			echo '{"result":1,"complaint":[';
+		while($result){
+				echo json_encode($result);
+
+			$result=$obj->fetch();
+			if($result!=false){
+				echo ",";
+			}
+		}
+		echo "]";
+				include_once("diseases.php");
+				$disease=new diseases();
+				$value=$disease->getAllDiseases();
+				$value=$disease->fetch();
+				 	echo ',"disease":[';
+				while($value){
+
+					echo json_encode($value);
+
+					$value=$disease->fetch();
+				if($value!=false){
+					echo ",";
+				}
+				}
+				echo "]}";
+
+			}
+}
 }
 /**
 *updates a medical complaint

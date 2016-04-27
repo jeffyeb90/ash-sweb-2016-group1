@@ -26,6 +26,15 @@ if(!isset($_SESSION['USER'])){
 					<script type="text/javascript" src="js/jquery-1.12.1.js"></script>
 	      	<script type="text/javascript">
 
+					function searchComplaintInfo(){
+						var theUrl="medicalComplaintAjax.php?cmd=3&txtName="+$("#search").val();
+						$.ajax(theUrl,
+							{
+								async:true,complete:saveComplaintComplete
+						});
+
+					 }
+
 					function validateText(){
 						var rgText=/[a-zA-Z]/;
 						var numTxt=/[0-9]/;
@@ -73,6 +82,7 @@ if(!isset($_SESSION['USER'])){
 
 					}
 						var select="";
+
 					function saveComplaintComplete(xhr,status){
 
 						if(status!="success"){
@@ -82,11 +92,12 @@ if(!isset($_SESSION['USER'])){
 						var obj=$.parseJSON(xhr.responseText);
 						if(obj.result==0){
 							divStatus.innerHTML=obj.message;
+							table.innerHTML="No result found";
 						}
 						else{
 							divStatus.innerHTML="Display Complaints";
 							var lengthOfDisease=obj.disease.length;
-							console.log(lengthOfDisease);
+
 
 							while(lengthOfDisease>0){
 								var selected="";
@@ -96,6 +107,7 @@ if(!isset($_SESSION['USER'])){
 
 							var result="";
 							var length=obj.complaint.length;
+
 
 								result+="<div style='overflow-x:auto;'><table class='center' id='table' ><tr><th>STUDENT ID</th><th>DATE</th><th>TEMPERATURE</th><th>DIAGNOSIS</th>><th>NURSE</th><th>CONTROLS</th><tr>";
 							while(length>0){
@@ -267,13 +279,12 @@ if(!isset($_SESSION['USER'])){
 
 	          <div class="row">
 
-	            <form action="" method="GET">
-	              <div class="input-field">
-	                <input id="search" type="text" name="txtSearch">
-	                <input type="submit" value="search" class="button"></input>
 
-	              </div>
-	            </form>
+								<div class="input-field">
+										<input onkeyup="searchComplaintInfo()" id="search" type="text" name="txtSearch">
+										<span onclick="searchComplaintInfo()" value="search" class="button">SEARCH</span>
+								</div>
+
 	      			</div>
 
 			<section class="medical-history">

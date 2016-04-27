@@ -71,10 +71,12 @@
         function searchComplaints($text=false){
           $filter=false;
           if($text!=false){
-            $filter=" diseases.NAME like '$text' or STUDENTID like '$text' ";
+            $filter=" diseases.NAME like '%$text%' or STUDENTID like '%$text%' or DATE like '%$text%'";
           }
           return $this->getComplaints($filter);
         }
+
+
 
 		/**
 		*get complaint records based on the filter
@@ -91,6 +93,7 @@
 				$strQuery=$strQuery . " where $filter";
 
 			}
+      
 			return $this->query($strQuery);
 		}
 

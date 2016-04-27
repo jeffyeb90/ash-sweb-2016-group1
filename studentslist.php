@@ -52,7 +52,7 @@
   					        result+="<div style='overflow-x:auto;'><table class='center' id='table'><tr><th>ID</th><th>USER NAME</th><th>FULL NAME</th><th>GENDER</th><th>PHONE NUMBER</th><th>CONTROLS</th></tr>"
   					        while(length>0){
   						        result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.user[length-1].STUDENTID+"</td><td>"+obj.user[length-1].USERNAME+"</td><td>"+obj.user[length-1].FIRSTNAME +" "+obj.user[length-1].LASTNAME+"</td><td>"+obj.user[length-1].GENDER+"</td> <td>"+obj.user[length-1].PHONENUMBER+"</td><td><span  onclick='getStudent("+obj.user[length-1].STUDENTID+")' class='btn'>Update</span><br><span onclick=viewDetails("+obj.user[length-1].STUDENTID+")><button class='btn'>View More</button></span><br><a href='viewStudentComplaints.php?sid="+obj.user[length-1].STUDENTID+
-						"'class='button'>View Complaints</a><br><a href='medicalComplaintAdd.php?sid="+obj.user[length-1].STUDENTID+"' class='button'>Add Medical Complaint</a><br></td></tr>";
+											"'class='button'>View Complaints</a><br><a href='medicalComplaintAdd.php?sid="+obj.user[length-1].STUDENTID+"' class='button'>Add Medical Complaint</a><br></td></tr>";
 
   						        length-=1;
                              }

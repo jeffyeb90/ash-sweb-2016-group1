@@ -74,17 +74,6 @@ if(!isset($_SESSION['USER'])){
 						<?php echo  $strStatusMessage ?>
 					</div>
 
-		<div class="row">
-			  <div class="col s3 offset-s9"><span class="flow-text">
-      <form action="" method="GET">
-        <div class="input-field">
-          <input id="search" type="search" name="txtSearch">
-          <label for="search">Search</label>
-
-        </div>
-      </form>
-			</span></div>
-		</div>
 		<section class="medical-history">
 <?php
 
