@@ -114,7 +114,7 @@ if(!isset($_SESSION['USER'])){
 							while(length>0){
 
 								result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.complaint[length-1].STUDENTID+"</td><td>"+obj.complaint[length-1].DATE +"</td><td> "+obj.complaint[length-1].TEMPERATURE+"</td> <td>"+obj.complaint[length-1].NAME+"</td><td>"+obj.complaint[length-1].FIRSTNAME +" "+obj.complaint[length-1].LASTNAME+"</td><td><a><span onClick='editName("+obj.complaint[length-1].COMPLAINTID+","+obj.complaint[length-1].STUDENTID+",&apos;"+obj.complaint[length-1].DATE
-								+"&apos;,"+obj.complaint[length-1].TEMPERATURE+",&apos;"+obj.complaint[length-1].SYMPTOMS+"&apos;,&apos;"+obj.complaint[length-1].NAME+"&apos;,"+obj.complaint[length-1].DISEASEID+",&apos;"+obj.complaint[length-1].CAUSE+"&apos;,&apos;"+obj.complaint[length-1].PRESPRESCRIPTION+"&apos;,"+obj.complaint[length-1].NURSEID+ ")'id='myBtn' >UPDATE</span></a><br><a><span onClick='showComplaint("+ obj.complaint[length-1].COMPLAINTID+", true)'>VIEW DETAILS</span></a></td></tr>";
+								+"&apos;,"+obj.complaint[length-1].TEMPERATURE+",&apos;"+obj.complaint[length-1].SYMPTOMS+"&apos;,&apos;"+obj.complaint[length-1].NAME+"&apos;,"+obj.complaint[length-1].DISEASEID+",&apos;"+obj.complaint[length-1].CAUSE+"&apos;,&apos;"+obj.complaint[length-1].PRESPRESCRIPTION+"&apos;,"+obj.complaint[length-1].NURSEID+ ")'id='myBtn' class='clickable'>Update</span></a><br><a><span onClick='showComplaint("+ obj.complaint[length-1].COMPLAINTID+", true)' class='clickable'>View Details</span></a></td></tr>";
 
 								length-=1;
 
@@ -228,43 +228,42 @@ if(!isset($_SESSION['USER'])){
 	    <body>
 
 	        <div class="navigation">
-	            <img src="images/logo.jpg" alt="" class="logo">
+                <img src="images/logo.jpg" alt="" class="logo">
+                    <ul class="menu">
+                        <li><a href="studentslist.php">HOME</a></li>
+
+                        <li class="dropdown active" id="complaints"><a  class="dropdown-button">COMPLAINTS</a>
+                            <ul class="dropdown-content">
+            				    <li><a href="medicalComplaintAdd.php">ADD </a></li>
+
+            					<li><a href="medicalComplaintList.php">VIEW </a></li>
 
 
-	            <ul class="menu">
-	                <li><a href="studentslist.php">HOME</a></li>
+            				</ul>
+
+                        </li>
+        			    <li class="dropdown" id="records"><a class="dropdown-button2" >STUDENT RECORDS</a>
+                            <ul class="dropdown-content2">
+                                <li><a href="studentslist.php">VIEW </a></li>
 
 
+                            </ul>
 
-									<li class="dropdown" id="complaints"><a  class="dropdown-button">COMPLAINTS</a>
-	                <ul class="dropdown-content">
-	    							<li><a href="medicalComplaintAdd.php">Add </a></li>
-
-	    							<li><a href="medicalComplaintList.php">View </a></li>
-
-
-	    						</ul>
-
-	                </li>
-				        <li class="dropdown" id="records"><a class="dropdown-button2" >STUDENT RECORDS</a>
-	                  <ul class="dropdown-content2">
-	                      <li><a href="studentslist.php">View </a></li>
-
-	                  </ul>
-
-	                </li>
-									<li><a href="generateReport.php">GET REPORT</a></li>
-	                <li><a href="medicalComplaintAdd.php" class="btn">NEW COMPLAINT</a></li>
-	                <li><a href='logout.php' class='btn'>Logout</a><li>
-	                <li><img src="images/profie.jpg" alt="" class="profile-pic"><br>
-	                  <?php
-
-
-	                $id=$_SESSION['USER'];
-	                echo $id['FIRSTNAME']." " .$id['LASTNAME'];
-	                ?></li>
-	            </ul>
-	        </div>
+                        </li>
+        				<li><a href="generateReport.php">GET REPORT</a></li>
+                        <li><a href="medicalComplaintAdd.php" class="btn">NEW COMPLAINT</a></li>
+                        
+                        <li class="dropdown pic-dropdown" id="records"><a href=""><img src="images/profie.jpg" alt="" class="profile-pic"></a>
+                            <ul class="dropdown-content2 logout-dropdown">
+                               <li><a href='logout.php' class='btn'>Logout <?php
+                                $id=$_SESSION['USER'];
+                                echo "<p class='username'>".$id['FIRSTNAME']."</p>";
+                            ?></a></li>
+                            </ul>
+                            
+                        </li>
+                    </ul>
+                </div>
 
 						<?php
 						$strStatusMessage="Display Medical Complaints";
@@ -279,18 +278,16 @@ if(!isset($_SESSION['USER'])){
 						</div>
 
 	          <div class="row">
-
-
-								<div class="input-field">
-										<input onkeyup="searchComplaintInfo()" id="search" type="text" name="txtSearch">
-										<span onclick="searchComplaintInfo()" value="search" class="button">SEARCH</span>
-								</div>
-
-	      			</div>
+	              <div class="input-field">
+                        <input onkeyup="searchStudentInfo()"id="search" type="text" name="txtSearch" placeholder="Enter to search something">
+<!--                        <span onclick="searchStudentInfo()" value="search" class="button">SEARCH</span>-->
+                    </div>
+            </div>
 
 			<section class="medical-history">
 			<table class='center' id='table'>
-				</table>
+			    
+			</table>
 
 	</section>
 
