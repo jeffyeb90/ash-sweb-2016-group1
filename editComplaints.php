@@ -63,45 +63,45 @@ if(!isset($_SESSION['USER'])){
 						$strStatusMessage=$_REQUEST['message'];
 					}
 
-	?>
+					?>
 					<div id="divStatus" class="status">
 						<?php echo  $strStatusMessage ?>
 					</div>
 
-		<div class="row">
-			  <div class="col s3 offset-s9"><span class="flow-text">
+					<div class="row">
+				  <div class="col s3 offset-s9"><span class="flow-text">
 
-			</span></div>
-		</div>
-		<section class="medical-history">
-<?php
-	$strStatusMessage ="Edit Medical Complaint";
-	include_once("medicalComplaint.php");
-	 $obj=new medicalComplaint();
-	$complaintID = $_REQUEST["complaintID"];
-
-	$result =$obj->getComplaintByID($complaintID);
-	if(!$result){
-		echo "Error getting data.";
-		exit();
-
-	}
-	$row =$obj->fetch();
-
-
-?>
-					<div id="divStatus" class="status">
-						<?php echo  $strStatusMessage ?>
+					</span></div>
 					</div>
-					<div id="divContent">
-						Content space
-						<form action="updateComplaint.php" method="GET">
-						<input type="hidden" name="complaintID" value="<?php echo $row['COMPLAINTID'] ?>">
-						<div>Student ID: <input type="text" name="studentID" value="<?php echo $row['STUDENTID'] ?>";/></div>
-						<div>Date: <input type="date" name="date" value="<?php echo $row['DATE'] ?>"/></div>
-						<div>Temperature: <input type="text" name="temperature" value="<?php echo $row['TEMPERATURE'] ?>"/></div>
-						<div>Symptoms: <input type="text" name="symptoms" value="<?php echo $row['SYMPTOMS'] ?>"/></div>
-          <div>
+					<section class="medical-history">
+						<?php
+						$strStatusMessage ="Edit Medical Complaint";
+						include_once("medicalComplaint.php");
+						$obj=new medicalComplaint();
+						$complaintID = $_REQUEST["complaintID"];
+
+						$result =$obj->getComplaintByID($complaintID);
+						if(!$result){
+							echo "Error getting data.";
+							exit();
+
+						}
+						$row =$obj->fetch();
+
+
+						?>
+						<div id="divStatus" class="status">
+								<?php echo  $strStatusMessage ?>
+						</div>
+						<div id="divContent">
+							Content space
+							<form action="updateComplaint.php" method="GET">
+							<input type="hidden" name="complaintID" value="<?php echo $row['COMPLAINTID'] ?>">
+							<div>Student ID: <input type="text" name="studentID" value="<?php echo $row['STUDENTID'] ?>";/></div>
+							<div>Date: <input type="date" name="date" value="<?php echo $row['DATE'] ?>"/></div>
+							<div>Temperature: <input type="text" name="temperature" value="<?php echo $row['TEMPERATURE'] ?>"/></div>
+							<div>Symptoms: <input type="text" name="symptoms" value="<?php echo $row['SYMPTOMS'] ?>"/></div>
+          	<div>
               Diagnosis: <select class="browser-default" name="diagnosis">
   							<?php
 
@@ -132,12 +132,12 @@ if(!isset($_SESSION['USER'])){
 
 
 						<input type="submit" name= "save" value="Update">
-		</form>
+					</form>
 					</div>
 				</td>
 			</tr>
 		</table>
-  
+
   </section>
 	</body>
 </html>
