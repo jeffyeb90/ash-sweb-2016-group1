@@ -28,6 +28,10 @@
   height: 45%;
 }
 
+li.active{
+    opacity: 0.3;
+}
+
 /* The Close Button */
 .close {
     color: #aaaaaa;
@@ -60,12 +64,26 @@
     display: inline-block;
 }
 
-.dropdown-content {
+.dropdown-content, 
+.dropdown-content2{
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 90px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding-left: 0px;
+    list-style-type: none;
+}
+
+.dropdown-content>li, 
+.dropdown-content2>li{
+    padding-left: 0px !important;
+    position: relative;
+}
+
+.dropdown-content>li>a, 
+.dropdown-content2>li>a{
+    position: inherit;
 }
 
 .dropdown-content a {
@@ -92,22 +110,29 @@
 
 
 
+.pic-dropdown{
+    margin-right: 10px;
+    right: 10px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    position: absolute;
+    margin-top: -30px !important;
+}
 
+.logout-dropdown{
+    right: 0px;
+    margin-right: -22px;
+    margin-top: 14px;
+}
 
 #complaints:hover .dropdown-content{
     display: block;
 }
 #complaints:hover .dropdown-button {
-    background-color: #3e8e41;
+/*    background-color: #3e8e41;*/
 }
 
-.dropdown-content2 {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
+
 
 .dropdown-content2 a {
     color: black;
@@ -121,12 +146,20 @@
 #records:hover .dropdown-content2{
     display: block;
 }
+
+
 #records:hover .dropdown-button2{
-    background-color: #3e8e41;
+/*    background-color: #3e8e41;*/
 }
+
+
 a{
     text-decoration: none;
     color: black;
+}
+
+a.btn{
+    padding: 6px;
 }
 
 a.active,
@@ -137,32 +170,44 @@ a:focus{
 
 
 body{
-    background-color: #EDEFF4;
     font-family: 'Avenir';
     margin-left: 0px;
     margin-right: 0px;
     margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.navigation{
+    background-color: #EDEFF4;
+    height: 60px;
 }
 
 .login-body{
     background-color: #EDEFF4;
 }
 
-.position {
-  position: fixed;
-  display: block;
-  right: 380px;
-  top: 180px;
-  width: 450px;
-  border: 6px solid #65B529;
-  padding: 50px;
-  background-color: #EDEFF4;
+.position{
+    position: relative;
+    display: block;
+    margin:0 auto;
+    width: 500px;
+    padding: 50px;
+    background-color: #EDEFF4;
+    margin-top: 100px;
+}
+
+form.addComplaint{
+    display: block;
+    position: relative;
+    margin-top: 20px;
 }
 
 
+
 .logo{
-    width: 100px;
+    width: 80px;
     padding-left: 20px;
+    padding-top: 12px;
 }
 
 table{
@@ -189,30 +234,41 @@ th, td {
     padding: 15px;
     text-align: left;
 }
+
+
 tr:nth-child(even){background-color: #EDEFF4}
+tr:nth-child(odd){background-color: #C9ECBD}
+
 .menu{
     list-style-type: none;
     display: inline-block;
     float: right;
-    padding-right: 20px;
+    margin-right: 70px;
+    padding-right: 0px;
 }
 
-.menu li{
+
+
+.menu>li{
     display: inline-block;
     padding-left: 20px;
+    /* position: relative; */
+    /* top: -15px; */
+    margin-top: -40px;
 }
 
 .menu li>a{
-    position: relative;
-    top: -15px;
+/*    position: relative;*/
+/*    top: -15px;*/
+    font-size: 12px;
 }
 
 .profile-pic{
     border-radius: 50%;
     height: 30px;
     display: inline-block !important;
-    position: relative;
-    top: -7px;
+    margin-top: 10px;
+    top: 0px;
 }
 
 .btn{
@@ -275,11 +331,14 @@ tr:nth-child(even){background-color: #EDEFF4}
 .b-list{
   margin-left:200px;
     text-align: right;
+    float: right;
 }
 
 .complaint{
-    width: 50%;
-    margin-left: 25%;
+    width: 550px;
+    display: block;
+    margin: 0 auto;
+    /* margin-left: 25%; */
     margin-bottom: 15px;
     border-bottom-color: #C8C8D3;
     border-bottom-width: 1px;
@@ -373,7 +432,7 @@ display: inline-block;
 border: 5px solid #ccc;
 border-radius: 10px;
 box-sizing: border-box;
- margin-left:8%;
+/* margin-left:8%;*/
 }
 .date1, select {
 width: 50%;
@@ -383,7 +442,17 @@ display: inline-block;
 border: 5px solid #ccc;
 border-radius: 10px;
 box-sizing: border-box;
-margin-left:6%;
+/*margin-left:6%;*/
+    border-bottom: 1px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0px;
+    font-size: 16px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    box-sizing: border-box;
+    background-color: #EDEFF4;
+    line-height: 25px;
 }
 
 .number1, select {
@@ -394,7 +463,17 @@ display: inline-block;
 border: 5px solid #ccc;
 border-radius: 10px;
 box-sizing: border-box;
-margin-left:8%;
+/*margin-left:8%;*/
+    border-bottom: 1px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0px;
+    font-size: 16px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    box-sizing: border-box;
+    background-color: #EDEFF4;
+    line-height: 25px;
 }
 .number, select {
 width: 50%;
@@ -404,7 +483,17 @@ display: inline-block;
 border: 5px solid #ccc;
 border-radius: 10px;
 box-sizing: border-box;
-margin-left:8%;
+/*margin-left:8%;*/
+    border-bottom: 1px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0px;
+    font-size: 16px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    box-sizing: border-box;
+    background-color: #EDEFF4;
+    line-height: 25px;
 }
 
 .select {
@@ -415,7 +504,7 @@ display: inline-block;
 border: 5px solid #ccc;
 border-radius: 10px;
 box-sizing: border-box;
-margin-left:2%;
+/*margin-left:2%;*/
 }
 .select1 {
 width: 50%;
@@ -425,7 +514,17 @@ display: inline-block;
 border: 5px solid #ccc;
 border-radius: 10px;
 box-sizing: border-box;
-margin-left:8%;
+/*margin-left:8%;*/
+    border-bottom: 1px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0px;
+    font-size: 16px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    box-sizing: border-box;
+    background-color: #EDEFF4;
+    line-height: 25px;
 }
 
 input[type=password], select {
@@ -630,4 +729,62 @@ input:focus{
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+table{
+    font-weight: 100;
+    font-size: 14px;
+}
+
+.input-field *{
+    display: block;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    margin-top: 20px;
+}
+
+.input-field input{
+    border: none;
+    font-size: 25px;
+    line-height: 25px;
+    text-align: center;
+    font-family: "Avenir";
+    font-weight: 100;
+    width: 100%;
+}
+
+p.username{
+    display: inline-block;
+    font-weight: 100;
+    position: relative;
+    top: -14px;
+}
+
+
+input:focus{
+    outline: none;   
+}
+
+
+#divStatus{
+    display: none;
+}
+
+.clickable, td a{
+    color: #20A1EE;
+    font: 14px;
+}
+
+.clickable:hover{
+    opacity: 0.3;
+}
+
+#table{
+    margin-top: 0px;
+}
+
+.student-desc,
+.medical-history{
+    font-weight: 100;
 }

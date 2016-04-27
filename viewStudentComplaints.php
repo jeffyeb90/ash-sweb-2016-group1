@@ -24,43 +24,42 @@ if(!isset($_SESSION['USER'])){
 
     <body>
         <div class="navigation">
-            <img src="images/logo.jpg" alt="" class="logo">
+                <img src="images/logo.jpg" alt="" class="logo">
+                    <ul class="menu">
+                        <li><a href="studentslist.php">HOME</a></li>
+
+                        <li class="dropdown" id="complaints"><a  class="dropdown-button">COMPLAINTS</a>
+                            <ul class="dropdown-content">
+            				    <li><a href="medicalComplaintAdd.php">ADD </a></li>
+
+            					<li><a href="medicalComplaintList.php">VIEW </a></li>
 
 
-            <ul class="menu">
-                <li><a href="studentslist.php">HOME</a></li>
+            				</ul>
+
+                        </li>
+        			    <li class="dropdown active" id="records"><a class="dropdown-button2" >STUDENT RECORDS</a>
+                            <ul class="dropdown-content2">
+                                <li><a href="studentslist.php">VIEW </a></li>
 
 
+                            </ul>
 
-								<li class="dropdown" id="complaints"><a  class="dropdown-button">COMPLAINTS</a>
-                <ul class="dropdown-content">
-    							<li><a href="medicalComplaintAdd.php">Add </a></li>
-
-    							<li><a href="medicalComplaintList.php">View </a></li>
-
-
-    						</ul>
-
-                </li>
-			        <li class="dropdown" id="records"><a class="dropdown-button2" >STUDENT RECORDS</a>
-                  <ul class="dropdown-content2">
-                      <li><a href="studentslist.php">View </a></li>
-
-                  </ul>
-
-                </li>
-								<li><a href="generateReport.php">GET REPORT</a></li>
-                <li><a href="medicalComplaintAdd.php" class="btn">NEW COMPLAINT</a></li>
-                <li><a href='logout.php' class='btn'>Logout</a><li>
-                <li><img src="images/profie.jpg" alt="" class="profile-pic"><br>
-                  <?php
-
-
-                $id=$_SESSION['USER'];
-                echo $id['FIRSTNAME']." " .$id['LASTNAME'];
-                ?></li>
-            </ul>
-        </div>
+                        </li>
+        				<li><a href="generateReport.php">GET REPORT</a></li>
+                        <li><a href="medicalComplaintAdd.php" class="btn">NEW COMPLAINT</a></li>
+                        
+                        <li class="dropdown pic-dropdown" id="records"><a href=""><img src="images/profie.jpg" alt="" class="profile-pic"></a>
+                            <ul class="dropdown-content2 logout-dropdown">
+                               <li><a href='logout.php' class='btn'>Logout <?php
+                                $id=$_SESSION['USER'];
+                                echo "<p class='username'>".$id['FIRSTNAME']."</p>";
+                            ?></a></li>
+                            </ul>
+                            
+                        </li>
+                    </ul>
+                </div>
 
 
 					<?php
@@ -119,10 +118,10 @@ if(!isset($_SESSION['USER'])){
 														";
                             echo "<li><p>Name: {$row['FIRSTNAME']} {$row['LASTNAME']}</p></li>";
                             echo "<li><p>Student ID: {$row['STUDENTID']}</p></li>";
-                            echo "<li><p>Email: {$row['EMAIL']}
+                            echo "<li><p>Email: 
 
 
-														<a href='mailto:{$row['EMAIL']}?Subject=Notification%20from%20Clinic' target='_top'  class='btn'>Send Mail</a></p></li>";
+														<a href='mailto:{$row['EMAIL']}?Subject=Notification%20from%20Clinic' class='clickable' target='_top'>{$row['EMAIL']}</a></p></li>";
 
                             echo "<li><p>Phone: {$row['PHONENUMBER']}</p></li></ul></div>
 														<section class='medical-history'>";
@@ -144,9 +143,7 @@ if(!isset($_SESSION['USER'])){
                                     echo "<ul class='b-list'>";
                                     echo "<li><p>Symptoms: {$row['SYMPTOMS']}</p></li>";
                                     echo "<li><p>Diagnosis: {$row['DIAGNOSIS']}</p></li>";
-                                    echo "<li><p>{$row['CAUSE']}</p></li>";
-                                    echo "<li><p>{$row['PRESCRIPTION']}</p></li>
-                                    <li><p><a href='viewComplaintDetails.php?cid={$row['COMPLAINTID']}' class='btn'>View Details</a></p></li></ul></div>";
+                                    echo "<li><p><a href='viewComplaintDetails.php?cid={$row['COMPLAINTID']}' class='btn'>View Details</a></p></li></ul></div>";
 
                                     $row = $obj->fetch();
                                     $rowNum++;

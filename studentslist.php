@@ -51,7 +51,7 @@
 
   					        result+="<div style='overflow-x:auto;'><table class='center' id='table'><tr><th>ID</th><th>USER NAME</th><th>FULL NAME</th><th>GENDER</th><th>PHONE NUMBER</th><th>CONTROLS</th></tr>"
   					        while(length>0){
-  						        result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.user[length-1].STUDENTID+"</td><td>"+obj.user[length-1].USERNAME+"</td><td>"+obj.user[length-1].FIRSTNAME +" "+obj.user[length-1].LASTNAME+"</td><td>"+obj.user[length-1].GENDER+"</td> <td>"+obj.user[length-1].PHONENUMBER+"</td><td><span  onclick='getStudent("+obj.user[length-1].STUDENTID+")' class='btn'>Update</span><br><span onclick=viewDetails("+obj.user[length-1].STUDENTID+")><button class='btn'>View More</button></span><br><a href='viewStudentComplaints.php?sid="+obj.user[length-1].STUDENTID+
+  						        result+="<tr bgcolor='$bgcolor' style='$style'><td>"+obj.user[length-1].STUDENTID+"</td><td>"+obj.user[length-1].USERNAME+"</td><td>"+obj.user[length-1].FIRSTNAME +" "+obj.user[length-1].LASTNAME+"</td><td>"+obj.user[length-1].GENDER+"</td> <td>"+obj.user[length-1].PHONENUMBER+"</td><td><span  onclick='getStudent("+obj.user[length-1].STUDENTID+")' class='clickable'>Update</span><br><span class='clickable' onclick=viewDetails("+obj.user[length-1].STUDENTID+")>View More</span><br><a href='viewStudentComplaints.php?sid="+obj.user[length-1].STUDENTID+
 											"'class='button'>View Complaints</a><br><a href='medicalComplaintAdd.php?sid="+obj.user[length-1].STUDENTID+"' class='button'>Add Medical Complaint</a><br></td></tr>";
 
   						        length-=1;
@@ -260,21 +260,21 @@
               <div class="navigation">
                 <img src="images/logo.jpg" alt="" class="logo">
                     <ul class="menu">
-                        <li><a href="studentslist.php">HOME</a></li>
+                        <li class="active"><a href="studentslist.php">HOME</a></li>
 
                         <li class="dropdown" id="complaints"><a  class="dropdown-button">COMPLAINTS</a>
                             <ul class="dropdown-content">
-            				    <li><a href="medicalComplaintAdd.php">Add </a></li>
+            				    <li><a href="medicalComplaintAdd.php">ADD </a></li>
 
-            					<li><a href="medicalComplaintList.php">View </a></li>
+            					<li><a href="medicalComplaintList.php">VIEW </a></li>
 
 
             				</ul>
 
                         </li>
-        			    <li class="dropdown" id="records"><a class="dropdown-button2" >STUDENT RECORDS</a>
+        			    <li class="dropdown active" id="records"><a class="dropdown-button2" >STUDENT RECORDS</a>
                             <ul class="dropdown-content2">
-                                <li><a href="studentslist.php">View </a></li>
+                                <li><a href="studentslist.php">VIEW </a></li>
 
 
                             </ul>
@@ -282,13 +282,15 @@
                         </li>
         				<li><a href="generateReport.php">GET REPORT</a></li>
                         <li><a href="medicalComplaintAdd.php" class="btn">NEW COMPLAINT</a></li>
-                        <li><a href='logout.php' class='btn'>Logout</a><li>
-                        <li><img src="images/profie.jpg" alt="" class="profile-pic"><br>
-
-                            <?php
+                        
+                        <li class="dropdown pic-dropdown" id="records"><a href=""><img src="images/profie.jpg" alt="" class="profile-pic"></a>
+                            <ul class="dropdown-content2 logout-dropdown">
+                               <li><a href='logout.php' class='btn'>Logout <?php
                                 $id=$_SESSION['USER'];
-                                echo $id['FIRSTNAME']." " .$id['LASTNAME'];
-                            ?>
+                                echo "<p class='username'>".$id['FIRSTNAME']."</p>";
+                            ?></a></li>
+                            </ul>
+                            
                         </li>
                     </ul>
                 </div>
@@ -307,8 +309,8 @@
         		<div class="row">
 
                     <div class="input-field">
-                        <input onkeyup="searchStudentInfo()"id="search" type="text" name="txtSearch">
-                        <span onclick="searchStudentInfo()" value="search" class="button">SEARCH</span>
+                        <input onkeyup="searchStudentInfo()"id="search" type="text" name="txtSearch" placeholder="Enter to search something">
+<!--                        <span onclick="searchStudentInfo()" value="search" class="button">SEARCH</span>-->
                     </div>
 
 
