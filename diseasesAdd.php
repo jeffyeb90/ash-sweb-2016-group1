@@ -32,16 +32,16 @@ if(!isset($_SESSION['USER'])){
 
 
 								<li class="dropdown" id="complaints"><a  class="dropdown-button">COMPLAINTS</a>
-                <ul class="dropdown-content">
-    							<li><a href="medicalComplaintAdd.php">Add </a></li>
+                	<ul class="dropdown-content">
+    								<li><a href="medicalComplaintAdd.php">Add </a></li>
 
-    							<li><a href="medicalComplaintList.php">View </a></li>
+    								<li><a href="medicalComplaintList.php">View </a></li>
 
 
-    						</ul>
+    							</ul>
 
                 </li>
-			        <li class="dropdown" id="records"><a class="dropdown-button2" >STUDENT RECORDS</a>
+			        	<li class="dropdown" id="records"><a class="dropdown-button2" >STUDENT RECORDS</a>
                   <ul class="dropdown-content2">
                       <li><a href="studentslist.php">View </a></li>
 
@@ -58,7 +58,7 @@ if(!isset($_SESSION['USER'])){
                 $id=$_SESSION['USER'];
                 echo $id['FIRSTNAME']." " .$id['LASTNAME'];
                 ?></li>
-            </ul>
+            		</ul>
         </div>
 
 
@@ -69,48 +69,46 @@ if(!isset($_SESSION['USER'])){
 						$strStatusMessage=$_REQUEST['message'];
 					}
 
-	?>
+					?>
 					<div id="divStatus" class="status">
 						<?php echo  $strStatusMessage ?>
 					</div>
 
-		<section class="medical-history">
-<?php
+					<section class="medical-history">
+						<?php
 
-			$strStatusMessage ="Add disease";
-			$name="";
+					$strStatusMessage ="Add disease";
+					$name="";
 
-			if(isset($_REQUEST['name'])){
-				$name=$_REQUEST['name'];
+					if(isset($_REQUEST['name'])){
+						$name=$_REQUEST['name'];
 
-				include_once("diseases.php");
-				$obj=new diseases();
-				$r=$obj->addDisease($name);
+						include_once("diseases.php");
+						$obj=new diseases();
+						$r=$obj->addDisease($name);
 
-				if($r==false){
-					$strStatusMessage="Error while adding disease";
-				}else{
-					$strStatusMessage="Disease added";
+						if($r==false){
+							$strStatusMessage="Error while adding disease";
+						}else{
+							$strStatusMessage="Disease added";
+						}
+
 				}
-
-			}
-?>
-					<div id="divStatus" class="status">
+				?>
+				<div id="divStatus" class="status">
 						<?php echo  $strStatusMessage ?>
-					</div>
-					<div id="divContent">
+				</div>
+				<div id="divContent">
 						Content space
 						<form action="" method="GET">
-			<div> Disease: <input type="text" name="name" value="<?php echo $name;  ?>"/></div>
+								<div> Disease: <input type="text" name="name" value="<?php echo $name;  ?>"/></div>
 
-			<input type="submit" value="Add">
-		</form>
+									<input type="submit" value="Add">
+						</form>
 					</div>
 				</td>
 			</tr>
 		</table>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
   </section>
 	</body>
 </html>
