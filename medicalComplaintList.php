@@ -9,6 +9,7 @@ error_reporting(0);
 session_start();
 if(!isset($_SESSION['USER'])){
 	header("location:login.php");
+    echo '<script>window.location = "login.php";</script>';
  exit();
 }
 	?>

@@ -1,10 +1,6 @@
 @font-face {
   font-family: 'Avenir';
-<<<<<<< HEAD
-  src: url(' ../font /Avenir.ttf');
-=======
   src: url('../font/Avenir.ttf');
->>>>>>> 20f110938434606bd45f0c2fd71f7c45cfc89864
   font-weight: normal;
   font-style: normal;
 }
@@ -17,7 +13,7 @@
     top: 150px;
     width: 40%; /* Full width */
     height: 45%; /* Full height */
-    overflow:auto;; /* Enable scroll if needed */
+    overflow:auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
@@ -25,7 +21,7 @@
 /* Modal Content */
 .modal-content12 {
     background-color: #EDEFF4;
-    margin: auto;t 
+    margin: auto;
     top: 350px;
     padding: 80px;
     width: 60%;
@@ -147,6 +143,11 @@ body{
     margin-right: 0px;
     margin-bottom: 0px;
 }
+
+.login-body{
+    background-color: #EDEFF4;
+}
+
 .position {
   position: fixed;
   display: block;
@@ -294,24 +295,28 @@ tr:nth-child(even){background-color: #EDEFF4}
 
 }
 
-.login {
+.login{
   position: absolute;
   right: 260px;
   top: 150px;
   width: 450px;
-  border: 6px solid #65B529;
   padding: 50px;
   background-color: #EDEFF4;
 }
+
 .submit {
-  width: 90%;
-  background-color: #65B529;
-  color: white;
-  padding: 8px 5px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-left:3px;
+    width: 70px;
+    display: block;
+    margin: 20 auto !important;
+    font-size: 14px;
+    font-weight: 200;
+    background-color: #949494;
+    color: white;
+    padding: 8px 5px;
+    border: none;
+    cursor: pointer;
+    margin-left:3px;
+    margin-top: 40px;
 }
 .loginAdd {
   width: 50%;
@@ -336,20 +341,29 @@ text-align: center;
 }
 
 .submit:hover {
-text-decoration:underline;
-cursor:hand;
-font-weight:bold;
-background-color:Silver
+    text-decoration:underline;
+    cursor:hand;
+    font-weight:bold;
+    background-color:Silver
 }
+
 .text, select {
-width: 50%;
-padding: 5px 10px;
-margin: 4px 2px;
-display: inline-block;
-border: 5px solid #ccc;
-border-radius: 10px;
-box-sizing: border-box;
-margin-left:8%;
+    padding: 5px 10px;
+    margin: 4px 2px;
+    display: inline-block;
+    border-bottom: 1px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0px;
+    font-size: 16px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    box-sizing: border-box;
+    background-color: #EDEFF4;
+    line-height: 25px;
+    width: 250px;
+    font-family: "Avenir";
+    font-weight: 100;
 }
 .date, select {
 width: 50%;
@@ -415,51 +429,74 @@ margin-left:8%;
 }
 
 input[type=password], select {
-width: 50%;
-padding: 5px 10px;
-margin: 4px 2px;
-display: inline-block;
-border: 5px solid #ccc;
-border-radius: 10px;
-box-sizing: border-box;
-margin-left:8%;
+    widows: 90%;
+    padding: 5px 10px;
+    margin: 5px 2px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    font-size: 16px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    box-sizing: border-box;
+    background: #EDEFF4;
+    line-height: 25px;
+    font-family: "Avenir";
+    width: 250px;
+    font-weight: 100;
 }
+
+input:focus{
+    text-decoration: none;
+}
+
+
 #header{
-
-background-color: #EDEFF4;
-text-align: center;
-font-family:cursive;
-font-size:xx-large;
-position:relative;
-width:1280px;
-height:115px;
-top:1px;
-
+    text-align: center;
+    font-size:xx-large;
+    position:relative;
+    padding-top:20px;
 }
+
 .container {
-margin: 80px auto;
-width: 60px;
+    margin: 80px auto;    
+/*    width: 60px;*/
 }
 
-.login {
-position: relative;
-top:1px;
-margin: 0 auto;
-padding: 20px 20px 20px;
-width: 310px;
-margin-left:80px;
-background: white;
-border-radius: 3px;
--webkit-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+.container .login {
+    padding-top: 0px;
+    position: relative;
+    display: block;
+    margin: 0px auto;
+    text-align: center;
+    width: 310px;
+    top: 0px;
+    right: 0px;
+    background: #EDEFF4;
 }
+
+#header p{
+    margin-bottom: 0px;
+}
+
+#header .img-responsive{
+    height: 70px;
+}
+
+.login p{
+    font-weight: 100;
+    font-size: 20px;
+}
+
+
 
 
 .image{
     text-align:center;
     font-size: 20;
     font-weight:bold;
-    position:absolute;
+    position:relative;
     width:10px;
     height:10px;
     top:36px;
